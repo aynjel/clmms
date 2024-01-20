@@ -110,6 +110,30 @@
               </li>
             </ul>
           </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link nav-edit_equipment">
+              <i class="nav-icon fas fa-list-alt"></i>
+              <p>
+                Equipment
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./index.php?page=new_equipment" class="nav-link nav-new_equipment tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Add New</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index.php?page=equipment_list" class="nav-link nav-equipment_list tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>List</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>

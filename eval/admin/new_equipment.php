@@ -59,28 +59,28 @@
 	</div>
 </div>
 
-<script>	
-	$('#manage_equipment').submit(function(e){
+<script>
+	$('#manage_equipment').submit(function(e) {
 		e.preventDefault()
 		$('input').removeClass("border-danger")
 		start_load()
 		$('#msg').html('')
-		
+
 		$.ajax({
-			url:'ajax.php?action=save_equipment',
+			url: 'ajax.php?action=save_equipment',
 			data: new FormData($(this)[0]),
-		    cache: false,
-		    contentType: false,
-		    processData: false,
-		    method: 'POST',
-		    type: 'POST',
-			success:function(resp){
-				if(resp == 1){
-					alert_toast('Data successfully saved.',"success");
-					setTimeout(function(){
+			cache: false,
+			contentType: false,
+			processData: false,
+			method: 'POST',
+			type: 'POST',
+			success: function(resp) {
+				if (resp == 1) {
+					alert_toast('Data successfully saved.', "success");
+					setTimeout(function() {
 						location.replace('index.php?page=equipment_list')
-					},750)
-				}else if(resp == 2){
+					}, 750)
+				} else if (resp == 2) {
 					$('#msg').html("<div class='alert alert-danger'>Equipment already exist.</div>");
 					$('[name="name"]').addClass("border-danger")
 					end_load()

@@ -720,36 +720,36 @@ Class Action {
 		}
 	}
 	
-function save_equipment(){
-	extract($_POST);
-	$data = "";
-	foreach($_POST as $k => $v){
-		if(!in_array($k, array('id','user_ids')) && !is_numeric($k)){
-			if(empty($data)){
-				$data .= " $k='$v' ";
-			}else{
-				$data .= ", $k='$v' ";
+	function save_equipment(){
+		extract($_POST);
+		$data = "";
+		foreach($_POST as $k => $v){
+			if(!in_array($k, array('id','user_ids')) && !is_numeric($k)){
+				if(empty($data)){
+					$data .= " $k='$v' ";
+				}else{
+					$data .= ", $k='$v' ";
+				}
 			}
 		}
+		$chk = $this->db->query("SELECT * FROM equipment_list where name = '$name' and id != '{$id}' ")->num_rows;
+		if($chk > 0){
+			return 2;
+		}
+		if(empty($id)){
+			$save = $this->db->query("INSERT INTO `equipment_list`(`name`, `quantity`, `description`, `manufacturer`, `serial_no`, `condition`) VALUES ('$name','$quantity','$description','$manufacturer','$serial_no','$condition')");
+		}else{
+			$save = $this->db->query("UPDATE equipment_list set `name`='$name', `quantity`='$quantity', `description`='$description', `manufacturer`='$manufacturer', `serial_no`='$serial_no', `condition`='$condition' where id = $id");
+		}
+		if($save){
+			return 1;
+		}
 	}
-	$chk = $this->db->query("SELECT * FROM equipment_list where equipmnet = '$equipment' and id != '{$id}' ")->num_rows;
-	if($chk > 0){
-		return 2;
+	function delete_equipment(){
+		extract($_POST);
+		$delete = $this->db->query("DELETE FROM `equipment_list` WHERE id = $id");
+		if($delete){
+			return 1;
+		}
 	}
-	if(empty($id)){
-		$save = $this->db->query("INSERT INTO equipment_list set $data");
-	}else{
-		$save = $this->db->query("UPDATE equipment_list set $data where equipment = $equipment");
-	}
-	if($save){
-		return 1;
-	}
-}
-function delete_equipment(){
-	extract($_POST);
-	$delete = $this->db->query("DELETE FROM `equipment_list` WHERE id");
-	if($delete){
-		return 1;
-	}
-}
 }

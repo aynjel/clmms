@@ -171,16 +171,16 @@ if($action == 'get_report'){
 		echo $get;
 }
 ob_end_flush();
-if($action == 'save_equipment'){
-	$save = $crud->save_equipment();
-	if($save)
-		echo $save;
-}
-if($action == 'delete_equipment'){
-	$save = $crud->delete_equipment();
-	if($save)
-		echo $save;
-}
+// if($action == 'save_equipment'){
+// 	$save = $crud->save_equipment();
+// 	if($save)
+// 		echo $save;
+// }
+// if($action == 'delete_equipment'){
+// 	$save = $crud->delete_equipment();
+// 	if($save)
+// 		echo $save;
+// }
 if($action == 'save_room'){
 	$save = $crud->save_room();
 	if($save)

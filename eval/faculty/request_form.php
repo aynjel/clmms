@@ -22,12 +22,6 @@ if(isset($_POST["submit"])){
 <html lang="en" dir="ltr">
   <head>
   <style>
-        body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
 
 .container {
     max-width: 800px;
@@ -83,16 +77,15 @@ button:hover {
   <body>
     <form class="container" action="" method="post" autocomplete="off">
     
-      <label for=""></label>
-      <label for="">Section:</label>
+      <label for="languages">Languages</label>
       <input type="checkbox" name="languages[]" value="Civil and Sanitary">Civil and Sanitary
       <input type="checkbox" name="languages[]" value="Electrical">Electrical
       <input type="checkbox" name="languages[]" value="Mechanical">Mechanical
       <input type="checkbox" name="languages[]" value="Electronic and Communication">Electronic and Communication
       <input type="checkbox" name="languages[]" value="ICT">ICT
-      <label for="description">Description:</label>
-            <input style="width: 95%; display:flex; " id="description" name="description" required></input>
-      <br>
+      <input type="checkbox" name="languages[]" value="Others" checked>Others
+      <label for="description">Description</label>
+      <input style="width: 95%;" id="description" name="description" required placeholder="Description" type="text" value="">
       
       <button type="submit" name="submit">Send</button>
     </form>

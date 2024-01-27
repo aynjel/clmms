@@ -119,7 +119,7 @@
 				if(resp == 1){
 					alert_toast('Data successfully saved.',"success");
 					setTimeout(function(){
-						location.replace('index.php?page=faculty_list')
+						location.replace('index.php?page=faculty_in-charge_list')
 					},750)
 				}else if(resp == 2){
 					$('#msg').html("<div class='alert alert-danger'>Email already exist.</div>");

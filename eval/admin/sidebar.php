@@ -21,23 +21,58 @@
               </p>
             </a>
           </li>
-          <li class="nav-item dropdown">
-            <a href="./index.php?page=room_list" class="nav-link nav-room_list">
-            <i class="nav-icon fas fa-list-alt"></i>
+          <li class="nav-item">
+            <a href="#" class="nav-link nav-edit_equipment">
+              <i class="nav-icon fas fa-tv"></i>
+              <p>
+                Equipment
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./index.php?page=new_equipment" class="nav-link nav-new_equipment tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Add New</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index.php?page=equipment_list" class="nav-link nav-equipment_list tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>List</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link nav-edit_room">
+              <i class="nav-icon fas fa-building"></i>
               <p>
                 Room
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./index.php?page=new_room" class="nav-link nav-new_room tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Add New</p>
+                </a>
+              </li>
+              <!-- <li class="nav-item">
+                <a href="./index.php?page=assign_faculty_room" class="nav-link nav-assign_faculty_room tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Assign Faculty</p>
+                </a>
+              </li> -->
+              <li class="nav-item">
+                <a href="./index.php?page=room_list" class="nav-link nav-room_list tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>List</p>
+                </a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item dropdown">
-            <a href="./index.php?page=view_report" class="nav-link nav-view_report">
-              <i class="nav-icon fas fa-list-alt"></i>
-              <p>
-                View Report
-              </p>
-            </a>
-          </li> 
-          
           
           
           <li class="nav-item">
@@ -104,30 +139,6 @@
               </li>
               <li class="nav-item">
                 <a href="./index.php?page=chairperson_list" class="nav-link nav-chairperson_list tree-item">
-                  <i class="fas fa-angle-right nav-icon"></i>
-                  <p>List</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item">
-            <a href="#" class="nav-link nav-edit_equipment">
-              <i class="nav-icon fas fa-list-alt"></i>
-              <p>
-                Equipment
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.php?page=new_equipment" class="nav-link nav-new_equipment tree-item">
-                  <i class="fas fa-angle-right nav-icon"></i>
-                  <p>Add New</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index.php?page=equipment_list" class="nav-link nav-equipment_list tree-item">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>List</p>
                 </a>

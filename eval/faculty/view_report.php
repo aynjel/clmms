@@ -1,7 +1,7 @@
 <?php
 
 require_once('db_connect.php');
-$query = "select * from tb_data ";
+$query = "SELECT * from tb_data ORDER BY id DESC";
 $result = mysqli_query($conn,$query);
 
 ?>
@@ -21,8 +21,8 @@ $result = mysqli_query($conn,$query);
       <th scope="col">#</th>
       <th scope="col">Section</th>
       <th scope="col">Description</th>
-      <th scope="col">Time/Date</th>
-      <th scope="col">Action</th>
+      <th scope="col">Date/Time</th>
+      <!-- <th scope="col">Action</th> -->
     </tr>
     <tr>
     <?php
@@ -30,10 +30,10 @@ $result = mysqli_query($conn,$query);
       while($row = mysqli_fetch_assoc($result))
       {
     ?>
-     <td><?php echo $row['id']; ?></td>
-     <td><?php echo $row['languages']; ?></td>
-     <td><?php echo $row['description']; ?></td>
-     <td><?php echo $row['date']; ?></td>
+     <td><?= $row['id']; ?></td>
+     <td><?= $row['languages']; ?></td>
+     <td><?= $row['description']; ?></td>
+     <td><?= date('F j, Y, g:i a',strtotime($row['date'])); ?></td>
     </tr>
     <?php
       }

@@ -13,11 +13,22 @@ if(isset($_GET['id'])){
 		<div id="msg" class="form-group"></div>
 		<div class="form-group">
 			<label for="room" class="control-label">Room</label>
-			<input type="text" class="form-control form-control-sm" name="room" id="room" value="<?php echo isset($room) ? $room : '' ?>" required>
+			<input type="number" class="form-control form-control-sm" name="room" id="room" value="<?php echo isset($room) ? $room : '' ?>" required autofocus>
 		</div>
 		<div class="form-group">
-			<label for="assign" class="control-label">Assign Faculty in Charge</label>
-			<input type="text" class="form-control form-control-sm" name="assign" id="assign" value="<?php echo isset($assign) ? $assign : '' ?>" required>
+			<label for="capacity" class="control-label">Capacity</label>
+			<input type="number" class="form-control form-control-sm" name="capacity" id="capacity" value="<?php echo isset($capacity) ? $capacity : '' ?>" required>
+		</div>
+		<div class="form-group">
+			<label for="status" class="control-label">Status</label>
+			<select name="status" id="status" class="custom-select custom-select-sm">
+				<option value="1" <?php echo isset($status) && $status == 1 ? 'selected' : '' ?>>Active</option>
+				<option value="0" <?php echo isset($status) && $status == 0 ? 'selected' : '' ?>>Inactive</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="description" class="control-label">Description <i>(optional)</i></label>
+			<textarea name="description" id="description" cols="30" rows="4" class="form-control"><?php echo isset($description) ? $description : '' ?></textarea>
 		</div>
 		
 	</form>

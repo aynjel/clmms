@@ -689,24 +689,14 @@ Class Action {
 	}
 	function save_room(){
 		extract($_POST);
-		$data = "";
-		foreach($_POST as $k => $v){
-			if(!in_array($k, array('id','user_ids')) && !is_numeric($k)){
-				if(empty($data)){
-					$data .= " $k='$v' ";
-				}else{
-					$data .= ", $k='$v' ";
-				}
-			}
-		}
 		$chk = $this->db->query("SELECT * FROM room_list where room = '$room' and id != '{$id}' ")->num_rows;
 		if($chk > 0){
 			return 2;
 		}
 		if(empty($id)){
-			$save = $this->db->query("INSERT INTO room_list set $data");
+			$save = $this->db->query("INSERT INTO `room_list`(`room`, `description`, `capacity`, `status`) VALUES ('$room','$description','$capacity','$status')");
 		}else{
-			$save = $this->db->query("UPDATE room_list set $data where room = $room");
+			$save = $this->db->query("UPDATE room_list set `room`='$room', `description`='$description', `capacity`='$capacity', `status`='$status' where id = $id");
 		}
 		if($save){
 			return 1;
@@ -722,16 +712,6 @@ Class Action {
 	
 	function save_equipment(){
 		extract($_POST);
-		$data = "";
-		foreach($_POST as $k => $v){
-			if(!in_array($k, array('id','user_ids')) && !is_numeric($k)){
-				if(empty($data)){
-					$data .= " $k='$v' ";
-				}else{
-					$data .= ", $k='$v' ";
-				}
-			}
-		}
 		$chk = $this->db->query("SELECT * FROM equipment_list where name = '$name' and id != '{$id}' ")->num_rows;
 		if($chk > 0){
 			return 2;
@@ -750,6 +730,16 @@ Class Action {
 		$delete = $this->db->query("DELETE FROM `equipment_list` WHERE id = $id");
 		if($delete){
 			return 1;
+		}
+	}
+
+	function save_faculty_room(){
+		extract($_POST);
+		$save = $this->db->query("INSERT INTO `faculty_room_list` (`faculty_id`, `room_id`) VALUES ('$faculty','$room')");
+		if($save){
+			return 1;
+		}else{
+			return 2;
 		}
 	}
 }

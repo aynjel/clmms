@@ -6,7 +6,7 @@
 			<form action="" id="manage_equipment">
 				<input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-6 border-right">
 						<div class="form-group">
 							<label for="" class="control-label">Name</label>
 							<input type="text" class="form-control form-control-sm" name="name" value="<?php echo isset($name) ? $name : '' ?>" required>
@@ -49,7 +49,7 @@
 						</div>
 					</div>
 				</div>
-
+				<hr>
 				<div class="col-lg-12 text-right justify-content-center d-flex">
 					<button class="btn btn-primary mr-2">Save</button>
 					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=equipment_list'">Cancel</button>

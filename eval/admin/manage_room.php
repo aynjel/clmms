@@ -28,9 +28,19 @@ if(isset($_GET['id'])){
 		</div>
 		<div class="form-group">
 			<label for="description" class="control-label">Description <i>(optional)</i></label>
-			<textarea name="description" id="description" cols="30" rows="4" class="form-control"><?php echo isset($description) ? $description : '' ?></textarea>
+			<textarea name="description" id="description" cols="30" rows="2" class="form-control"><?php echo isset($description) ? $description : '' ?></textarea>
 		</div>
-		
+		<!-- <div class="form-group">
+			<label for="faculty" class="control-label">Faculty</label>
+			<select name="faculty_id" id="faculty" class="custom-select custom-select-sm" required>
+				<option selected disabled hidden>Select Faculty</option>
+				<?php 
+				$qry = $conn->query("SELECT * FROM faculty_list order by id asc");
+				while($row= $qry->fetch_assoc()): ?>
+				<option value="<?= $row['id'] ?>" <?= isset($fac['id']) && $fac['id'] == $row['id'] ? 'selected' : '' ?>><?= ucwords($row['firstname'].' '.$row['lastname']) ?></option>
+			<?php endwhile; ?>
+			</select>
+		</div> -->
 	</form>
 </div>
 <script>

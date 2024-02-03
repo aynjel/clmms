@@ -1,30 +1,30 @@
 <?php
-$room_sql = $conn->query("SELECT * FROM room_list where id = ".$_GET['room_id'])->fetch_array();
-foreach($room_sql as $k => $v){
-	$$k = $v;
+include '../db_connect.php';
+if(isset($_GET['room_id'])){
+	$qry = $conn->query("SELECT * FROM room_list where id={$_GET['room_id']}")->fetch_array();
+	foreach($qry as $k => $v){
+		$$k = $v;
+	}
 }
 ?>
 <form action="" id="manage_faculty_room">
+	<input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
+	<input type="hidden" name="description" value="<?php echo isset($description) ? $description : '' ?>">
+	<input type="hidden" name="capacity" value="<?php echo isset($capacity) ? $capacity : '' ?>">
+	<input type="hidden" name="status" value="<?php echo isset($status) ? $status : 1 ?>">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
 				<label for="room" class="control-label">Room</label>
-				<input type="text" class="form-control form-control-sm" value="<?= isset($room) ? $room : '' ?>" readonly>
-				<input type="text" class="form-control form-control-sm" name="room" id="room" value="<?= isset($id) ? $id : '' ?>" hidden>
+				<input type="text" class="form-control form-control-sm" name="room" value="<?php echo isset($room) ? $room : '' ?>" readonly>
 			</div>
 		</div>
 		<div class="col-md-12">
 			<div class="form-group">
 				<label for="faculty" class="control-label">Faculty</label>
-				<select name="faculty" id="faculty" class="custom-select custom-select-sm">
-					<option selected disabled value="" hidden>Select Faculty</option>
-					<?php 
-					$chk = $conn->query("SELECT * FROM faculty_room_list where room_id = {$id} ");
-					if($chk->num_rows > 0){
-						$fac = $chk->fetch_array();
-						$fac = $conn->query("SELECT * FROM faculty_list where id = {$fac['faculty_id']} ")->fetch_array();
-						echo '<option value="'.$fac['id'].'" selected>'.ucwords($fac['firstname'].' '.$fac['lastname']).'</option>';
-					}
+				<select name="faculty_id" id="faculty" class="custom-select custom-select-sm" required>
+					<option selected disabled hidden>Select Faculty</option>
+					<?php
 					$qry = $conn->query("SELECT * FROM faculty_list order by lastname asc");
 					while($row= $qry->fetch_assoc()):
 					?>
@@ -33,11 +33,6 @@ foreach($room_sql as $k => $v){
 				</select>
 			</div>
 		</div>
-	</div>
-
-	<div class="col-lg-12 text-right justify-content-center d-flex">
-		<button class="btn btn-primary mr-2">Save</button>
-		<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=room_list'">Cancel</button>
 	</div>
 </form>
 
@@ -49,7 +44,7 @@ foreach($room_sql as $k => $v){
 		$('#msg').html('')
 
 		$.ajax({
-			url: 'ajax.php?action=save_faculty_room',
+			url: 'ajax.php?action=save_room',
 			data: new FormData($(this)[0]),
 			cache: false,
 			contentType: false,

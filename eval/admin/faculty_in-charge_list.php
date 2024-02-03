@@ -29,7 +29,10 @@
 						<td><b><?php echo $row['school_id'] ?></b></td>
 						<td><b><?php echo ucwords($row['name']) ?></b></td>
 						<td><b><?php echo $row['email'] ?></b></td>
-						<td><b><?php echo $row['room'] ?></b></td>
+						<td><b><?php
+							$room = $conn->query("SELECT * FROM room_list where id = ".$row['room_id']);
+							echo ucwords($room->num_rows > 0 ? $room->fetch_array()['room'] : 'N/A');
+						?></b></td>
 						<td class="text-center">
 							<button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 		                      Action

@@ -34,29 +34,15 @@
 						<td><b><?= $row['room'] ?></b></td>
 						<td><b><?= $row['capacity'] ?></b></td>
 						<td style="text-align: center;">
-							<b>
-								<?php 
-								$chk = $conn->query("SELECT * FROM faculty_room_list where room_id = {$row['id']} ");
-								if($chk->num_rows > 0){
-									$fac = $chk->fetch_array();
-									$fac = $conn->query("SELECT * FROM faculty_list where id = {$fac['faculty_id']} ")->fetch_array();
-									echo ucwords($fac['firstname'].' '.$fac['lastname']);?>
-										<div class="d-flex justify-content-center">
-											<button class="btn btn-sm btn-flat btn-link assign_faculty" type="button" data-id="<?= $row['id'] ?>">Re-assign</button>
-										</div>
-									<?php
-								}else{
-									if ($row['status'] == 1) { ?>
-										<div class="d-flex justify-content-center">
-											<button class="btn btn-sm btn-flat btn-primary assign_faculty" type="button" data-id="<?= $row['id'] ?>">Assign</button>
-										</div>
-									<?php } else { ?>
-										<div class="d-flex justify-content-center">
-											<button class="btn btn-sm btn-flat btn-secondary" type="button" data-id="<?= $row['id'] ?>" disabled>Assign</button>
-										</div>
-									<?php }
-								} ?>
-							</b>
+							<?php if ($row['faculty_id'] == null): ?>
+								<button class="btn btn-sm btn-primary assign_faculty" data-id="<?= $row['id'] ?>">Assign Faculty</button>
+							<?php else: ?>
+								<?php
+								$fac = $conn->query("SELECT * FROM faculty_list where id = ".$row['faculty_id'])->fetch_array();
+								?>
+								<b><?= ucwords($fac['firstname'].' '.$fac['lastname']) ?></b>
+								<button class="btn btn-sm btn-link assign_faculty" data-id="<?= $row['id'] ?>">Re-assign Faculty</button>
+							<?php endif; ?>
 						</td>
 						<td>
 							<b>
@@ -92,7 +78,8 @@
 		// 	uni_modal("New room","<?= $_SESSION['login_view_folder'] ?>manage_room.php")
 		// })
 		$('.assign_faculty').click(function(){
-			window.location.href = "index.php?page=assign_faculty_room&room_id="+$(this).attr('data-id')
+			uni_modal("Assign Faculty","<?= $_SESSION['login_view_folder'] ?>assign_faculty_room.php?room_id="+$(this).attr('data-id'))
+			// window.location.href = "index.php?page=assign_faculty_room&room_id="+$(this).attr('data-id')
 		})
 		$('.manage_room').click(function(){
 			uni_modal("Manage room","<?= $_SESSION['login_view_folder'] ?>manage_room.php?id="+$(this).attr('data-id'))

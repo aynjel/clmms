@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2024 at 01:32 AM
+-- Generation Time: Feb 03, 2024 at 04:02 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -110,6 +110,7 @@ INSERT INTO `criteria_list` (`id`, `criteria`, `order_by`) VALUES
 
 CREATE TABLE `equipment_list` (
   `id` int(30) NOT NULL,
+  `room_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `quantity` int(50) NOT NULL,
   `description` text NOT NULL,
@@ -117,15 +118,6 @@ CREATE TABLE `equipment_list` (
   `serial_no` text NOT NULL,
   `condition` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `equipment_list`
---
-
-INSERT INTO `equipment_list` (`id`, `name`, `quantity`, `description`, `manufacturer`, `serial_no`, `condition`) VALUES
-(16, 'Skyler Espinoza', 852, 'Tempor nihil odio et', 'Cadman Hurst', 'Amber Peck', 'Damaged'),
-(17, 'Veronica Shannon', 594, 'Reiciendis dolor iur', 'Idona Dennis', 'Timothy Wiggins', 'Bad'),
-(19, 'Talon Rush', 102, 'Quis saepe fugit is', 'Unity Sweet', 'Madeline Nguyen', 'Refurbished');
 
 -- --------------------------------------------------------
 
@@ -194,18 +186,16 @@ CREATE TABLE `faculty_list` (
   `email` varchar(200) NOT NULL,
   `password` text NOT NULL,
   `avatar` text NOT NULL DEFAULT 'no-image-available.png',
-  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
-  `room` int(15) NOT NULL
+  `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `faculty_list`
 --
 
-INSERT INTO `faculty_list` (`id`, `school_id`, `firstname`, `lastname`, `email`, `password`, `avatar`, `date_created`, `room`) VALUES
-(1, '20140623', 'George', 'Wilson', 'gwilson@sample.com', 'dd15740db7e88fbe5499826e54a1a7eb', '1608011100_avatar.jpg', '2020-12-15 13:45:18', 101),
-(2, '200101', 'Rowel', 'Yguinto', 'rowel@gmail.com', 'bc23badd48cc5bcd8d8c3e9b887bc3f5', '1701776280_1608081180_avatar.jpg', '2023-12-05 19:38:15', 102),
-(3, 'Elijah', 'Rosalyn', 'Amanda', 'nedyvakun@mailinator.com', 'a8f5f167f44f4964e6c998dee827110c', '1706370780_IMG_0510.JPG', '2024-01-27 23:53:01', 0);
+INSERT INTO `faculty_list` (`id`, `school_id`, `firstname`, `lastname`, `email`, `password`, `avatar`, `date_created`) VALUES
+(1, '20140623', 'George', 'Wilson', 'gwilson@sample.com', 'dd15740db7e88fbe5499826e54a1a7eb', '1608011100_avatar.jpg', '2020-12-15 13:45:18'),
+(2, '200101', 'Rowel', 'Yguinto', 'rowel@gmail.com', 'bc23badd48cc5bcd8d8c3e9b887bc3f5', '1701776280_1608081180_avatar.jpg', '2023-12-05 19:38:15');
 
 -- --------------------------------------------------------
 
@@ -219,15 +209,6 @@ CREATE TABLE `faculty_room_list` (
   `room_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `faculty_room_list`
---
-
-INSERT INTO `faculty_room_list` (`id`, `faculty_id`, `room_id`, `created_at`) VALUES
-(7, 2, 93, '2024-01-28 01:58:22'),
-(8, 2, 107, '2024-01-28 02:00:05'),
-(9, 3, 105, '2024-01-28 02:00:11');
 
 -- --------------------------------------------------------
 
@@ -327,21 +308,12 @@ INSERT INTO `restriction_list` (`id`, `academic_id`, `faculty_id`, `class_id`, `
 
 CREATE TABLE `room_list` (
   `id` int(11) NOT NULL,
+  `faculty_id` int(11) DEFAULT NULL,
   `room` varchar(7) NOT NULL,
   `description` text DEFAULT NULL,
   `capacity` int(11) NOT NULL DEFAULT 0,
   `status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `room_list`
---
-
-INSERT INTO `room_list` (`id`, `room`, `description`, `capacity`, `status`) VALUES
-(105, '1', 'Eiusmod praesentium ', 3, 1),
-(106, '93', 'Illum officia ea de', 49, 1),
-(107, '26', 'Molestiae enim labor', 10, 1),
-(108, '13', 'Veniam sapiente rep', 7, 0);
 
 -- --------------------------------------------------------
 
@@ -504,7 +476,8 @@ ALTER TABLE `criteria_list`
 -- Indexes for table `equipment_list`
 --
 ALTER TABLE `equipment_list`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_to_room` (`room_id`);
 
 --
 -- Indexes for table `evaluation_list`
@@ -522,7 +495,9 @@ ALTER TABLE `faculty_list`
 -- Indexes for table `faculty_room_list`
 --
 ALTER TABLE `faculty_room_list`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_to_room1` (`room_id`),
+  ADD KEY `fk_to_faculty1` (`faculty_id`);
 
 --
 -- Indexes for table `maintenance_work_requests`
@@ -552,7 +527,8 @@ ALTER TABLE `restriction_list`
 -- Indexes for table `room_list`
 --
 ALTER TABLE `room_list`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_room_to_faculty` (`faculty_id`);
 
 --
 -- Indexes for table `sections`
@@ -616,7 +592,7 @@ ALTER TABLE `criteria_list`
 -- AUTO_INCREMENT for table `equipment_list`
 --
 ALTER TABLE `equipment_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `evaluation_list`
@@ -634,7 +610,7 @@ ALTER TABLE `faculty_list`
 -- AUTO_INCREMENT for table `faculty_room_list`
 --
 ALTER TABLE `faculty_room_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `maintenance_work_requests`
@@ -664,7 +640,7 @@ ALTER TABLE `restriction_list`
 -- AUTO_INCREMENT for table `room_list`
 --
 ALTER TABLE `room_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT for table `sections`
@@ -701,6 +677,29 @@ ALTER TABLE `tb_data`
 --
 ALTER TABLE `users`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `equipment_list`
+--
+ALTER TABLE `equipment_list`
+  ADD CONSTRAINT `fk_to_room` FOREIGN KEY (`room_id`) REFERENCES `room_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `faculty_room_list`
+--
+ALTER TABLE `faculty_room_list`
+  ADD CONSTRAINT `fk_to_faculty1` FOREIGN KEY (`faculty_id`) REFERENCES `faculty_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_to_room1` FOREIGN KEY (`room_id`) REFERENCES `room_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `room_list`
+--
+ALTER TABLE `room_list`
+  ADD CONSTRAINT `fk_room_to_faculty` FOREIGN KEY (`faculty_id`) REFERENCES `faculty_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

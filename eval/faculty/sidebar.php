@@ -40,7 +40,7 @@
             </li> 
             <li class="nav-item dropdown">
               <a href="./index.php?page=equipment_list" class="nav-link nav-equipment_list">
-                <i class="nav-icon fas fa-list-alt"></i>
+                <i class="nav-icon fas fa-tv"></i>
                 <p>
                   Equipments
                 </p>

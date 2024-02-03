@@ -10,7 +10,7 @@
 						<div class="form-group">
 							<label for="equipment" class="control-label">Equipment</label>
 							<select name="equipment" id="equipment" class="form-control form-control-sm select2">
-								<option value=""></option>
+								<option selected disabled hidden>Select Equipment</option>
 								<?php 
 								$eq = $conn->query("SELECT * FROM equipment_list order by name asc");
 								while($row=$eq->fetch_assoc()):

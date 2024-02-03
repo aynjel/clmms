@@ -22,7 +22,7 @@ if(isset($_GET['room_id'])){
 		<div class="col-md-12">
 			<div class="form-group">
 				<label for="faculty" class="control-label">Faculty</label>
-				<select name="faculty_id" id="faculty" class="custom-select custom-select-sm" required>
+				<select name="faculty_id" id="faculty" class="form-control form-control-sm select2">
 					<option selected disabled hidden>Select Faculty</option>
 					<?php
 					$qry = $conn->query("SELECT * FROM faculty_list order by lastname asc");

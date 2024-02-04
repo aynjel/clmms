@@ -19,20 +19,42 @@ $astat = array("Not Yet Started","On-going","Closed");
         Welcome <?php echo $_SESSION['login_name'] ?>!
         <br>
         <div class="row">
-        <div class="col-12 col-sm-6 col-md-4 col-md-5">
-            <div class="small-box bg-light shadow-sm border">
-              <div class="inner">
-                <h3><?php echo $conn->query("SELECT * FROM tb_data")->num_rows; ?></h3>
+          <div class="col-md-4">
+              <div class="small-box bg-light shadow-sm border">
+                <div class="inner">
+                  <h3><?php echo $conn->query("SELECT * FROM tb_data")->num_rows; ?></h3>
 
-                <p>Total Report</p>
-              </div>
-              <div class="icon">
-                <i class="fa ion-ios-people-outline"></i>
+                  <p>Total Report</p>
+                </div>
+                <div class="icon">
+                  <i class="fa ion-ios-people-outline"></i>
+                </div>
               </div>
           </div>
-      </div>
-      
-      
+          <div class="col-md-4">
+              <div class="small-box bg-light shadow-sm border">
+                <div class="inner">
+                  <h3><?php echo $conn->query("SELECT * FROM equipment_list")->num_rows; ?></h3>
+
+                  <p>Total Equipment</p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-laptop"></i>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="small-box bg-light shadow-sm border">
+                <div class="inner">
+                  <h3><?php echo $conn->query("SELECT * FROM evaluation_list")->num_rows; ?></h3>
+
+                  <p>Total Evaluate</p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-poll"></i>
+                </div>
+              </div>
+          </div>
         </div>
         
       

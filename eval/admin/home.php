@@ -71,4 +71,52 @@ $astat = array("Not Yet Started","On-going","Closed");
               </div>
             </div>
           </div>
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="small-box bg-light shadow-sm border">
+              <div class="inner">
+                <h3><?php echo $conn->query("SELECT * FROM room_list")->num_rows; ?></h3>
+
+                <p>Total Room</p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-building"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="small-box bg-light shadow-sm border">
+              <div class="inner">
+                <h3><?php echo $conn->query("SELECT * FROM equipment_list")->num_rows; ?></h3>
+
+                <p>Total Equipment</p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-laptop"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="small-box bg-light shadow-sm border">
+              <div class="inner">
+                <h3><?php echo $conn->query("SELECT * FROM evaluation_list")->num_rows; ?></h3>
+
+                <p>Total Evaluate</p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-poll"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="small-box bg-light shadow-sm border">
+              <div class="inner">
+                <h3><?php echo $conn->query("SELECT * FROM evaluation_list")->num_rows; ?></h3>
+
+                <p>Report Pending</p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-list-alt"></i>
+              </div>
+            </div>
+          </div>
       </div>

@@ -41,6 +41,7 @@
 								$fac = $conn->query("SELECT * FROM faculty_list where id = ".$row['faculty_id'])->fetch_array();
 								?>
 								<b><?= ucwords($fac['firstname'].' '.$fac['lastname']) ?></b>
+								<br>
 								<button class="btn btn-sm btn-link assign_faculty" data-id="<?= $row['id'] ?>">Re-assign Faculty</button>
 							<?php endif; ?>
 						</td>

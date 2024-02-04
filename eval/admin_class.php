@@ -784,4 +784,66 @@ class Action
 		}
 		
 	}
+
+	function save_report()
+	{
+		$id = $_POST["id"];
+		$user_id = $_SESSION['login_id'];
+		$description = $_POST["description"];
+
+		$languages = $_POST["languages"];
+		$language = "";
+		foreach($languages as $row){
+			$language .= $row . ",";
+		}
+
+		if (empty($id)) {
+			$save = $this->db->query("INSERT INTO `tb_data`(`user_id`, `description`, `languages`) VALUES ('$user_id','$description','$language')");
+		} else {
+			$save = $this->db->query("UPDATE tb_data set `user_id`='$user_id', `description`='$description', `languages`='$language' where id = $id");
+		}
+		if ($save) {
+			return 1;
+		}
+	}
+
+	function delete_report()
+	{
+		extract($_POST);
+		$delete = $this->db->query("DELETE FROM `tb_data` WHERE id = $id");
+		if ($delete) {
+			return 1;
+		}
+	}
+
+	function save_evaluation_01()
+	{
+		extract($_POST);
+		// var_dump($_POST);
+		$user_id = $_SESSION['login_id'];
+		
+		// $chk = $this->db->query("SELECT * FROM tbl_evaluation where user_id = '$user_id' ")->num_rows;
+		// if ($chk > 0) {
+		// 	return 2;
+		// }
+
+		if (empty($id)) {
+			$save = $this->db->query("INSERT INTO `tbl_evaluation`(`user_id`, `service`, `response`, `quality`, `communication`, `experience`, `troubleshooting`, `clean_orderly`, `overall`, `core_services`, `improvement`) VALUES ('$user_id','$service','$response','$quality','$communication','$experience','$troubleshooting','$clean_orderly','$overall','$core_services','$improvement')");
+		} else {
+			$save = $this->db->query("UPDATE tbl_evaluation set `user_id`='$user_id', `service`='$service', `response`='$response', `quality`='$quality', `communication`='$communication', `experience`='$experience', `troubleshooting`='$troubleshooting', `clean_orderly`='$clean_orderly', `overall`='$overall', `core_services`='$core_services', `improvement`='$improvement' where id = $id");
+		}
+		if ($save) {
+			return 1;
+		}
+	}
+
+	function delete_evaluation_01()
+	{
+		extract($_POST);
+		$delete = $this->db->query("DELETE FROM `tb_evaluation` WHERE id = $id");
+		if ($delete) {
+			return 1;
+		}
+	}
+
 }

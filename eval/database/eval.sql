@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2024 at 04:02 PM
+-- Generation Time: Feb 04, 2024 at 08:18 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -119,6 +119,14 @@ CREATE TABLE `equipment_list` (
   `condition` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `equipment_list`
+--
+
+INSERT INTO `equipment_list` (`id`, `room_id`, `name`, `quantity`, `description`, `manufacturer`, `serial_no`, `condition`) VALUES
+(52, 122, 'Elvis Castillo', 571, 'Provident qui aut a', 'Dominique Nichols', 'Quynn Johnson', 'Damaged'),
+(53, 122, 'Urielle Mckee', 959, 'Velit porro a conse', 'Zena Sampson', 'Ralph Martinez', 'Good');
+
 -- --------------------------------------------------------
 
 --
@@ -126,6 +134,7 @@ CREATE TABLE `equipment_list` (
 --
 
 CREATE TABLE `evaluation_answers` (
+  `id` int(11) NOT NULL,
   `evaluation_id` int(30) NOT NULL,
   `question_id` int(30) NOT NULL,
   `rate` int(20) NOT NULL
@@ -135,16 +144,16 @@ CREATE TABLE `evaluation_answers` (
 -- Dumping data for table `evaluation_answers`
 --
 
-INSERT INTO `evaluation_answers` (`evaluation_id`, `question_id`, `rate`) VALUES
-(1, 1, 5),
-(1, 6, 4),
-(1, 3, 5),
-(2, 1, 5),
-(2, 6, 5),
-(2, 3, 4),
-(3, 1, 5),
-(3, 6, 5),
-(3, 3, 4);
+INSERT INTO `evaluation_answers` (`id`, `evaluation_id`, `question_id`, `rate`) VALUES
+(1, 1, 1, 5),
+(2, 1, 6, 4),
+(3, 1, 3, 5),
+(4, 2, 1, 5),
+(5, 2, 6, 5),
+(6, 2, 3, 4),
+(7, 3, 1, 5),
+(8, 3, 6, 5),
+(9, 3, 3, 4);
 
 -- --------------------------------------------------------
 
@@ -195,7 +204,8 @@ CREATE TABLE `faculty_list` (
 
 INSERT INTO `faculty_list` (`id`, `school_id`, `firstname`, `lastname`, `email`, `password`, `avatar`, `date_created`) VALUES
 (1, '20140623', 'George', 'Wilson', 'gwilson@sample.com', 'dd15740db7e88fbe5499826e54a1a7eb', '1608011100_avatar.jpg', '2020-12-15 13:45:18'),
-(2, '200101', 'Rowel', 'Yguinto', 'rowel@gmail.com', 'bc23badd48cc5bcd8d8c3e9b887bc3f5', '1701776280_1608081180_avatar.jpg', '2023-12-05 19:38:15');
+(2, '200101', 'Rowel', 'Yguinto', 'rowel@gmail.com', 'bc23badd48cc5bcd8d8c3e9b887bc3f5', '1701776280_1608081180_avatar.jpg', '2023-12-05 19:38:15'),
+(4, '123346546', 'Juliet', 'Fritz', 'gocynape@mailinator.com', 'a8f5f167f44f4964e6c998dee827110c', 'no-image-available.png', '2024-02-04 12:09:10');
 
 -- --------------------------------------------------------
 
@@ -315,6 +325,14 @@ CREATE TABLE `room_list` (
   `status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `room_list`
+--
+
+INSERT INTO `room_list` (`id`, `faculty_id`, `room`, `description`, `capacity`, `status`) VALUES
+(122, 1, '69', 'Iure rerum et sequi ', 28, 1),
+(123, NULL, '3', 'Consectetur neque p', 76, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -398,13 +416,46 @@ INSERT INTO `system_settings` (`id`, `name`, `email`, `contact`, `address`, `cov
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_evaluation`
+--
+
+CREATE TABLE `tbl_evaluation` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `service` varchar(100) DEFAULT NULL,
+  `response` varchar(100) DEFAULT NULL,
+  `quality` varchar(100) DEFAULT NULL,
+  `communication` varchar(100) DEFAULT NULL,
+  `experience` varchar(100) DEFAULT NULL,
+  `troubleshooting` varchar(100) DEFAULT NULL,
+  `clean_orderly` varchar(100) DEFAULT NULL,
+  `overall` varchar(100) DEFAULT NULL,
+  `core_services` text DEFAULT NULL,
+  `improvement` text DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_evaluation`
+--
+
+INSERT INTO `tbl_evaluation` (`id`, `user_id`, `service`, `response`, `quality`, `communication`, `experience`, `troubleshooting`, `clean_orderly`, `overall`, `core_services`, `improvement`, `status`) VALUES
+(6, 1, '2', '3', '3', '3', '3', '4', '4', '2', 'Culpa voluptas mole', 'Iste ea laboris cons', 0),
+(7, 1, '3', '3', '3', '4', '2', '5', '4', '1', 'Soluta consectetur u', 'Voluptate commodo in', 0),
+(8, 1, '3', '5', '4', '3', '4', '5', '1', '3', 'Quis quis voluptatem', 'Dolor velit earum mo', 0),
+(9, 1, '2', '3', '5', '5', '2', '1', '4', '1', 'Beatae consequatur ', 'Voluptatem qui quia ', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_data`
 --
 
 CREATE TABLE `tb_data` (
   `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `description` varchar(50) NOT NULL,
-  `languages` varchar(50) NOT NULL,
+  `languages` text NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -412,19 +463,10 @@ CREATE TABLE `tb_data` (
 -- Dumping data for table `tb_data`
 --
 
-INSERT INTO `tb_data` (`id`, `description`, `languages`, `date`) VALUES
-(1, 'WEFGFGHGD', 'Civil and Sanitary,Electrical,Mechanical,Electroni', '2023-12-05 15:52:05'),
-(2, '24', 'Civil and Sanitary,', '2023-12-05 15:52:05'),
-(3, 'john', 'Civil and Sanitary,Electrical,', '2023-12-05 15:52:05'),
-(4, 'sghtetyw', 'Electrical,Mechanical,', '2023-12-05 15:52:05'),
-(5, 'gsthrjtrs', 'Civil and Sanitary,Electrical,', '2023-12-05 18:17:33'),
-(6, 'Joshua', 'Electronic and Communication,', '2023-12-05 18:18:10'),
-(7, 'Please repair the computer #3 at room 101', 'Electrical,ICT,', '2023-12-05 19:05:48'),
-(8, 'John lloyd', 'ICT,', '2023-12-05 19:10:09'),
-(9, 'test', '', '2024-01-27 21:59:28'),
-(10, 'test mexh', 'Mechanical,', '2024-01-27 22:01:44'),
-(11, 'test', 'Mechanical,Electronic and Communication,Others,', '2024-01-28 00:02:04'),
-(12, 'tes', 'Others,', '2024-01-28 00:03:07');
+INSERT INTO `tb_data` (`id`, `user_id`, `description`, `languages`, `date`) VALUES
+(19, 1, 'Adipisci aliquid fug123', 'ICT,Others,', '2024-02-04 14:30:50'),
+(20, 1, 'Consequatur non ea v', 'Civil and Sanitary,Electrical,Electronic and Communication,', '2024-02-04 14:33:26'),
+(21, 1, 'Adipisci aliquid fug', 'Electronic and Communication,ICT,', '2024-02-04 14:39:21');
 
 -- --------------------------------------------------------
 
@@ -478,6 +520,12 @@ ALTER TABLE `criteria_list`
 ALTER TABLE `equipment_list`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_to_room` (`room_id`);
+
+--
+-- Indexes for table `evaluation_answers`
+--
+ALTER TABLE `evaluation_answers`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `evaluation_list`
@@ -555,6 +603,12 @@ ALTER TABLE `system_settings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_evaluation`
+--
+ALTER TABLE `tbl_evaluation`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tb_data`
 --
 ALTER TABLE `tb_data`
@@ -592,7 +646,13 @@ ALTER TABLE `criteria_list`
 -- AUTO_INCREMENT for table `equipment_list`
 --
 ALTER TABLE `equipment_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+--
+-- AUTO_INCREMENT for table `evaluation_answers`
+--
+ALTER TABLE `evaluation_answers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `evaluation_list`
@@ -604,7 +664,7 @@ ALTER TABLE `evaluation_list`
 -- AUTO_INCREMENT for table `faculty_list`
 --
 ALTER TABLE `faculty_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `faculty_room_list`
@@ -640,7 +700,7 @@ ALTER TABLE `restriction_list`
 -- AUTO_INCREMENT for table `room_list`
 --
 ALTER TABLE `room_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT for table `sections`
@@ -667,10 +727,16 @@ ALTER TABLE `system_settings`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `tbl_evaluation`
+--
+ALTER TABLE `tbl_evaluation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `tb_data`
 --
 ALTER TABLE `tb_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`

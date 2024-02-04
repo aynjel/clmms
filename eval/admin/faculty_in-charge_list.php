@@ -30,7 +30,7 @@
 						<td><b><?php echo ucwords($row['name']) ?></b></td>
 						<td><b><?php echo $row['email'] ?></b></td>
 						<td><b><?php
-							$room = $conn->query("SELECT * FROM room_list where id = ".$row['room_id']);
+							$room = $conn->query("SELECT * FROM room_list where faculty_id = ".$row['id']);
 							echo ucwords($room->num_rows > 0 ? $room->fetch_array()['room'] : 'N/A');
 						?></b></td>
 						<td class="text-center">

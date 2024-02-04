@@ -164,6 +164,26 @@ if($action == 'save_evaluation'){
 	if($save)
 		echo $save;
 }
+if($action == 'save_evaluation_01'){
+	$save = $crud->save_evaluation_01();
+	if($save)
+		echo $save;
+}
+if($action == 'delete_evaluation_01'){
+	$save = $crud->delete_evaluation_01();
+	if($save)
+		echo $save;
+}
+if($action == 'save_report'){
+	$save = $crud->save_report();
+	if($save)
+		echo $save;
+}
+if($action == 'delete_report'){
+	$save = $crud->delete_report();
+	if($save)
+		echo $save;
+}
 
 if($action == 'get_class'){
 	$get = $crud->get_class();

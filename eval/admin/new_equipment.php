@@ -16,7 +16,7 @@
 								$room = $conn->query("SELECT * FROM room_list order by id asc");
 								while ($row = $room->fetch_assoc()) :
 								?>
-									<option value="<?php echo $row['id'] ?>" <?php echo isset($_GET['room_id']) && $_GET['room_id'] == $row['id'] ? 'selected' : '' ?>><?php echo $row['id'] ?>:<?php echo $row['room'] ?></option>
+									<option value="<?php echo $row['id'] ?>" <?php echo isset($_GET['room_id']) && $_GET['room_id'] == $row['id'] ? 'selected' : '' ?>><?php echo $row['room'] ?></option>
 								<?php endwhile; ?>
 							</select>
 						</div>

@@ -21,6 +21,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item dropdown">
+            <a href="./index.php?page=evaluation" class="nav-link nav-evaluation">
+              <i class="nav-icon fas fa-clipboard-list"></i>
+              <p>
+                Evaluation
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link nav-edit_equipment">
               <i class="nav-icon fas fa-tv"></i>

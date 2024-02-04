@@ -5,8 +5,23 @@
 		<div class="card-body">
 			<form action="" id="manage_equipment">
 				<input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
+				<input type="hidden" name="room_id" value="<?php echo isset($_GET['room_id']) ? $_GET['room_id'] : '' ?>">
 				<div class="row">
-					<div class="col-md-6 border-right">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="" class="control-label">Room</label>
+							<select name="room_id" id="" class="custom-select custom-select-sm" <?php echo isset($_GET['room_id']) ? 'disabled' : '' ?>>
+								<option selected disabled hidden>Select Room</option>
+								<?php
+								$room = $conn->query("SELECT * FROM room_list order by id asc");
+								while ($row = $room->fetch_assoc()) :
+								?>
+									<option value="<?php echo $row['id'] ?>" <?php echo isset($_GET['room_id']) && $_GET['room_id'] == $row['id'] ? 'selected' : '' ?>><?php echo $row['room'] ?></option>
+								<?php endwhile; ?>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-3">
 						<div class="form-group">
 							<label for="" class="control-label">Name</label>
 							<input type="text" class="form-control form-control-sm" name="name" value="<?php echo isset($name) ? $name : '' ?>" required>
@@ -49,7 +64,7 @@
 						</div>
 					</div>
 				</div>
-				<hr>
+
 				<div class="col-lg-12 text-right justify-content-center d-flex">
 					<button class="btn btn-primary mr-2">Save</button>
 					<button class="btn btn-secondary" type="button" onclick="location.href = 'index.php?page=equipment_list'">Cancel</button>

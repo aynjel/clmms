@@ -22,14 +22,14 @@
               </p>
             </a>
           </li>
-          <li class="nav-item dropdown">
+          <!-- <li class="nav-item dropdown">
             <a href="./index.php?page=request_form" class="nav-link nav-request_form">
               <i class="nav-icon fas fa-calendar"></i>
               <p>
                 Request
               </p>
             </a>
-          </li> 
+          </li>  -->
             <li class="nav-item dropdown">
               <a href="./index.php?page=view_report" class="nav-link nav-view_report">
                 <i class="nav-icon fas fa-list-alt"></i>

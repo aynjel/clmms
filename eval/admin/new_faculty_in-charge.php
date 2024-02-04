@@ -19,10 +19,10 @@
 							<label for="" class="control-label">Last Name</label>
 							<input type="text" name="lastname" class="form-control form-control-sm" required value="<?php echo isset($lastname) ? $lastname : '' ?>">
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<label for="" class="control-label">Room</label>
 							<input type="text" name="room" class="form-control form-control-sm" required value="<?php echo isset($room) ? $room : '' ?>">
-						</div>
+						</div> -->
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">

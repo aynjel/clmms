@@ -1,53 +1,61 @@
 <?php include'db_connect.php' ?>
 <div class="col-lg-12">
-	<div class="card card-outline card-success">
-		<div class="card-header">
+	<div class="card card-outline card-primary">
+		<!-- <div class="card-header">
 			<div class="card-tools">
-				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="./index.php?page=new_evaluation"><i class="fa fa-plus"></i> Add New Evaluation</a>
+				<a class="btn btn-block btn-sm btn-default btn-flat border-primary new_room" href="index.php?page=new_room"><i class="fa fa-plus"></i> Add New</a>
 			</div>
-		</div>
+		</div> -->
 		<div class="card-body">
-			<table class="table tabe-hover table-bordered" id="list">
+			<table class="table tabe-hover table-bordered" id="evaluation_list">
+				<colgroup>
+					<col width="5%">
+					<col width="20%">
+					<col width="30%">
+					<col width="10%">
+				</colgroup>
 				<thead>
 					<tr>
-						<th class="text-center">#</th>
-						<th>Task</th>
-						<th>Name</th>
-						<?php if($_SESSION['login_type'] != 1): ?>
-						<th>Evaluator</th>
-						<?php endif; ?>
-						<th width="15%">Performance Average</th>
-						<th>Action</th>
+						<th>ID</th>
+						<th>Faculty</th>
+                        <th>Status</th>
+                        <th style="text-align: center;">Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
 					$i = 1;
-					$where = "";
-					if($_SESSION['login_type'] == 1)
-						$where = " where r.evaluator_id = {$_SESSION['login_id']} ";
-					$qry = $conn->query("SELECT r.*,concat(e.lastname,', ',e.firstname,' ',e.middlename) as name,t.task,concat(ev.lastname,', ',ev.firstname,' ',ev.middlename) as ename,((((r.efficiency + r.timeliness + r.quality + r.accuracy)/4)/5) * 100) as pa FROM ratings r inner join employee_list e on e.id = r.employee_id inner join task_list t on t.id = r.task_id inner join evaluator_list ev on ev.id = r.evaluator_id $where order by concat(e.lastname,', ',e.firstname,' ',e.middlename) asc");
+					$qry = $conn->query("SELECT * FROM `tbl_evaluation` order by id asc");
 					while($row= $qry->fetch_assoc()):
+                        
 					?>
 					<tr>
-						<th class="text-center"><?php echo $i++ ?></th>
-						<td><b><?php echo ($row['task']) ?></b></td>
-						<td><b><?php echo ucwords($row['name']) ?></b></td>
-						<?php if($_SESSION['login_type'] != 1): ?>
-						<td><b><?php echo ucwords($row['ename']) ?></b></td>
-						<?php endif; ?>
-						<td><b><?php echo number_format($row['pa'],2)."%" ?></b></td>
+						<td><b><?= $row['id'] ?></b></td>
+						<td><b><?php
+						$fac = $conn->query("SELECT * FROM faculty_list where id = ".$row['user_id'])->fetch_array();
+						echo ucwords($fac['firstname'].' '.$fac['lastname']);
+						?></b></td>
+						<td>
+							<b>
+								<?php if($row['status'] == 1): ?>
+									<span class="badge badge-success">ACCEPTED</span>
+								<?php else: ?>
+									<span class="badge badge-warning">PENDING</span>
+								<?php endif; ?>
+							</b>
+						</td>
 						<td class="text-center">
-							<button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-		                      Action
-		                    </button>
-		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item view_evaluation" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">View</a>
-		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item" href="./index.php?page=edit_evaluation&id=<?php echo $row['id'] ?>">Edit</a>
-		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item delete_evaluation" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">Delete</a>
-		                    </div>
+		                    <div class="btn-group">
+								<a href="javascript:void(0)" data-id="<?= $row['id'] ?>" class="btn btn-info btn-flat view_evaluation">
+		                          <i class="fas fa-eye"></i>
+								</a>
+		                        <a href="javascript:void(0)" data-id="<?= $row['id'] ?>" class="btn btn-primary btn-flat manage_evaluation">
+		                          <i class="fas fa-edit"></i>
+		                        </a>
+		                        <button type="button"  class="btn btn-danger btn-flat delete_evaluation" data-id="<?= $row['id'] ?>">
+		                          <i class="fas fa-trash"></i>
+		                        </button>
+	                      </div>
 						</td>
 					</tr>	
 				<?php endwhile; ?>
@@ -58,13 +66,16 @@
 </div>
 <script>
 	$(document).ready(function(){
-		$('#list').dataTable()
-	$('.view_evaluation').click(function(){
-		uni_modal("Evaluation Details","view_evaluation.php?id="+$(this).attr('data-id'),'mid-large')
-	})
-	$('.delete_evaluation').click(function(){
-	_conf("Are you sure to delete this evaluation?","delete_evaluation",[$(this).attr('data-id')])
-	})
+		$('#evaluation_list').dataTable()
+		$('.view_evaluation').click(function(){
+			uni_modal("Evaluation Details","<?= $_SESSION['login_view_folder'] ?>view_evaluation.php?id="+$(this).attr('data-id'))
+		})
+		$('.manage_evaluation').click(function(){
+			uni_modal("Manage Evaluation","<?= $_SESSION['login_view_folder'] ?>manage_evaluation.php?id="+$(this).attr('data-id'))
+		})
+		$('.delete_evaluation').click(function(){
+			_conf("Are you sure to delete this Evaluation?","delete_evaluation",[$(this).attr('data-id')])
+		})
 	})
 	function delete_evaluation($id){
 		start_load()

@@ -169,7 +169,7 @@ CREATE TABLE `evaluation_list` (
   `subject_id` int(30) NOT NULL,
   `faculty_id` int(30) NOT NULL,
   `restriction_id` int(30) NOT NULL,
-  `date_taken` datetime NOT NULL DEFAULT current_timestamp()
+  `date_taken` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -194,8 +194,8 @@ CREATE TABLE `faculty_list` (
   `lastname` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
   `password` text NOT NULL,
-  `avatar` text NOT NULL DEFAULT 'no-image-available.png',
-  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+  `avatar` text,
+  `date_created` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -217,7 +217,7 @@ CREATE TABLE `faculty_room_list` (
   `id` int(11) NOT NULL,
   `faculty_id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -280,7 +280,7 @@ CREATE TABLE `requests` (
   `request_id` int(11) NOT NULL,
   `section_id` int(11) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -358,7 +358,7 @@ CREATE TABLE `student_list` (
   `email` varchar(200) NOT NULL,
   `password` text NOT NULL,
   `class_id` int(30) NOT NULL,
-  `avatar` text NOT NULL DEFAULT 'no-image-available.png',
+  `avatar` text,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -480,7 +480,7 @@ CREATE TABLE `users` (
   `lastname` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
   `password` text NOT NULL,
-  `avatar` text NOT NULL DEFAULT 'no-image-available.png',
+  `avatar` text,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

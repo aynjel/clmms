@@ -830,7 +830,7 @@ class Action
 		if (empty($id)) {
 			$save = $this->db->query("INSERT INTO `tbl_evaluation`(`user_id`, `service`, `response`, `quality`, `communication`, `experience`, `troubleshooting`, `clean_orderly`, `overall`, `core_services`, `improvement`) VALUES ('$user_id','$service','$response','$quality','$communication','$experience','$troubleshooting','$clean_orderly','$overall','$core_services','$improvement')");
 		} else {
-			$save = $this->db->query("UPDATE tbl_evaluation set `user_id`='$user_id', `service`='$service', `response`='$response', `quality`='$quality', `communication`='$communication', `experience`='$experience', `troubleshooting`='$troubleshooting', `clean_orderly`='$clean_orderly', `overall`='$overall', `core_services`='$core_services', `improvement`='$improvement' where id = $id");
+			$save = $this->db->query("UPDATE tbl_evaluation set `status`='$status' where id = $id");
 		}
 		if ($save) {
 			return 1;
@@ -840,7 +840,7 @@ class Action
 	function delete_evaluation_01()
 	{
 		extract($_POST);
-		$delete = $this->db->query("DELETE FROM `tb_evaluation` WHERE id = $id");
+		$delete = $this->db->query("DELETE FROM `tbl_evaluation` WHERE id = $id");
 		if ($delete) {
 			return 1;
 		}

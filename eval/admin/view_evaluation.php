@@ -1,9 +1,24 @@
 <?php 
-include 'db_connect.php';
+include '../db_connect.php';
 if(isset($_GET['id'])){
-	$qry = $conn->query("SELECT r.*,concat(e.lastname,', ',e.firstname,' ',e.middlename) as name,t.task,concat(ev.lastname,', ',ev.firstname,' ',ev.middlename) as ename,((((r.efficiency + r.timeliness + r.quality + r.accuracy)/4)/5) * 100) as pa FROM ratings r inner join employee_list e on e.id = r.employee_id inner join task_list t on t.id = r.task_id inner join evaluator_list ev on ev.id = r.evaluator_id  where r.id = ".$_GET['id'])->fetch_array();
+	$qry = $conn->query("SELECT * FROM tbl_evaluation WHERE id = {$_GET['id']}")->fetch_array();
 	foreach($qry as $k => $v){
 		$$k = $v;
+	}
+}
+function displayText($idStatus){
+	if($idStatus == 1){
+		return "Very Dissatisfied";
+	}elseif($idStatus == 2){
+		return "Disatisfied";
+	}elseif($idStatus == 3){
+		return "Neutral";
+	}elseif($idStatus == 4){
+		return "Satisfied";
+	}elseif($idStatus == 5){
+		return "Very Satisfied";
+	}else{
+		return $idStatus;
 	}
 }
 ?>
@@ -12,47 +27,65 @@ if(isset($_GET['id'])){
 		<div class="row">
 			<div class="col-md-6">
 				<dl>
-					<dt><b class="border-bottom border-primary">Task</b></dt>
-					<dd><?php echo ucwords($task) ?></dd>
+					<dt><b class="border-bottom border-primary">Service</b></dt>
+					<dd>
+						<?= displayText($service); ?>
+					</dd>
 				</dl>
 				<dl>
-					<dt><b class="border-bottom border-primary">Assign To</b></dt>
-					<dd><?php echo ucwords($name) ?></dd>
-				</dl>
-				<dl>
-					<dt><b class="border-bottom border-primary">Evaluator</b></dt>
-					<dd><?php echo ucwords($ename) ?></dd>
-				</dl>
-				<dl>
-					<dt><b class="border-bottom border-primary">Date Evaluated</b></dt>
-					<dd><?php echo date("m d,Y",strtotime($date_created)) ?></dd>
-				</dl>
-				<dl>
-				<dt><b class="border-bottom border-primary">Remarks</b></dt>
-				<dd><?php echo $remarks ?></dd>
-				</dl>
-			</div>
-			<div class="col-md-6">
-				<b>Ratings:</b>
-				<dl>
-					<dt><b class="border-bottom border-primary">Efficiency</b></dt>
-					<dd><?php echo $efficiency ?></dd>
-				</dl>
-				<dl>
-					<dt><b class="border-bottom border-primary">Timeliness</b></dt>
-					<dd><?php echo $timeliness ?></dd>
+					<dt><b class="border-bottom border-primary">Response</b></dt>
+					<dd>
+						<?= displayText($response); ?>
+					</dd>
 				</dl>
 				<dl>
 					<dt><b class="border-bottom border-primary">Quality</b></dt>
-					<dd><?php echo $quality ?></dd>
+					<dd>
+						<?= displayText($quality); ?>
+					</dd>
 				</dl>
 				<dl>
-					<dt><b class="border-bottom border-primary">Accuracy</b></dt>
-					<dd><?php echo $accuracy ?></dd>
+					<dt><b class="border-bottom border-primary">Communication</b></dt>
+					<dd>
+						<?= displayText($communication); ?>
+					</dd>
+				</dl>
+			</div>
+			<div class="col-md-6">
+				<dl>
+					<dt><b class="border-bottom border-primary">Troubleshooting</b></dt>
+					<dd>
+						<?= displayText($troubleshooting); ?>
+					</dd>
 				</dl>
 				<dl>
-					<dt><b class="border-bottom border-primary">Performance Average</b></dt>
-					<dd><?php echo number_format($pa,2).'%' ?></dd>
+					<dt><b class="border-bottom border-primary">Clean Orderly</b></dt>
+					<dd>
+						<?= displayText($clean_orderly); ?>
+					</dd>
+				</dl>
+				<dl>
+					<dt><b class="border-bottom border-primary">Overall</b></dt>
+					<dd>
+						<?= displayText($overall); ?>
+					</dd>
+				</dl>
+				<dl>
+					<dt><b class="border-bottom border-primary">Experience</b></dt>
+					<dd>
+						<?= displayText($experience); ?>
+					</dd>
+				</dl>
+			</div>
+			<hr>
+			<div class="col-md-12">
+				<dl>
+					<dt><b class="border-bottom border-primary">Core Services</b></dt>
+					<dd><?php echo ucwords($core_services) ?></dd>
+				</dl>
+				<dl>
+					<dt><b class="border-bottom border-primary">Improvement</b></dt>
+					<dd><?php echo ucwords($improvement) ?></dd>
 				</dl>
 			</div>
 		</div>

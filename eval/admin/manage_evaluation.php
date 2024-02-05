@@ -1,71 +1,141 @@
 <?php
-include '../db_connect.php';
-if(isset($_GET['id'])){
-	$qry = $conn->query("SELECT * FROM room_list where id={$_GET['id']}")->fetch_array();
-	foreach($qry as $k => $v){
-		$$k = $v;
-	}
+require '../db_connect.php';
+if (isset($_GET['id'])) {
+    $qry = $conn->query("SELECT * from tbl_evaluation where id = " . $_GET['id']);
+    foreach ($qry->fetch_array() as $k => $val) {
+        $$k = $val;
+    }
 }
 ?>
-<div class="container-fluid">
-	<form action="" id="manage-room">
-		<input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
-		<div id="msg" class="form-group"></div>
-		<div class="form-group">
-			<label for="room" class="control-label">Room</label>
-			<input type="number" class="form-control form-control-sm" name="room" id="room" value="<?php echo isset($room) ? $room : '' ?>" required autofocus>
-		</div>
-		<div class="form-group">
-			<label for="capacity" class="control-label">Capacity</label>
-			<input type="number" class="form-control form-control-sm" name="capacity" id="capacity" value="<?php echo isset($capacity) ? $capacity : '' ?>" required>
-		</div>
-		<div class="form-group">
-			<label for="status" class="control-label">Status</label>
-			<select name="status" id="status" class="custom-select custom-select-sm">
-				<option value="1" <?php echo isset($status) && $status == 1 ? 'selected' : '' ?>>Active</option>
-				<option value="0" <?php echo isset($status) && $status == 0 ? 'selected' : '' ?>>Inactive</option>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="description" class="control-label">Description <i>(optional)</i></label>
-			<textarea name="description" id="description" cols="30" rows="2" class="form-control"><?php echo isset($description) ? $description : '' ?></textarea>
-		</div>
-		<!-- <div class="form-group">
-			<label for="faculty" class="control-label">Faculty</label>
-			<select name="faculty_id" id="faculty" class="custom-select custom-select-sm" required>
-				<option selected disabled hidden>Select Faculty</option>
-				<?php 
-				$qry = $conn->query("SELECT * FROM faculty_list order by id asc");
-				while($row= $qry->fetch_assoc()): ?>
-				<option value="<?= $row['id'] ?>" <?= isset($fac['id']) && $fac['id'] == $row['id'] ? 'selected' : '' ?>><?= ucwords($row['firstname'].' '.$row['lastname']) ?></option>
-			<?php endwhile; ?>
-			</select>
-		</div> -->
-	</form>
-</div>
+<form id="manage-evaluation_01">
+    <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
+	<div class="form-group">
+        <label for="status">Status</label>
+        <select class="form-control" name="status" id="status">
+            <option selected hidden disabled>Choose</option>
+            <option value="0">Pending</option>
+            <option value="1">Approve</option>
+            <option value="2">Reject</option>
+        </select>
+    </div>
+    <!-- <div class="form-group">
+        <label for="service">How satisfied are you with the service provided?</label>
+        <select class="form-control" name="service" id="service">
+            <option value="1">1 - Very Dissatisfied</option>
+            <option value="2">2 - Dissatisfied</option>
+            <option value="3">3 - Neutral</option>
+            <option value="4">4 - Satisfied</option>
+            <option value="5">5 - Very Satisfied</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="response">How do you rate the response time of our technician?</label>
+        <select class="form-control" name="response" id="response">
+            <option value="1">1 - Very Dissatisfied</option>
+            <option value="2">2 - Dissatisfied</option>
+            <option value="3">3 - Neutral</option>
+            <option value="4">4 - Satisfied</option>
+            <option value="5">5 - Very Satisfied</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="quality">How satisfied are you with the quality of our service?</label>
+        <select class="form-control" name="quality" id="quality">
+            <option value="1">1 - Very Dissatisfied</option>
+            <option value="2">2 - Dissatisfied</option>
+            <option value="3">3 - Neutral</option>
+            <option value="4">4 - Satisfied</option>
+            <option value="5">5 - Very Satisfied</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="communication">How do you rate our customer communication?</label>
+        <select class="form-control" name="communication" id="communication">
+            <option value="1">1 - Very Dissatisfied</option>
+            <option value="2">2 - Dissatisfied</option>
+            <option value="3">3 - Neutral</option>
+            <option value="4">4 - Satisfied</option>
+            <option value="5">5 - Very Satisfied</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="knowledge">How do you rate the knowledge of our technician in terms of:</label>
+        <div class="row">
+            <div class="col-md-4">
+                <label for="experience">
+                    Experience
+                </label>
+                <select class="form-control" name="experience" id="experience">
+                    <option value="1">1 - Very Dissatisfied</option>
+                    <option value="2">2 - Dissatisfied</option>
+                    <option value="3">3 - Neutral</option>
+                    <option value="4">4 - Satisfied</option>
+                    <option value="5">5 - Very Satisfied</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="troubleshooting">
+                    Troobleshooting
+                </label>
+                <select class="form-control" name="troubleshooting" id="troubleshooting">
+                    <option value="1">1 - Very Dissatisfied</option>
+                    <option value="2">2 - Dissatisfied</option>
+                    <option value="3">3 - Neutral</option>
+                    <option value="4">4 - Satisfied</option>
+                    <option value="5">5 - Very Satisfied</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="clean_orderly">
+                    Clean & Orderly
+                </label>
+                <select class="form-control" name="clean_orderly" id="clean_orderly">
+                    <option value="1">1 - Very Dissatisfied</option>
+                    <option value="2">2 - Dissatisfied</option>
+                    <option value="3">3 - Neutral</option>
+                    <option value="4">4 - Satisfied</option>
+                    <option value="5">5 - Very Satisfied</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="overall">Rate your overall satisfaction with the service.</label>
+        <select class="form-control" name="overall" id="overall">
+            <option value="1">1 - Very Dissatisfied</option>
+            <option value="2">2 - Dissatisfied</option>
+            <option value="3">3 - Neutral</option>
+            <option value="4">4 - Satisfied</option>
+            <option value="5">5 - Very Satisfied</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="core_services">What are the main strengths of our services?</label>
+        <textarea class="form-control" name="core_services" id="core_services"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="improvement">What areas would we need to improve in terms of our services?</label>
+        <textarea class="form-control" name="improvement" id="improvement"></textarea>
+    </div> -->
+</form>
 <script>
-	$(document).ready(function(){
-		$('#manage-room').submit(function(e){
-			e.preventDefault();
-			start_load()
-			$('#msg').html('')
-			$.ajax({
-				url:'ajax.php?action=save_room',
-				method:'POST',
-				data:$(this).serialize(),
-				success:function(resp){
-					if(resp == 1){
-						alert_toast("Data successfully saved.","success");
-						setTimeout(function(){
-							location.reload()	
-						},1750)
-					}else if(resp == 2){
-						$('#msg').html('<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Room already exist.</div>')
-						end_load()
-					}
-				}
-			})
-		})
-	})
-
+    $(document).ready(function() {
+        $('#manage-evaluation_01').submit(function(e) {
+            e.preventDefault();
+            start_load()
+            $.ajax({
+                url: 'ajax.php?action=save_evaluation_01',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function(resp) {
+                    if (resp == 1) {
+                        alert_toast("Data successfully saved.", "success");
+                        setTimeout(function() {
+                            location.reload()
+                        }, 1750)
+                    }
+                }
+            })
+        })
+    })
 </script>

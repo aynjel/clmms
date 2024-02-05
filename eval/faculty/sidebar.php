@@ -39,10 +39,10 @@
               </a>
             </li> 
             <li class="nav-item dropdown">
-              <a href="./index.php?page=equipment_list" class="nav-link nav-equipment_list">
-                <i class="nav-icon fas fa-tv"></i>
+              <a href="./index.php?page=room" class="nav-link nav-room">
+                <i class="nav-icon fas fa-building"></i>
                 <p>
-                  Equipments
+                  Room
                 </p>
               </a>
             </li> 

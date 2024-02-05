@@ -39,6 +39,8 @@
 							<b>
 								<?php if($row['status'] == 1): ?>
 									<span class="badge badge-success">ACCEPTED</span>
+								<?php elseif($row['status'] == 2): ?>
+									<span class="badge badge-danger">REJECTED</span>
 								<?php else: ?>
 									<span class="badge badge-warning">PENDING</span>
 								<?php endif; ?>
@@ -80,7 +82,7 @@
 	function delete_evaluation($id){
 		start_load()
 		$.ajax({
-			url:'ajax.php?action=delete_evaluation',
+			url:'ajax.php?action=delete_evaluation_01',
 			method:'POST',
 			data:{id:$id},
 			success:function(resp){

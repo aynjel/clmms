@@ -1,48 +1,40 @@
 <?php
-
-require_once('db_connect.php');
-$query = "SELECT * from tb_data ORDER BY id DESC";
-$result = mysqli_query($conn,$query);
-
+require '../db_connect.php';
+if (isset($_GET['id'])) {
+  $qry = $conn->query("SELECT * from tb_data where id = " . $_GET['id']);
+  foreach ($qry->fetch_array() as $k => $val) {
+    $$k = $val;
+  }
+}
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    
-</head>
-<body>
-    <h1 align="center" style="color:red;">Report List</h1>
-    <br>
-    <div class="card-body">
-        <div class="table-responsive">
-        <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Section</th>
-      <th scope="col">Description</th>
-      <th scope="col">Time/Date</th>
-      <!-- <th scope="col">Action</th> -->
-    </tr>
-    <tr>
-    <?php
-    
-      while($row = mysqli_fetch_assoc($result))
-      {
-    ?>
-     <td><?= $row['id']; ?></td>
-     <td><?= $row['languages']; ?></td>
-     <td><?= $row['description']; ?></td>
-     <td><?= date('F j, Y, g:i a',strtotime($row['date'])); ?></td>
-    </tr>
-    <?php
-      }
-
-
-
-    ?>
-  </thead>
-  
-</table>
-</body>
-</html>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card card-outline card-primary">
+        <div class="card-header">
+          <h3 class="card-title text-capitalize font-weight-bold">
+            Maintenance Report Details
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <p><b>Section:</b> <span class="text-muted"><?php echo $languages ?></span></p>
+              <p><b>Description:</b> <span class="text-muted"><?php echo $description ?></span></p>
+              <p><b>Date/Time:</b> <span class="text-muted"><?php echo date('F j, Y, g:i a', strtotime($date)) ?></span></p>
+              <p><b>Status:</b> <span class="text-muted">
+                  <?php
+                  if ($status == 1) {
+                    echo "<span class='badge badge-success'>Done Evaluate</span>";
+                  } else {
+                    echo "<span class='badge badge-warning'>Pending</span>";
+                  }
+                  ?>
+                </span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

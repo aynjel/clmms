@@ -782,7 +782,6 @@ class Action
 		if ($save) {
 			return 1;
 		}
-		
 	}
 
 	function save_report()
@@ -793,7 +792,7 @@ class Action
 
 		$languages = $_POST["languages"];
 		$language = "";
-		foreach($languages as $row){
+		foreach ($languages as $row) {
 			$language .= $row . ",";
 		}
 
@@ -821,14 +820,16 @@ class Action
 		extract($_POST);
 		// var_dump($_POST);
 		$user_id = $_SESSION['login_id'];
-		
+
 		// $chk = $this->db->query("SELECT * FROM tbl_evaluation where user_id = '$user_id' ")->num_rows;
 		// if ($chk > 0) {
 		// 	return 2;
 		// }
 
 		if (empty($id)) {
-			$save = $this->db->query("INSERT INTO `tbl_evaluation`(`user_id`, `service`, `response`, `quality`, `communication`, `experience`, `troubleshooting`, `clean_orderly`, `overall`, `core_services`, `improvement`) VALUES ('$user_id','$service','$response','$quality','$communication','$experience','$troubleshooting','$clean_orderly','$overall','$core_services','$improvement')");
+			$save = $this->db->query("INSERT INTO `tbl_evaluation`(`user_id`, `report_id`, `service`, `response`, `quality`, `communication`, `experience`, `troubleshooting`, `clean_orderly`, `overall`, `core_services`, `improvement`) VALUES ('$user_id','$report_id','$service','$response','$quality','$communication','$experience','$troubleshooting','$clean_orderly','$overall','$core_services','$improvement')");
+
+			$save = $this->db->query("UPDATE `tb_data` set `status`='1' where id = $report_id");
 		} else {
 			$save = $this->db->query("UPDATE tbl_evaluation set `status`='$status' where id = $id");
 		}
@@ -845,5 +846,4 @@ class Action
 			return 1;
 		}
 	}
-
 }

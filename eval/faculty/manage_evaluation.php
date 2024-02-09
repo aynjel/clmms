@@ -8,7 +8,19 @@ if (isset($_GET['id'])) {
 }
 ?>
 <form id="manage-evaluation_01">
-    <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
+    <input type="hidden" name="id" value="<?= isset($id) ? $id : '' ?>">
+    <div class="form-group">
+        <label for="report_id">Select Report to evaluate</label>
+        <select class="form-control" name="report_id" id="report_id">
+            <option selected disabled hidden>Select Report</option>
+            <?php
+            $qry = $conn->query("SELECT * from tb_data where status = 0");
+            while ($row = $qry->fetch_assoc()) :
+            ?>
+                <option value="<?= $row['id'] ?>" <?= isset($report_id) && $report_id == $row['id'] ? 'selected' : '' ?> title="<?= $row['languages'] ?> - <?= $row['description'] ?>"><?= $row['languages'] ?> - <?= $row['description'] ?></option>
+            <?php endwhile; ?>
+        </select>
+    </div>
     <div class="form-group">
         <label for="service">How satisfied are you with the service provided?</label>
         <select class="form-control" name="service" id="service">

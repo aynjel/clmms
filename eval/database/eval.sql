@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2024 at 08:18 AM
+-- Generation Time: Feb 09, 2024 at 01:48 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -169,7 +169,7 @@ CREATE TABLE `evaluation_list` (
   `subject_id` int(30) NOT NULL,
   `faculty_id` int(30) NOT NULL,
   `restriction_id` int(30) NOT NULL,
-  `date_taken` datetime DEFAULT current_timestamp()
+  `date_taken` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -194,8 +194,8 @@ CREATE TABLE `faculty_list` (
   `lastname` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
   `password` text NOT NULL,
-  `avatar` text,
-  `date_created` datetime DEFAULT current_timestamp()
+  `avatar` text NOT NULL DEFAULT 'no-image-available.png',
+  `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -217,7 +217,7 @@ CREATE TABLE `faculty_room_list` (
   `id` int(11) NOT NULL,
   `faculty_id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
-  `created_at` datetime DEFAULT current_timestamp()
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -280,7 +280,7 @@ CREATE TABLE `requests` (
   `request_id` int(11) NOT NULL,
   `section_id` int(11) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `created_at` timestamp DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -358,7 +358,7 @@ CREATE TABLE `student_list` (
   `email` varchar(200) NOT NULL,
   `password` text NOT NULL,
   `class_id` int(30) NOT NULL,
-  `avatar` text,
+  `avatar` text NOT NULL DEFAULT 'no-image-available.png',
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -411,7 +411,7 @@ CREATE TABLE `system_settings` (
 --
 
 INSERT INTO `system_settings` (`id`, `name`, `email`, `contact`, `address`, `cover_img`) VALUES
-(1, 'CLMMS', 'info@sample.comm', '+6948 8542 623', '2102  Caldwell Road, Rochester, New York, 14608', '');
+(1, 'COMPUTER LABORATORY MANAGEMENT AND MAINTENANCE SYSTEM', 'info@sample.comm', '+6948 8542 623', '2102  Caldwell Road, Rochester, New York, 14608', '');
 
 -- --------------------------------------------------------
 
@@ -422,6 +422,7 @@ INSERT INTO `system_settings` (`id`, `name`, `email`, `contact`, `address`, `cov
 CREATE TABLE `tbl_evaluation` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `report_id` int(11) NOT NULL,
   `service` varchar(100) DEFAULT NULL,
   `response` varchar(100) DEFAULT NULL,
   `quality` varchar(100) DEFAULT NULL,
@@ -439,11 +440,9 @@ CREATE TABLE `tbl_evaluation` (
 -- Dumping data for table `tbl_evaluation`
 --
 
-INSERT INTO `tbl_evaluation` (`id`, `user_id`, `service`, `response`, `quality`, `communication`, `experience`, `troubleshooting`, `clean_orderly`, `overall`, `core_services`, `improvement`, `status`) VALUES
-(6, 1, '2', '3', '3', '3', '3', '4', '4', '2', 'Culpa voluptas mole', 'Iste ea laboris cons', 0),
-(7, 1, '3', '3', '3', '4', '2', '5', '4', '1', 'Soluta consectetur u', 'Voluptate commodo in', 0),
-(8, 1, '3', '5', '4', '3', '4', '5', '1', '3', 'Quis quis voluptatem', 'Dolor velit earum mo', 0),
-(9, 1, '2', '3', '5', '5', '2', '1', '4', '1', 'Beatae consequatur ', 'Voluptatem qui quia ', 0);
+INSERT INTO `tbl_evaluation` (`id`, `user_id`, `report_id`, `service`, `response`, `quality`, `communication`, `experience`, `troubleshooting`, `clean_orderly`, `overall`, `core_services`, `improvement`, `status`) VALUES
+(10, 1, 21, '4', '2', '1', '4', '3', '4', '2', '1', 'Dolor distinctio Qu', 'Placeat explicabo ', 0),
+(11, 1, 19, '5', '2', '5', '5', '4', '4', '5', '5', 'Voluptate possimus ', 'Unde adipisci quas i', 0);
 
 -- --------------------------------------------------------
 
@@ -456,6 +455,7 @@ CREATE TABLE `tb_data` (
   `user_id` int(11) NOT NULL,
   `description` varchar(50) NOT NULL,
   `languages` text NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
   `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -463,10 +463,10 @@ CREATE TABLE `tb_data` (
 -- Dumping data for table `tb_data`
 --
 
-INSERT INTO `tb_data` (`id`, `user_id`, `description`, `languages`, `date`) VALUES
-(19, 1, 'Adipisci aliquid fug123', 'ICT,Others,', '2024-02-04 14:30:50'),
-(20, 1, 'Consequatur non ea v', 'Civil and Sanitary,Electrical,Electronic and Communication,', '2024-02-04 14:33:26'),
-(21, 1, 'Adipisci aliquid fug', 'Electronic and Communication,ICT,', '2024-02-04 14:39:21');
+INSERT INTO `tb_data` (`id`, `user_id`, `description`, `languages`, `status`, `date`) VALUES
+(19, 1, 'Adipisci aliquid fug123', 'ICT,Others,', 1, '2024-02-04 14:30:50'),
+(21, 1, 'Adipisci aliquid fug', 'Electronic and Communication,ICT,', 1, '2024-02-04 14:39:21'),
+(22, 1, 'Ut occaecat sed ipsa', 'Mechanical,Electronic and Communication,ICT,', 0, '2024-02-09 19:32:30');
 
 -- --------------------------------------------------------
 
@@ -480,7 +480,7 @@ CREATE TABLE `users` (
   `lastname` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
   `password` text NOT NULL,
-  `avatar` text,
+  `avatar` text NOT NULL DEFAULT 'no-image-available.png',
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -730,13 +730,13 @@ ALTER TABLE `system_settings`
 -- AUTO_INCREMENT for table `tbl_evaluation`
 --
 ALTER TABLE `tbl_evaluation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tb_data`
 --
 ALTER TABLE `tb_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `users`

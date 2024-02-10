@@ -1,6 +1,6 @@
 <?php include 'db_connect.php' ?>
 <?php
-$query = "SELECT * from tb_data ORDER BY id DESC";
+$query = "SELECT * from tb_data WHERE user_id = {$_SESSION['login_id']} ORDER BY id DESC";
 $result = mysqli_query($conn, $query);
 ?>
 <div class="row">
@@ -30,8 +30,15 @@ $result = mysqli_query($conn, $query);
 								<td class="text-center"><?php echo $row['description'] ?></td>
 								<td class="text-center"><?php echo date('F j, Y, g:i a', strtotime($row['date'])); ?></td>
 								<td class="text-center">
-									<button class="btn btn-sm btn-primary view_report" type="button" data-id="<?php echo $row['id'] ?>">View</button>
-									<button class="btn btn-sm btn-danger delete_report" type="button" data-id="<?php echo $row['id'] ?>">Delete</button>
+									<button class="btn btn-sm btn-info view_report" type="button" data-id="<?php echo $row['id'] ?>">
+										<i class="fa fa-eye"></i>
+									</button>
+									<button class="btn btn-sm btn-primary edit_report" type="button" data-id="<?php echo $row['id'] ?>">
+										<i class="fa fa-edit"></i>
+									</button>
+									<button class="btn btn-sm btn-danger delete_report" type="button" data-id="<?php echo $row['id'] ?>">
+										<i class="fa fa-trash"></i>
+									</button>
 								</td>
 							</tr>
 						<?php endwhile; ?>
@@ -47,6 +54,9 @@ $result = mysqli_query($conn, $query);
 		$('.report_list').dataTable()
 		$('.view_report').click(function() {
 			uni_modal("Maintenance Report Details", "<?php echo $_SESSION['login_view_folder'] ?>view_report.php?id=" + $(this).attr('data-id'))
+		})
+		$('.edit_report').click(function() {
+			uni_modal("Edit Maintenance Report", "<?php echo $_SESSION['login_view_folder'] ?>manage_report.php?id=" + $(this).attr('data-id'))
 		})
 		$('.delete_report').click(function() {
 			_conf("Are you sure to delete this report?", "delete_report", [$(this).attr('data-id')])

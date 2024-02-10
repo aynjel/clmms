@@ -9,13 +9,12 @@ if (isset($_GET['id'])) {
 ?>
 <form id="manage-evaluation_01">
     <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
-	<div class="form-group">
+    <div class="form-group">
         <label for="status">Status</label>
         <select class="form-control" name="status" id="status">
             <option selected hidden disabled>Choose</option>
-            <option value="0">Pending</option>
-            <option value="1">Approve</option>
-            <option value="2">Reject</option>
+            <option value="0">Under Process</option>
+            <option value="1">Accomplish</option>
         </select>
     </div>
     <!-- <div class="form-group">

@@ -1,35 +1,67 @@
 <?php include('db_connect.php');
-function ordinal_suffix1($num){
-    $num = $num % 100; // protect against large numbers
-    if($num < 11 || $num > 13){
-         switch($num % 10){
-            case 1: return $num.'st';
-            case 2: return $num.'nd';
-            case 3: return $num.'rd';
-        }
+function ordinal_suffix1($num)
+{
+  $num = $num % 100; // protect against large numbers
+  if ($num < 11 || $num > 13) {
+    switch ($num % 10) {
+      case 1:
+        return $num . 'st';
+      case 2:
+        return $num . 'nd';
+      case 3:
+        return $num . 'rd';
     }
-    return $num.'th';
+  }
+  return $num . 'th';
 }
-$astat = array("Not Yet Started","Started","Closed");
- ?>
+$astat = array("Not Yet Started", "Started", "Closed");
+?>
 
 <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        Welcome <?php echo $_SESSION['login_name'] ?>!
-        <br>
-        <div class="col-12 col-sm-6 col-md-4 col-md-5">
-            <div class="small-box bg-light shadow-sm border">
-              <div class="inner">
-                <h3><?php echo $conn->query("SELECT * FROM tb_data")->num_rows; ?></h3>
+  <div class="card">
+    <div class="card-body">
+      Welcome <?php echo $_SESSION['login_name'] ?>!
+      <br>
+      <div class="row">
+        <div class="col-md-3 col-lg-4">
+          <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+              <h3><?php echo $conn->query("SELECT * FROM tb_data")->num_rows; ?></h3>
 
-                <p>Total Report</p>
-              </div>
-              <div class="icon">
-                <i class="fa ion-ios-people-outline"></i>
-              </div>
+              <p>Total Report</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-list"></i>
+            </div>
           </div>
-      </div>
+        </div>
+
+        <div class="col-md-3 col-lg-4">
+          <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+              <h3><?php echo $conn->query("SELECT * FROM tb_data where status = 0")->num_rows; ?></h3>
+
+              <p>Pending Request</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-clock"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-lg-4">
+          <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+              <h3><?php echo $conn->query("SELECT * FROM tb_data where status = 1")->num_rows; ?></h3>
+
+              <p>Accomplished</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-check"></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
 </div>

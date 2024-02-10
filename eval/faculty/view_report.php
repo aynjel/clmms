@@ -42,9 +42,9 @@ $result = mysqli_query($conn, $query);
                 <td><?php echo date('F j, Y, g:i a', strtotime($row['date'])); ?></td>
                 <td class="text-center">
                   <?php if ($row['status'] == 1) : ?>
-                    <span class="badge badge-success">Done Evaluate</span>
+                    <span class="badge badge-success">Accomplished</span>
                   <?php else : ?>
-                    <span class="badge badge-warning">Pending</span>
+                    <span class="badge badge-warning">Under Process</span>
                   <?php endif; ?>
                 </td>
                 <td class="text-center">

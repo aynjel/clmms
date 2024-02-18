@@ -19,6 +19,7 @@ $result = mysqli_query($conn, $query);
 							<th scope="col">Section</th>
 							<th scope="col">Description</th>
 							<th scope="col">Date/Time</th>
+							<th scope="col">Status</th>
 							<th scope="col">Action</th>
 						</tr>
 					</thead>
@@ -29,6 +30,15 @@ $result = mysqli_query($conn, $query);
 								<td class="text-center"><?php echo $row['languages'] ?></td>
 								<td class="text-center"><?php echo $row['description'] ?></td>
 								<td class="text-center"><?php echo date('F j, Y, g:i a', strtotime($row['date'])); ?></td>
+								<td class="text-center">
+									<?php if ($row['status'] == 1) : ?>
+										<span class="badge badge-success">Accomplished</span>
+									<?php elseif ($row['status'] == 2) : ?>
+										<span class="badge badge-secondary">Under Process</span>
+									<?php else : ?>
+										<span class="badge badge-warning">Pending</span>
+									<?php endif; ?>
+								</td>
 								<td class="text-center">
 									<button class="btn btn-sm btn-info view_report" type="button" data-id="<?php echo $row['id'] ?>">
 										<i class="fa fa-eye"></i>

@@ -786,11 +786,9 @@ class Action
 
 	function save_report()
 	{
-		$id = $_POST["id"];
+		extract($_POST);
 		$user_id = $_SESSION['login_id'];
-		$description = $_POST["description"];
 
-		$languages = $_POST["languages"];
 		$language = "";
 		foreach ($languages as $row) {
 			$language .= $row . ",";
@@ -799,7 +797,7 @@ class Action
 		if (empty($id)) {
 			$save = $this->db->query("INSERT INTO `tb_data`(`user_id`, `description`, `languages`) VALUES ('$user_id','$description','$language')");
 		} else {
-			$save = $this->db->query("UPDATE tb_data set `user_id`='$user_id', `description`='$description', `languages`='$language' where id = $id");
+			$save = $this->db->query("UPDATE tb_data set `user_id`='$user_id', `status`='$status' where id = $id");
 		}
 		if ($save) {
 			return 1;

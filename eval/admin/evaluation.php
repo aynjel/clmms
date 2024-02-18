@@ -17,7 +17,7 @@
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Faculty</th>
+						<th>Evaluator</th>
 						<th>Status</th>
 						<th style="text-align: center;">Action</th>
 					</tr>
@@ -38,9 +38,11 @@
 							<td>
 								<b>
 									<?php if ($row['status'] == 1) : ?>
-										<span class="badge badge-success">Accomplish</span>
+										<span class="badge badge-success">Approved</span>
+									<?php elseif ($row['status'] == 2) : ?>
+										<span class="badge badge-danger">Rejected</span>
 									<?php else : ?>
-										<span class="badge badge-warning">Under Process</span>
+										<span class="badge badge-warning">Pending</span>
 									<?php endif; ?>
 								</b>
 							</td>

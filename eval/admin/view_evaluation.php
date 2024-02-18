@@ -27,7 +27,7 @@ function displayText($idStatus)
 	<div class="row">
 		<div class="col-md-12">
 			<dl>
-				<dt><b class="border-bottom border-primary">Faculty</b></dt>
+				<dt><b class="border-bottom border-primary">Evaluator</b></dt>
 				<dd><?php
 					$fac = $conn->query("SELECT * FROM faculty_list where id = " . $user_id)->fetch_array();
 					echo ucwords($fac['firstname'] . ' ' . $fac['lastname']);

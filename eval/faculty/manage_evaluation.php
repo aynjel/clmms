@@ -23,7 +23,7 @@ if (isset($_GET['id'])) {
     </div>
     <div class="form-group">
         <label for="service">How satisfied are you with the service provided?</label>
-        <select class="form-control" name="service" id="service">
+        <select class="form-control" name="service" id="service" required>
             <option value="1">1 - Very Dissatisfied</option>
             <option value="2">2 - Dissatisfied</option>
             <option value="3">3 - Neutral</option>
@@ -33,7 +33,7 @@ if (isset($_GET['id'])) {
     </div>
     <div class="form-group">
         <label for="response">How do you rate the response time of our technician?</label>
-        <select class="form-control" name="response" id="response">
+        <select class="form-control" name="response" id="response" required>
             <option value="1">1 - Very Dissatisfied</option>
             <option value="2">2 - Dissatisfied</option>
             <option value="3">3 - Neutral</option>
@@ -43,7 +43,7 @@ if (isset($_GET['id'])) {
     </div>
     <div class="form-group">
         <label for="quality">How satisfied are you with the quality of our service?</label>
-        <select class="form-control" name="quality" id="quality">
+        <select class="form-control" name="quality" id="quality" required>
             <option value="1">1 - Very Dissatisfied</option>
             <option value="2">2 - Dissatisfied</option>
             <option value="3">3 - Neutral</option>
@@ -53,7 +53,7 @@ if (isset($_GET['id'])) {
     </div>
     <div class="form-group">
         <label for="communication">How do you rate our customer communication?</label>
-        <select class="form-control" name="communication" id="communication">
+        <select class="form-control" name="communication" id="communication" required>
             <option value="1">1 - Very Dissatisfied</option>
             <option value="2">2 - Dissatisfied</option>
             <option value="3">3 - Neutral</option>
@@ -68,7 +68,7 @@ if (isset($_GET['id'])) {
                 <label for="experience">
                     Experience
                 </label>
-                <select class="form-control" name="experience" id="experience">
+                <select class="form-control" name="experience" id="experience" required>
                     <option value="1">1 - Very Dissatisfied</option>
                     <option value="2">2 - Dissatisfied</option>
                     <option value="3">3 - Neutral</option>
@@ -80,7 +80,7 @@ if (isset($_GET['id'])) {
                 <label for="troubleshooting">
                     Troobleshooting
                 </label>
-                <select class="form-control" name="troubleshooting" id="troubleshooting">
+                <select class="form-control" name="troubleshooting" id="troubleshooting" required>
                     <option value="1">1 - Very Dissatisfied</option>
                     <option value="2">2 - Dissatisfied</option>
                     <option value="3">3 - Neutral</option>
@@ -92,7 +92,7 @@ if (isset($_GET['id'])) {
                 <label for="clean_orderly">
                     Clean & Orderly
                 </label>
-                <select class="form-control" name="clean_orderly" id="clean_orderly">
+                <select class="form-control" name="clean_orderly" id="clean_orderly" required>
                     <option value="1">1 - Very Dissatisfied</option>
                     <option value="2">2 - Dissatisfied</option>
                     <option value="3">3 - Neutral</option>
@@ -104,7 +104,7 @@ if (isset($_GET['id'])) {
     </div>
     <div class="form-group">
         <label for="overall">Rate your overall satisfaction with the service.</label>
-        <select class="form-control" name="overall" id="overall">
+        <select class="form-control" name="overall" id="overall" required>
             <option value="1">1 - Very Dissatisfied</option>
             <option value="2">2 - Dissatisfied</option>
             <option value="3">3 - Neutral</option>
@@ -114,11 +114,11 @@ if (isset($_GET['id'])) {
     </div>
     <div class="form-group">
         <label for="core_services">What are the main strengths of our services?</label>
-        <textarea class="form-control" name="core_services" id="core_services"></textarea>
+        <textarea class="form-control" name="core_services" id="core_services" required></textarea>
     </div>
     <div class="form-group">
         <label for="improvement">What areas would we need to improve in terms of our services?</label>
-        <textarea class="form-control" name="improvement" id="improvement"></textarea>
+        <textarea class="form-control" name="improvement" id="improvement" required></textarea>
     </div>
 </form>
 <script>
@@ -132,10 +132,10 @@ if (isset($_GET['id'])) {
                 data: $(this).serialize(),
                 success: function(resp) {
                     if (resp == 1) {
-                        alert_toast("Data successfully saved.", "success");
+                        alert_toast("Thank you for responding to our survey.", "success");
                         setTimeout(function() {
                             location.reload()
-                        }, 1750)
+                        }, 1850)
                     }
                 }
             })

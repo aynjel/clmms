@@ -13,9 +13,9 @@ if (isset($_GET['id'])) {
         <label for="status">Status</label>
         <select class="form-control" name="status" id="status">
             <option selected hidden disabled>Choose</option>
-            <option value="0">Under Process</option>
-            <option value="1">Accomplish</option>
-        </select>
+            <option value="0">Pending</option>
+            <option value="1">Approve</option>
+            <option value="2">Reject</option>
     </div>
     <!-- <div class="form-group">
         <label for="service">How satisfied are you with the service provided?</label>

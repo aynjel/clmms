@@ -115,11 +115,15 @@ function displayText($idStatus)
 	<div class="row">
 		<div class="col-md-12">
 			<dl>
-				<dt><b class="border-bottom border-primary">Core Services</b></dt>
+				<dt><b class="border-bottom border-primary">
+					What are the main strengths of the our services?
+				</b></dt>
 				<dd><?php echo ucwords($core_services) ?></dd>
 			</dl>
 			<dl>
-				<dt><b class="border-bottom border-primary">Improvement</b></dt>
+				<dt><b class="border-bottom border-primary">
+					What areas should we need to improve?
+				</b></dt>
 				<dd><?php echo ucwords($improvement) ?></dd>
 			</dl>
 		</div>

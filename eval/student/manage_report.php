@@ -64,8 +64,8 @@ if (isset($_GET['id'])) {
       <div class="form-group">
         <label for="" class="control-label">Status</label>
         <select name="status" id="" class="custom-select" required>
-          <option value="1" <?php echo isset($status) && $status == 1 ? 'selected' : '' ?>>Done Evaluate</option>
-          <option value="0" <?php echo isset($status) && $status == 0 ? 'selected' : '' ?>>Pending</option>
+          <option value="1" <?php echo isset($status) && $status == 1 ? 'selected' : '' ?>>Under Process</option>
+          <option value="0" <?php echo isset($status) && $status == 0 ? 'selected' : '' ?>>Accomplished</option>
         </select>
       </div>
     </div>

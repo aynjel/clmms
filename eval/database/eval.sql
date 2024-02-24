@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2024 at 01:48 PM
+-- Generation Time: Feb 25, 2024 at 12:37 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -436,14 +436,6 @@ CREATE TABLE `tbl_evaluation` (
   `status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tbl_evaluation`
---
-
-INSERT INTO `tbl_evaluation` (`id`, `user_id`, `report_id`, `service`, `response`, `quality`, `communication`, `experience`, `troubleshooting`, `clean_orderly`, `overall`, `core_services`, `improvement`, `status`) VALUES
-(10, 1, 21, '4', '2', '1', '4', '3', '4', '2', '1', 'Dolor distinctio Qu', 'Placeat explicabo ', 0),
-(11, 1, 19, '5', '2', '5', '5', '4', '4', '5', '5', 'Voluptate possimus ', 'Unde adipisci quas i', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -455,7 +447,9 @@ CREATE TABLE `tb_data` (
   `user_id` int(11) NOT NULL,
   `description` varchar(50) NOT NULL,
   `languages` text NOT NULL,
+  `req_no` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
+  `f_status` int(11) NOT NULL DEFAULT 0,
   `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -463,10 +457,14 @@ CREATE TABLE `tb_data` (
 -- Dumping data for table `tb_data`
 --
 
-INSERT INTO `tb_data` (`id`, `user_id`, `description`, `languages`, `status`, `date`) VALUES
-(19, 1, 'Adipisci aliquid fug123', 'ICT,Others,', 1, '2024-02-04 14:30:50'),
-(21, 1, 'Adipisci aliquid fug', 'Electronic and Communication,ICT,', 1, '2024-02-04 14:39:21'),
-(22, 1, 'Ut occaecat sed ipsa', 'Mechanical,Electronic and Communication,ICT,', 0, '2024-02-09 19:32:30');
+INSERT INTO `tb_data` (`id`, `user_id`, `description`, `languages`, `req_no`, `status`, `f_status`, `date`) VALUES
+(19, 1, 'Adipisci aliquid fug updated', 'ICT,Others,', 123, 0, 0, '2024-02-04 14:30:50'),
+(21, 1, 'Adipisci aliquid fug', 'Electronic and Communication,ICT,', 456, 0, 0, '2024-02-04 14:39:21'),
+(22, 1, 'Ut occaecat sed ipsa', 'Mechanical,Electronic and Communication,ICT,', 789, 0, 0, '2024-02-09 19:32:30'),
+(24, 1, 'Exercitation autem s', 'Civil and Sanitary,Electrical,Electronic and Communication,', 321, 0, 0, '2024-02-18 13:35:54'),
+(25, 1, 'Lorem non irure aut ', 'Electrical,Electronic and Communication,ICT,', 654, 0, 0, '2024-02-18 13:36:00'),
+(26, 1, 'Et natus ut dolor ei', 'Mechanical,Electronic and Communication,', 987, 0, 0, '2024-02-18 13:40:36'),
+(27, 1, 'Placeat ab est vol', 'Civil and Sanitary,Electrical,Electronic and Communication,ICT,', 147, 0, 0, '2024-02-18 13:40:41');
 
 -- --------------------------------------------------------
 
@@ -730,13 +728,13 @@ ALTER TABLE `system_settings`
 -- AUTO_INCREMENT for table `tbl_evaluation`
 --
 ALTER TABLE `tbl_evaluation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tb_data`
 --
 ALTER TABLE `tb_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`

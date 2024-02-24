@@ -27,13 +27,11 @@ $result = mysqli_query($conn, $query);
             <tr>
               <!-- <th scope="col">#</th> -->
               <th scope="col">Section</th>
-              <th scope="col">Description</th>
+              <!-- <th scope="col">Description</th> -->
               <th scope="col">Action Taken</th>
               <th scope="col">Done By</th>
               <th scope="col">Remarks</th>
-              <th scope="col">Date</th>
               <th scope="col">Evaluation Status</th>
-              <th scope="col">Request Status</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -42,15 +40,38 @@ $result = mysqli_query($conn, $query);
               <tr>
                 <!-- <td class="text-center"><?php echo $row['id'] ?></td> -->
                 <td><?php echo $row['languages'] ?></td>
-                <td><?php echo $row['description'] ?></td>
-                <td><?php echo 'Date of done repair' ?></td>
-                <td><?php echo 'Maintenance Name' ?></td>
-                <td><?php echo 'Accomplished or Under Process' ?></td>
-                <td><?php echo date('M d, Y', strtotime($row['date'])); ?></td>
-                <td><?php echo 'Remarks ni Maintenance' ?></td>
-                <td><?php echo 'Status for done Evaluation' ?></td>
+                <!-- <td><?php echo $row['description'] ?></td> -->
+                <td><?php echo date('M d, Y h:i A', strtotime($row['date'])) ?></td>
+                <td>
+                  <?php
+                  $maintenanceQuery = $conn->query("SELECT * from student_list where id = " . $row['user_id']);
+                  $maintenance = $maintenanceQuery->fetch_assoc();
+                  echo $maintenance['firstname'] . ' ' . $maintenance['lastname'];
+                  ?>
+                </td>
+                <td>
+                  <?php
+                  if ($row['status'] == 1) {
+                    echo "<span class='badge badge-success'>Accomplished</span>";
+                  } else {
+                    echo "<span class='badge badge-info'>Under Process</span>";
+                  }
+                  ?>
+                </td>
+                <td>
+                  <?php
+                  if ($row['f_status'] == 1) {
+                    echo "<span class='badge badge-success'>Approved</span>";
+                  } else {
+                    echo "<span class='badge badge-warning'>Pending</span>";
+                  }
+                  ?>
+                </td>
                 <td class="text-center">
                   <div class="btn-group">
+                    <button class="btn btn-sm btn-info view_report_details" type="button" data-id="<?php echo $row['id'] ?>">
+                      <i class="fa fa-eye"></i>
+                    </button>
                     <a href="javascript:void(0)" data-id="<?= $row['id'] ?>" class="btn btn-primary btn-flat manage_report">
                       <i class="fas fa-edit"></i>
                     </a>
@@ -71,11 +92,14 @@ $result = mysqli_query($conn, $query);
 <script>
   $(document).ready(function() {
     $('.report_list').dataTable()
+    $('.view_report_details').click(function() {
+      uni_modal("Maintenance Report Details", "<?php echo $_SESSION['login_view_folder'] ?>view_report_details.php?id=" + $(this).attr('data-id'))
+    })
     $('.new_evaluation').click(function() {
       uni_modal("New Evaluation", "<?= $_SESSION['login_view_folder'] ?>manage_evaluation.php", "large")
     })
     $('.new_request').click(function() {
-      uni_modal("New Request", "<?= $_SESSION['login_view_folder'] ?>manage_report.php")
+      uni_modal("New Request for Maintenance", "<?= $_SESSION['login_view_folder'] ?>manage_report.php")
     })
     $('.manage_report').click(function() {
       uni_modal("Manage Report", "<?= $_SESSION['login_view_folder'] ?>manage_report.php?id=" + $(this).attr('data-id'))

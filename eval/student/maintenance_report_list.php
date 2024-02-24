@@ -15,26 +15,32 @@ $result = mysqli_query($conn, $query);
 				<table class="table tabe-hover table-bordered report_list">
 					<thead>
 						<tr>
-							<th scope="col">#</th>
+							<!-- <th scope="col">#</th> -->
 							<th scope="col">Section</th>
-							<th scope="col">Description</th>
-							<th scope="col">Date/Time</th>
-							<th scope="col">Status</th>
+							<!-- <th scope="col">Description</th> -->
+							<th scope="col">Action Taken</th>
+							<th scope="col">Remarks</th>
+							<th scope="col">Evaluation Status</th>
 							<th scope="col">Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php while ($row = mysqli_fetch_array($result)) : ?>
 							<tr>
-								<td class="text-center"><?php echo $row['id'] ?></td>
-								<td class="text-center"><?php echo $row['languages'] ?></td>
-								<td class="text-center"><?php echo $row['description'] ?></td>
+								<!-- <td class="text-center"><?php echo $row['id'] ?></td> -->
+								<td><?php echo $row['languages'] ?></td>
+								<!-- <td class="text-center"><?php echo $row['description'] ?></td> -->
 								<td class="text-center"><?php echo date('F j, Y, g:i a', strtotime($row['date'])); ?></td>
 								<td class="text-center">
-									<?php if ($row['status'] == 1) : ?>
+									<?php if ($row['f_status'] == 1) : ?>
 										<span class="badge badge-success">Accomplished</span>
-									<?php elseif ($row['status'] == 2) : ?>
-										<span class="badge badge-secondary">Under Process</span>
+									<?php else : ?>
+										<span class="badge badge-warning">Under Process</span>
+									<?php endif; ?>
+								</td>
+								<td class="text-center">
+									<?php if ($row['status'] == 1) : ?>
+										<span class="badge badge-success">Approved</span>
 									<?php else : ?>
 										<span class="badge badge-warning">Pending</span>
 									<?php endif; ?>

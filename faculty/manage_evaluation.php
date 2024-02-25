@@ -8,6 +8,20 @@ if (isset($_GET['id'])) {
 }
 ?>
 <form id="manage-evaluation_01">
+    <p>
+        <i><b>Thank You</b> for rating the Customer Satisfaction Survey. The survey should take less than 5 minutes of your time to complete. Please rate your satisfaction level with each of the following statements. Your feedback is important to us and will help us to improve our services.</i>
+    </p>
+
+    <ul style="list-style-type: none; padding: 0; display: flex; justify-content: space-between;">
+        <li>1 - Very Dissatisfied</li>
+        <li>2 - Dissatisfied</li>
+        <li>3 - Neutral</li>
+        <li>4 - Satisfied</li>
+        <li>5 - Very Satisfied</li>
+    </ul>
+
+    <hr>
+
     <input type="hidden" name="id" value="<?= isset($id) ? $id : '' ?>">
     <div class="form-group">
         <label for="report_id">Select Report to evaluate</label>

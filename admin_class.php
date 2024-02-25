@@ -723,7 +723,11 @@ class Action
 		if (empty($id)) {
 			$save = $this->db->query("INSERT INTO `room_list`(`room`, `description`, `capacity`, `status`) VALUES ('$room','$description','$capacity','$status')");
 		} else {
-			$save = $this->db->query("UPDATE room_list set `room`='$room', `description`='$description', `capacity`='$capacity', `status`='$status', `faculty_id`='$faculty_id' where id = $id");
+			if (empty($faculty_id) || $faculty_id == 0) {
+				$save = $this->db->query("UPDATE room_list set `room`='$room', `description`='$description', `capacity`='$capacity', `status`='$status', `faculty_id`=null where id = $id");
+			} else {
+				$save = $this->db->query("UPDATE room_list set `room`='$room', `description`='$description', `capacity`='$capacity', `status`='$status', `faculty_id`='$faculty_id' where id = $id");
+			}
 		}
 		if ($save) {
 			return 1;

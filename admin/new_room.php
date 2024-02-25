@@ -9,7 +9,7 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="room" class="control-label">Room</label>
-							<input type="number" class="form-control form-control-sm" name="room" id="room" min="1" value="<?php echo isset($room) ? $room : '' ?>" required autofocus>
+							<input type="text" class="form-control form-control-sm" name="room" id="room" min="1" value="<?php echo isset($room) ? $room : '' ?>" required autofocus>
 						</div>
 					</div>
 					<div class="col-md-4">

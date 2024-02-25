@@ -797,7 +797,11 @@ class Action
 		if (empty($id)) {
 			$save = $this->db->query("INSERT INTO `tb_data`(`user_id`, `description`, `languages`) VALUES ('$user_id','$description','$language')");
 		} else {
-			$save = $this->db->query("UPDATE tb_data set `user_id`='$user_id', `status`='$status' where id = $id");
+			if (empty($status)) {
+				$save = $this->db->query("UPDATE tb_data set `f_status`='$f_status' WHERE id = $id");
+			} else {
+				$save = $this->db->query("UPDATE tb_data set `status`='$status' WHERE id = $id");
+			}
 		}
 		if ($save) {
 			return 1;

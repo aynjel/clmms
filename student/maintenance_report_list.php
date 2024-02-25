@@ -32,14 +32,14 @@ $result = mysqli_query($conn, $query);
 								<!-- <td class="text-center"><?php echo $row['description'] ?></td> -->
 								<td class="text-center"><?php echo date('F j, Y, g:i a', strtotime($row['date'])); ?></td>
 								<td class="text-center">
-									<?php if ($row['f_status'] == 1) : ?>
+									<?php if ($row['status'] == 1) : ?>
 										<span class="badge badge-success">Accomplished</span>
 									<?php else : ?>
 										<span class="badge badge-warning">Under Process</span>
 									<?php endif; ?>
 								</td>
 								<td class="text-center">
-									<?php if ($row['status'] == 1) : ?>
+									<?php if ($row['f_status'] == 1) : ?>
 										<span class="badge badge-success">Approved</span>
 									<?php else : ?>
 										<span class="badge badge-warning">Pending</span>

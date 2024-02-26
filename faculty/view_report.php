@@ -1,6 +1,6 @@
 <?php include 'db_connect.php' ?>
 <?php
-$query = "SELECT * from tb_data where user_id = '" . $_SESSION['login_id'] . "' order by date desc";
+$query = "SELECT * from tb_data where faculty_id = '" . $_SESSION['login_id'] . "' order by date desc";
 $result = mysqli_query($conn, $query);
 ?>
 <div class="row">

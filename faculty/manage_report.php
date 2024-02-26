@@ -23,6 +23,16 @@ if (isset($_GET['id'])) {
     }
     ?>
     <div class="form-group">
+        <label for="maintenance">Maintenance</label>
+        <select name="user_id" id="maintenance" class="custom-select">
+            <option value="" selected disabled>Select</option>
+            <?php $qry = $conn->query("SELECT * from student_list");
+            while ($row = $qry->fetch_assoc()) : ?>
+                <option value="<?php echo $row['id'] ?>" <?php echo isset($maintenance) && $maintenance == $row['id'] ? 'selected' : '' ?>><?php echo $row['firstname'] . ' ' . $row['lastname'] ?></option>
+            <?php endwhile; ?>
+        </select>
+    </div>
+    <div class="form-group">
         <label for="languages">Languages</label>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" value="Civil and Sanitary" name="languages[]" id="civil_and_sanitary" <?php echo isset($languages) && in_array('Civil and Sanitary', explode(",", $languages)) ? 'checked' : '' ?>>
@@ -76,16 +86,7 @@ if (isset($_GET['id'])) {
             ?>
             <input type="text" class="form-control" name="req_no" value="<?php echo $req_no ?>" readonly>
         </div>
-    <?php
-    } else {
-    ?>
-        <div class="form-group">
-            <label for="req_no">Request No.</label>
-            <input type="text" class="form-control" name="req_no" value="<?php echo isset($req_no) ? $req_no : '' ?>" readonly>
-        </div>
-    <?php
-    }
-    ?>
+    <?php } ?>
 </form>
 <script>
     $(document).ready(function() {
@@ -93,7 +94,7 @@ if (isset($_GET['id'])) {
             e.preventDefault();
             start_load()
             $.ajax({
-                url: 'ajax.php?action=save_report',
+                url: 'ajax.php?action=save_report_fa',
                 method: 'POST',
                 data: $(this).serialize(),
                 success: function(resp) {

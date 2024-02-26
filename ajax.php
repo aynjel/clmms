@@ -179,6 +179,11 @@ if($action == 'save_report'){
 	if($save)
 		echo $save;
 }
+if($action == 'save_report_fa'){
+	$save = $crud->save_report_fa();
+	if($save)
+		echo $save;
+}
 if($action == 'delete_report'){
 	$save = $crud->delete_report();
 	if($save)

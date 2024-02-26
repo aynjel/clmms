@@ -788,6 +788,30 @@ class Action
 		}
 	}
 
+	function save_report_fa()
+	{
+		extract($_POST);
+		$faculty_id = $_SESSION['login_id'];
+
+		$language = "";
+		foreach ($languages as $row) {
+			$language .= $row . ",";
+		}
+
+		if (empty($id)) {
+			$save = $this->db->query("INSERT INTO `tb_data`(`user_id`,`faculty_id`, `description`, `languages`) VALUES ('$user_id','$faculty_id','$description','$language')");
+		} else {
+			if (empty($status)) {
+				$save = $this->db->query("UPDATE tb_data set `f_status`='$f_status' WHERE id = $id");
+			} else {
+				$save = $this->db->query("UPDATE tb_data set `status`='$status' WHERE id = $id");
+			}
+		}
+		if ($save) {
+			return 1;
+		}
+	}
+
 	function save_report()
 	{
 		extract($_POST);

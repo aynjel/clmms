@@ -26,7 +26,7 @@ $astat = array("Not Yet Started", "On-going", "Closed");
         <div class="col-md-4">
           <div class="small-box bg-light shadow-sm border">
             <div class="inner">
-              <h3><?php echo $conn->query("SELECT * FROM tb_data")->num_rows; ?></h3>
+              <h3><?php echo $conn->query("SELECT * FROM tb_data WHERE faculty_id = $_SESSION[login_id]")->num_rows; ?></h3>
 
               <p>Total Report</p>
             </div>
@@ -50,7 +50,7 @@ $astat = array("Not Yet Started", "On-going", "Closed");
         <div class="col-md-4">
           <div class="small-box bg-light shadow-sm border">
             <div class="inner">
-              <h3><?php echo $conn->query("SELECT * FROM tbl_evaluation")->num_rows; ?></h3>
+              <h3><?php echo $conn->query("SELECT * FROM tbl_evaluation WHERE faculty_id = $_SESSION[login_id]")->num_rows; ?></h3>
 
               <p>Total Evaluate</p>
             </div>

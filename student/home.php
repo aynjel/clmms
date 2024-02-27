@@ -26,7 +26,7 @@ $astat = array("Not Yet Started", "Started", "Closed");
         <div class="col-md-3 col-lg-4">
           <div class="small-box bg-light shadow-sm border">
             <div class="inner">
-              <h3><?php echo $conn->query("SELECT * FROM tb_data")->num_rows; ?></h3>
+              <h3><?php echo $conn->query("SELECT * FROM tb_data WHERE user_id = $_SESSION[login_id]")->num_rows; ?></h3>
 
               <p>Total Report</p>
             </div>
@@ -39,9 +39,9 @@ $astat = array("Not Yet Started", "Started", "Closed");
         <div class="col-md-3 col-lg-4">
           <div class="small-box bg-light shadow-sm border">
             <div class="inner">
-              <h3><?php echo $conn->query("SELECT * FROM tb_data where status = 0")->num_rows; ?></h3>
+              <h3><?php echo $conn->query("SELECT * FROM tb_data where user_id = $_SESSION[login_id] AND status = 0")->num_rows; ?></h3>
 
-              <p>Pending Request</p>
+              <p>Pending Evaluation</p>
             </div>
             <div class="icon">
               <i class="fas fa-clock"></i>
@@ -52,7 +52,7 @@ $astat = array("Not Yet Started", "Started", "Closed");
         <div class="col-md-3 col-lg-4">
           <div class="small-box bg-light shadow-sm border">
             <div class="inner">
-              <h3><?php echo $conn->query("SELECT * FROM tb_data where status = 1")->num_rows; ?></h3>
+              <h3><?php echo $conn->query("SELECT * FROM tb_data where user_id = $_SESSION[login_id] AND status = 1")->num_rows; ?></h3>
 
               <p>Accomplished</p>
             </div>

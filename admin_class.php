@@ -802,6 +802,7 @@ class Action
 			$save = $this->db->query("INSERT INTO `tb_data`(`user_id`,`faculty_id`, `description`, `languages`) VALUES ('$user_id','$faculty_id','$description','$language')");
 		} else {
 			if (empty($status)) {
+				$save = $this->db->query("INSERT INTO `tb_data_comments`(`comments`, `faculty_id`, `tb_data_id`) VALUES ('$comments','$faculty_id','$id')");
 				$save = $this->db->query("UPDATE tb_data set `f_status`='$f_status' WHERE id = $id");
 			} else {
 				$save = $this->db->query("UPDATE tb_data set `status`='$status' WHERE id = $id");

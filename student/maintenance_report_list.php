@@ -21,6 +21,7 @@ $result = mysqli_query($conn, $query);
 							<th scope="col">Action Taken</th>
 							<th scope="col">Remarks</th>
 							<th scope="col">Evaluation Status</th>
+							<!-- <th scope="col">Date Created</th> -->
 							<th scope="col">Action</th>
 						</tr>
 					</thead>
@@ -45,6 +46,7 @@ $result = mysqli_query($conn, $query);
 										<span class="badge badge-warning">Pending</span>
 									<?php endif; ?>
 								</td>
+								<!-- <td class="text-center"><?php echo $row['date'] ?></td> -->
 								<td class="text-center">
 									<button class="btn btn-sm btn-info view_report" type="button" data-id="<?php echo $row['id'] ?>">
 										<i class="fa fa-eye"></i>

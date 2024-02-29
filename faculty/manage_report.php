@@ -11,13 +11,24 @@ if (isset($_GET['id'])) {
     <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
     <?php
     if (isset($id)) {
-    ?>
+        ?>
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="text" class="form-control" disabled value="<?= date('M d, Y h:i A', strtotime($date)) ?>">
+        </div>
+
         <div class="form-group">
             <label for="f_status">Evaluation Status</label>
             <select name="f_status" id="f_status" class="custom-select">
                 <option value="0" <?php echo $f_status == 0 ? 'selected' : '' ?>>Pending</option>
                 <option value="1" <?php echo $f_status == 1 ? 'selected' : '' ?>>Approved</option>
             </select>
+        </div>
+
+        <!-- comments textarea -->
+        <div class="form-group">
+            <label for="comments">Comments</label>
+            <textarea class="form-control" rows="3" name="comments" required><?php echo isset($comments) ? $comments : '' ?></textarea>
         </div>
     <?php
     }

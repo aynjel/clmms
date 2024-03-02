@@ -57,9 +57,13 @@ if (isset($_GET['id'])) {
         <label for="" class="control-label">Description</label>
         <textarea name="description" id="" cols="30" rows="4" class="form-control" required><?php echo isset($description) ? $description : '' ?></textarea>
       </div>
-      <div class="form-group" hidden>
+      <div class="form-group">
         <label for="" class="control-label">Date/Time</label>
         <input type="datetime-local" class="form-control" name="date" value="<?php echo isset($date) ? date("Y-m-d\TH:i:s", strtotime($date)) : '' ?>" required>
+      </div>
+      <div class="form-group">
+        <label for="" class="control-label">Comments</label>
+        <textarea name="comments" id="" cols="30" rows="4" class="form-control" required><?php echo isset($comments) ? $comments : '' ?></textarea>
       </div>
       <div class="form-group">
         <label for="" class="control-label">Status</label>

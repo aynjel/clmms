@@ -29,7 +29,7 @@ $result = mysqli_query($conn, $query);
 						<?php while ($row = mysqli_fetch_array($result)) : ?>
 							<tr>
 								<!-- <td class="text-center"><?php echo $row['id'] ?></td> -->
-								<td><?php echo $row['languages'] ?></td>
+								<td><?php echo substr($row['languages'], 0, -1) ?></td>
 								<!-- <td class="text-center"><?php echo $row['description'] ?></td> -->
 								<td class="text-center"><?php echo date('F j, Y, g:i a', strtotime($row['date'])); ?></td>
 								<td class="text-center">
@@ -48,15 +48,17 @@ $result = mysqli_query($conn, $query);
 								</td>
 								<!-- <td class="text-center"><?php echo $row['date'] ?></td> -->
 								<td class="text-center">
-									<button class="btn btn-sm btn-info view_report" type="button" data-id="<?php echo $row['id'] ?>">
-										<i class="fa fa-eye"></i>
-									</button>
-									<button class="btn btn-sm btn-primary edit_report" type="button" data-id="<?php echo $row['id'] ?>">
-										<i class="fa fa-edit"></i>
-									</button>
-									<button class="btn btn-sm btn-danger delete_report" type="button" data-id="<?php echo $row['id'] ?>">
-										<i class="fa fa-trash"></i>
-									</button>
+									<div class="btn-group">
+										<button class="btn btn-sm btn-info view_report" type="button" data-id="<?php echo $row['id'] ?>">
+											<i class="fa fa-eye"></i>
+										</button>
+										<button class="btn btn-sm btn-primary edit_report" type="button" data-id="<?php echo $row['id'] ?>">
+											<i class="fa fa-edit"></i>
+										</button>
+										<button class="btn btn-sm btn-danger delete_report" type="button" data-id="<?php echo $row['id'] ?>">
+											<i class="fa fa-trash"></i>
+										</button>
+									</div>
 								</td>
 							</tr>
 						<?php endwhile; ?>

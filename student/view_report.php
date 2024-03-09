@@ -9,7 +9,7 @@ if (isset($_GET['id'])) {
 ?>
 <div class="row">
   <div class="col-md-12">
-    <p><b>Section:</b> <span class="text-muted"><?php echo $languages ?></span></p>
+    <p><b>Section:</b> <span class="text-muted"><?php echo substr($languages, 0, -1) ?></span></p>
     <p><b>Description:</b> <span class="text-muted"><?php echo $description ?></span></p>
     <p><b>Action Taken:</b> <span class="text-muted"><?php echo date('F j, Y, g:i a', strtotime($date)) ?></span></p>
     <p><b>Done By:</b> <span class="text-muted">

@@ -34,7 +34,7 @@
               <a href="./index.php?page=view_report" class="nav-link nav-view_report">
                 <i class="nav-icon fas fa-list-alt"></i>
                 <p>
-                  View Report
+                  Reports List
                 </p>
               </a>
             </li> 

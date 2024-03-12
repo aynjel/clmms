@@ -23,14 +23,6 @@
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a href="./index.php?page=new_evaluation_report" class="nav-link nav-new_evaluation_report">
-              <i class="nav-icon fas fa-plus"></i>
-              <p>
-                New Evaluation
-              </p>
-            </a>
-          </li>
-          <li class="nav-item dropdown">
             <a href="./index.php?page=maintenance_report_list" class="nav-link nav-maintenance_report_list">
               <i class="nav-icon fas fa-list"></i>
               <p>

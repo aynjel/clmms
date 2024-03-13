@@ -254,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `tbl_evaluation` (
   `status` int NOT NULL DEFAULT '0',
   `f_status` int DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Data exporting was unselected.
 
@@ -268,8 +268,21 @@ CREATE TABLE IF NOT EXISTS `tb_data` (
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` int NOT NULL DEFAULT '0',
   `f_status` int DEFAULT '0',
+  `comments` text COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table eval.tb_data_comments
+CREATE TABLE IF NOT EXISTS `tb_data_comments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `comments` text NOT NULL,
+  `student_id` int NOT NULL,
+  `tb_data_id` int NOT NULL,
+  `date` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Data exporting was unselected.
 

@@ -16,6 +16,7 @@ if (isset($_GET['id'])) {
             <option value="0">Pending</option>
             <option value="1">Approve</option>
             <option value="2">Reject</option>
+        </select>
     </div>
     <!-- <div class="form-group">
         <label for="service">How satisfied are you with the service provided?</label>

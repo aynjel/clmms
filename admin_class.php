@@ -855,7 +855,7 @@ class Action
 		if (empty($id)) {
 			$save = $this->db->query("INSERT INTO `tbl_evaluation`(`user_id`, `report_id`, `service`, `response`, `quality`, `communication`, `experience`, `troubleshooting`, `clean_orderly`, `overall`, `core_services`, `improvement`) VALUES ('$user_id','$report_id','$service','$response','$quality','$communication','$experience','$troubleshooting','$clean_orderly','$overall','$core_services','$improvement')");
 
-			$save = $this->db->query("UPDATE `tb_data` set `status`='1' where id = $report_id");
+			$save = $this->db->query("UPDATE `tb_data` set `f_status`='1' where id = $report_id");
 		} else {
 			$save = $this->db->query("UPDATE tbl_evaluation set `status`='$status' where id = $id");
 		}

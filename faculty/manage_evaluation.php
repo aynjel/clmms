@@ -24,11 +24,11 @@ if (isset($_GET['id'])) {
 
     <input type="hidden" name="id" value="<?= isset($id) ? $id : '' ?>">
     <div class="form-group">
-        <label for="report_id">Select Report to evaluate</label>
+        <label for="report_id">Select Report to Evaluate</label>
         <select class="form-control" name="report_id" id="report_id">
             <option selected disabled hidden>Select Report</option>
             <?php
-            $qry = $conn->query("SELECT * from tb_data where status = 0");
+            $qry = $conn->query("SELECT * from tb_data WHERE status = 0 AND faculty_id IS NOT NULL ORDER BY date DESC");
             while ($row = $qry->fetch_assoc()) :
             ?>
                 <option value="<?= $row['id'] ?>" <?= isset($report_id) && $report_id == $row['id'] ? 'selected' : '' ?> title="<?= $row['languages'] ?> - <?= $row['description'] ?>"><?= $row['languages'] ?> - <?= $row['description'] ?></option>

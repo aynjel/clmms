@@ -93,13 +93,14 @@
 <div class="row">
   <div class="col-lg-12">
   <?php
-    $query = "SELECT * from tb_data ORDER BY date DESC";
+  // select everything from tb_data where faculty_id is NULL
+    $query = "SELECT * from tb_data WHERE faculty_id IS NULL order by date desc";
     $result = mysqli_query($conn, $query);
   ?>
     <div class="card card-outline card-primary">
       <div class="card-header">
         <h3 class="card-title text-capitalize font-weight-bold">
-          All Reports (<?= mysqli_num_rows($result) ?>)
+          Other Reports (<?= mysqli_num_rows($result) ?>)
         </h3>
       </div>
       <div class="card-body">

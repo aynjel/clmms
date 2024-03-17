@@ -11,7 +11,7 @@ if (isset($_GET['id'])) {
     <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
     <?php
     if (isset($id)) {
-        ?>
+    ?>
         <div class="form-group">
             <label for="f_status">Evaluation Status</label>
             <select name="f_status" id="f_status" class="custom-select">
@@ -24,13 +24,21 @@ if (isset($_GET['id'])) {
     ?>
     <div class="form-group">
         <label for="maintenance">Maintenance</label>
-        <select name="user_id" id="maintenance" class="custom-select">
-            <option value="" selected disabled>Select</option>
-            <?php $qry = $conn->query("SELECT * from student_list");
-            while ($row = $qry->fetch_assoc()) : ?>
-                <option value="<?php echo $row['id'] ?>" <?php echo isset($maintenance) && $maintenance == $row['id'] ? 'selected' : '' ?>><?php echo $row['firstname'] . ' ' . $row['lastname'] ?></option>
-            <?php endwhile; ?>
-        </select>
+        <?php if (isset($id)) {
+            $maintenanceQuery = $conn->query("SELECT * from student_list where id = " . $user_id);
+            $maintenance = $maintenanceQuery->fetch_assoc(); ?>
+            <input type="hidden" name="user_id" value="<?php echo isset($maintenance) ? $maintenance['id'] : '' ?>">
+            <input type="text" class="form-control" value="<?php echo isset($maintenance) ? $maintenance['firstname'] . ' ' . $maintenance['lastname'] : '' ?>" readonly>
+        <?php } ?>
+        <?php if (!isset($id)) : ?>
+            <select name="user_id" id="maintenance" class="custom-select">
+                <option value="" selected disabled>Select Maintenance</option>
+                <?php $qry = $conn->query("SELECT * from student_list");
+                while ($row = $qry->fetch_assoc()) : ?>
+                    <option value="<?php echo $row['id'] ?>" <?php echo isset($maintenance) && $maintenance == $row['id'] ? 'selected' : '' ?>><?php echo $row['firstname'] . ' ' . $row['lastname'] ?></option>
+                <?php endwhile; ?>
+            </select>
+        <?php endif; ?>
     </div>
     <div class="form-group">
         <label for="languages">Languages</label>

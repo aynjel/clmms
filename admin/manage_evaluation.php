@@ -13,9 +13,8 @@ if (isset($_GET['id'])) {
         <label for="status">Status</label>
         <select class="form-control" name="status" id="status">
             <option selected hidden disabled>Choose</option>
-            <option value="0">Pending</option>
-            <option value="1">Approve</option>
-            <option value="2">Reject</option>
+            <option value="0">Reject</option>
+            <option value="1">Accept</option>
         </select>
     </div>
     <!-- <div class="form-group">

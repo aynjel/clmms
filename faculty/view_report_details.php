@@ -37,5 +37,18 @@ if (isset($_GET['id'])) {
         }
         ?>
       </span></p>
+    <p><b>Comments:</b>
+      <span class="text-muted">
+        <ul>
+          <?php
+          $commentQuery = $conn->query("SELECT * from tb_data_comments where tb_data_id = " . $id);
+          while ($comment = $commentQuery->fetch_assoc()) {
+            if (!empty($comment['comments'])) {
+              echo "<li>" . $comment['comments'] . " (" . date('F j, Y, g:i a', strtotime($comment['date'])) . ")</li>";
+            }
+          }
+          ?>
+        </ul>
+    </p>
   </div>
 </div>

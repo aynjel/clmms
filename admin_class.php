@@ -819,13 +819,13 @@ class Action
 		}
 
 		if (empty($id)) {
-			$save = $this->db->query("INSERT INTO `tb_data`(`user_id`, `description`, `languages`) VALUES ('$user_id','$description','$language')");
+			$save = $this->db->query("INSERT INTO `tb_data`(`user_id`, `description`, `languages`, `faculty_id`) VALUES ('$user_id','$description','$language','$faculty_id')");
 		} else {
 			$save = $this->db->query("UPDATE tb_data set `status`='$status' WHERE id = $id");
-			if(empty($comments)){
+			if (empty($comments)) {
 				$comments = "No comments";
 			}
-			$save = $this->db->query("INSERT INTO `tb_data_comments`(`comments`, `student_id`, `tb_data_id`, `date`) VALUES ('$comments','$user_id','$id', '$date')");
+			$save = $this->db->query("INSERT INTO `tb_data_comments`(`comments`, `student_id`, `tb_data_id`) VALUES ('$comments','$user_id','$id')");
 		}
 		if ($save) {
 			return 1;
@@ -857,7 +857,7 @@ class Action
 
 			$save = $this->db->query("UPDATE `tb_data` set `f_status`='1' where id = $report_id");
 		} else {
-			$save = $this->db->query("UPDATE tbl_evaluation set `status`='$status' where id = $id");
+			$save = $this->db->query("UPDATE tbl_evaluation set `c_status`='$status' where id = $id");
 		}
 		if ($save) {
 			return 1;

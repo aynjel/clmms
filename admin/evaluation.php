@@ -37,12 +37,10 @@
 									?></b></td>
 							<td>
 								<b>
-									<?php if ($row['status'] == 1) : ?>
-										<span class="badge badge-success">Approved</span>
-									<?php elseif ($row['status'] == 2) : ?>
-										<span class="badge badge-danger">Rejected</span>
+									<?php if ($row['c_status'] == 1) : ?>
+										<span class="badge badge-success">Accomplished</span>
 									<?php else : ?>
-										<span class="badge badge-warning">Pending</span>
+										<span class="badge badge-warning">Under Process</span>
 									<?php endif; ?>
 								</b>
 							</td>

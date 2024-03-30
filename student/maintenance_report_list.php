@@ -11,12 +11,12 @@ $result = mysqli_query($conn, $query);
 					Maintenance Report List (<?= mysqli_num_rows($result) ?>)
 				</h3>
 				<div class="card-tools">
-          <ul class="pagination pagination-sm m-0 float-right">
-            <li class="page-item">
-              <a class="btn btn-block btn-sm btn-default btn-flat border-primary new_request" href="javascript:void(0)"><i class="fa fa-plus"></i> New Request</a>
-            </li>
-          </ul>
-        </div>
+					<ul class="pagination pagination-sm m-0 float-right">
+						<li class="page-item">
+							<a class="btn btn-block btn-sm btn-default btn-flat border-primary new_request" href="javascript:void(0)"><i class="fa fa-plus"></i> New Request</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 			<div class="card-body">
 				<table class="table tabe-hover table-bordered report_list">
@@ -78,10 +78,15 @@ $result = mysqli_query($conn, $query);
 
 <script>
 	$(document).ready(function() {
-		$('.report_list').dataTable()
+		$('.report_list').dataTable({
+			dom: 'Bfrtip',
+			buttons: [
+				'excel', 'pdf', 'print'
+			],
+		})
 		$('.new_request').click(function() {
-      uni_modal("New Request for Maintenance", "<?= $_SESSION['login_view_folder'] ?>manage_report.php")
-    })
+			uni_modal("New Request for Maintenance", "<?= $_SESSION['login_view_folder'] ?>manage_report.php")
+		})
 		$('.view_report').click(function() {
 			uni_modal("Maintenance Report Details", "<?php echo $_SESSION['login_view_folder'] ?>view_report.php?id=" + $(this).attr('data-id'))
 		})

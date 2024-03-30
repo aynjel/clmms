@@ -66,7 +66,12 @@
 </div>
 <script>
 	$(document).ready(function() {
-		$('#evaluation_list').dataTable()
+		$('#evaluation_list').dataTable({
+			dom: 'Bfrtip',
+			buttons: [
+				'excel', 'pdf', 'print'
+			],
+		})
 		$('.view_evaluation').click(function() {
 			uni_modal("Evaluation Details", "<?= $_SESSION['login_view_folder'] ?>view_evaluation.php?id=" + $(this).attr('data-id'))
 		})

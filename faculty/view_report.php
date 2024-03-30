@@ -2,10 +2,10 @@
 
 <div class="row">
   <div class="col-lg-12">
-  <?php
+    <?php
     $query = "SELECT * from tb_data where faculty_id = '" . $_SESSION['login_id'] . "' order by date desc";
     $result = mysqli_query($conn, $query);
-  ?>
+    ?>
     <div class="card card-outline card-primary">
       <div class="card-header">
         <h3 class="card-title text-capitalize font-weight-bold">
@@ -92,11 +92,11 @@
 
 <div class="row">
   <div class="col-lg-12">
-  <?php
-  // select everything from tb_data where faculty_id is NULL
+    <?php
+    // select everything from tb_data where faculty_id is NULL
     $query = "SELECT * from tb_data WHERE faculty_id IS NULL order by date desc";
     $result = mysqli_query($conn, $query);
-  ?>
+    ?>
     <div class="card card-outline card-primary">
       <div class="card-header">
         <h3 class="card-title text-capitalize font-weight-bold">
@@ -175,7 +175,11 @@
   $(document).ready(function() {
     // limit row display to 1
     $('.report_list').dataTable({
-      pageLength: 5
+      pageLength: 5,
+      dom: 'Bfrtip',
+      buttons: [
+        'excel', 'pdf', 'print'
+      ],
     })
     $('.view_report_details').click(function() {
       uni_modal("Maintenance Report Details", "<?php echo $_SESSION['login_view_folder'] ?>view_report_details.php?id=" + $(this).attr('data-id'))

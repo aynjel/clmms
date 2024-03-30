@@ -488,7 +488,12 @@ if (isset($_GET['room_id']) && $_GET['room_id'] > 0) {
 		$('.delete_equipment').click(function() {
 			_conf("Are you sure to delete this equipment?", "delete_equipment", [$(this).attr('data-id')])
 		})
-		$('.equipment_list').dataTable()
+		$('.equipment_list').dataTable({
+			dom: 'Bfrtip',
+			buttons: [
+				'excel', 'pdf', 'print'
+			],
+		})
 	})
 
 	function delete_equipment($id) {

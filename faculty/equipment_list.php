@@ -36,7 +36,7 @@ $eqList = $conn->query("SELECT * FROM room_list WHERE faculty_id = {$_SESSION['l
 			</select>
 		</div>
 	</div> -->
-	<!-- <div class="col-md-4">
+<!-- <div class="col-md-4">
 		<div class="form-group">
 			<label for="" class="control-label">Filter by Faculty</label>
 			<select name="faculty_id" id="faculty_id" class="custom-select custom-select-sm" onchange="location.href = 'index.php?page=equipment_list&faculty_id=' + this.value">
@@ -217,13 +217,13 @@ if (isset($_GET['room_id']) && $_GET['room_id'] > 0) {
 			</div>
 		<?php endwhile; ?>
 	<?php endif; ?>
-<?php } elseif (isset($_GET['faculty_id']) && $_GET['faculty_id'] > 0) {
+	<?php } elseif (isset($_GET['faculty_id']) && $_GET['faculty_id'] > 0) {
 	$faList = $conn->query("SELECT * FROM faculty_list where id = " . $_GET['faculty_id']);
 	$row = $faList->fetch_assoc();
 	if ($faList->num_rows <= 0) :
 		$eqList = $conn->query("SELECT * FROM room_list where id = " . $row['room_id']);
 		$row = $eqList->fetch_assoc();
-?>
+	?>
 		<?php if ($eqList->num_rows <= 0) : ?>
 			<div class="col-lg-12">
 				<div class="card card-outline card-danger">
@@ -404,7 +404,12 @@ if (isset($_GET['room_id']) && $_GET['room_id'] > 0) {
 		$('.delete_equipment').click(function() {
 			_conf("Are you sure to delete this equipment?", "delete_equipment", [$(this).attr('data-id')])
 		})
-		$('.equipment_list').dataTable()
+		$('.equipment_list').dataTable({
+			dom: 'Bfrtip',
+			buttons: [
+				'excel', 'pdf', 'print'
+			],
+		})
 	})
 
 	function delete_equipment($id) {

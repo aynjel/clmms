@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
 }
 ?>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-12" id="maintenance_report_details">
     <p><b>Section:</b> <span class="text-muted"><?php echo substr($languages, 0, -1) ?></span></p>
     <p><b>Description:</b> <span class="text-muted"><?php echo $description ?></span></p>
     <p><b>Action Taken:</b> <span class="text-muted"><?php echo date('F j, Y, g:i a', strtotime($date)) ?></span></p>
@@ -37,18 +37,23 @@ if (isset($_GET['id'])) {
         }
         ?>
       </span></p>
-      <p><b>Comments:</b>
+    <p><b>Comments:</b>
       <span class="text-muted">
         <ul>
-        <?php
-        $commentQuery = $conn->query("SELECT * from tb_data_comments where tb_data_id = " . $id);
-        while ($comment = $commentQuery->fetch_assoc()) {
-          if (!empty($comment['comments'])) {
-            echo "<li>" . $comment['comments'] . " (" . date('F j, Y, g:i a', strtotime($comment['date'])) . ")</li>";
+          <?php
+          $commentQuery = $conn->query("SELECT * from tb_data_comments where tb_data_id = " . $id);
+          while ($comment = $commentQuery->fetch_assoc()) {
+            if (!empty($comment['comments'])) {
+              echo "<li>" . $comment['comments'] . " (" . date('F j, Y, g:i a', strtotime($comment['date'])) . ")</li>";
+            }
           }
-        }
-        ?>
+          ?>
         </ul>
     </p>
+  </div>
+
+  <div class="col-md-12">
+    <!-- Print Button -->
+    <button class="btn btn-primary" onclick="PrintElem('maintenance_report_details')">Print</button>
   </div>
 </div>

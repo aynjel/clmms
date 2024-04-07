@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
 }
 ?>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-12" id="printableArea">
     <p><b>Section:</b> <span class="text-muted"><?php echo $languages ?></span></p>
     <p><b>Description:</b> <span class="text-muted"><?php echo $description ?></span></p>
     <p><b>Action Taken:</b> <span class="text-muted"><?php echo date('F j, Y, g:i a', strtotime($date)) ?></span></p>
@@ -50,5 +50,9 @@ if (isset($_GET['id'])) {
           ?>
         </ul>
     </p>
+  </div>
+  <div class="col-md-12">
+    <!-- Print Button -->
+    <button class="btn btn-primary" onclick="PrintElem('printableArea')">Print</button>
   </div>
 </div>

@@ -122,8 +122,14 @@ include 'header.php'
 
     <!-- Main Footer -->
     <footer class="main-footer">
-      <strong>Copyright &copy; 2023 <a href="https://www.campcodes.com"></a>.</strong>
-      Baton, Carbajosa, Parami, Yguinto
+      <strong>
+        <span>
+          &copy; <?php echo date('Y') ?>
+          <b>
+            Capstone Project
+          </b>
+        </span>
+      </strong>
       <div class="float-right d-none d-sm-inline-block">
         <b><?php echo $_SESSION['system']['name'] ?></b>
       </div>

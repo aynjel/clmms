@@ -23,23 +23,18 @@
         </div>
       </div>
       <div class="card-body">
-        <!-- <table border="0" cellspacing="5" cellpadding="5">
+        <table border="0" cellspacing="5" cellpadding="5">
           <tbody>
             <tr>
-              <td colspan="2">
-                <h4>Filter by Date</h4>
-              </td>
+              <td>Minimum date:</td>
+              <td><input type="date" id="min"></td>
             </tr>
             <tr>
-              <td>From date</td>
-              <td>To date</td>
-            </tr>
-            <tr>
-              <td><input type="date" id="min" name="min"></td>
-              <td><input type="date" id="max" name="max"></td>
+              <td>Maximum date:</td>
+              <td><input type="date" id="max"></td>
             </tr>
           </tbody>
-        </table> -->
+        </table>
         <table class="table tabe-hover table-bordered report_list">
           <thead>
             <tr>
@@ -59,7 +54,10 @@
                 <!-- <td class="text-center"><?php echo $row['id'] ?></td> -->
                 <td><?php echo substr($row['languages'], 0, -1) ?></td>
                 <!-- <td><?php echo $row['description'] ?></td> -->
-                <td><?php echo date('M d, Y h:i A', strtotime($row['date'])) ?></td>
+                <td>
+                  <!-- Format the date mm/dd/yyyy -->
+                  <?php echo date('m/d/Y', strtotime($row['date'])) ?>
+                </td>
                 <td>
                   <?php
                   $maintenanceQuery = $conn->query("SELECT * from student_list where id = " . $row['user_id']);
@@ -140,7 +138,10 @@
                 <!-- <td class="text-center"><?php echo $row['id'] ?></td> -->
                 <td><?php echo substr($row['languages'], 0, -1) ?></td>
                 <!-- <td><?php echo $row['description'] ?></td> -->
-                <td><?php echo date('M d, Y h:i A', strtotime($row['date'])) ?></td>
+                <td>
+                  <!-- Format the date mm/dd/yyyy -->
+                  <?php echo date('m/d/Y', strtotime($row['date'])) ?>
+                </td>
                 <td>
                   <?php
                   $maintenanceQuery = $conn->query("SELECT * from student_list where id = " . $row['user_id']);
@@ -188,6 +189,16 @@
   </div>
 </div>
 
+<!-- 
+  https://cdn.datatables.net/2.0.7/js/dataTables.js
+  https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js
+  https://cdn.datatables.net/datetime/1.5.2/js/dataTables.dateTime.min.js
+-->
+
+<script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.5.2/js/dataTables.dateTime.min.js"></script>
+
 <script>
   $(document).ready(function() {
     const table = $('.report_list').DataTable({
@@ -216,38 +227,42 @@
       ]
     })
 
-    //   let minDate, maxDate;
+    let minDate, maxDate;
 
-    //   // Date range filter
-    //   $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
-    //     let min = minDate.val();
-    //     let max = maxDate.val();
-    //     let date = new Date(data[4]);
+    // Create date inputs
+    minDate = new DateTime('#min', {
+      format: 'MMMM Do YYYY'
+    });
+    maxDate = new DateTime('#max', {
+      format: 'MMMM Do YYYY'
+    });
 
-    //     if (
-    //       (min === null && max === null) ||
-    //       (min === null && date <= max) ||
-    //       (min <= date && max === null) ||
-    //       (min <= date && date <= max)
-    //     ) {
-    //       return true;
-    //     }
-    //     return false;
-    //   });
+    // Filter by date
+    $('#min, #max').on('change', function() {
+      minDate = $('#min').val();
+      maxDate = $('#max').val();
 
-    //   // Create date inputs
-    //   minDate = new DateTime('#min', {
-    //     format: 'MMMM Do YYYY'
-    //   });
-    //   maxDate = new DateTime('#max', {
-    //     format: 'MMMM Do YYYY'
-    //   });
+      table.draw();
 
-    //   document.querySelectorAll('#min, #max').forEach((el) => {
-    //     el.addEventListener('change', function() {
-    //       table.draw();
-    //     });
-    //   });
+      console.log(minDate, maxDate);
+    });
+
+    $.fn.dataTable.ext.search.push(
+      function(settings, data, dataIndex) {
+        // format and trim the date values from data[1]
+
+        const min = moment(minDate, 'YYYY-MM-DD');
+        const max = moment(maxDate, 'YYYY-MM-DD');
+        const date = moment(data[1], 'MM/DD/YYYY');
+
+        // If the date is between the min and max
+        if ((min == '' && max == '') || (min == '' && date <= max) || (min <= date && '' == max) || (min <= date && date <= max)) {
+          return true;
+        }
+
+        return false;
+      }
+    );
   });
 
   $('.view_report_details').click(function() {

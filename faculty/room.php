@@ -339,6 +339,18 @@ if (isset($_GET['room_id']) && $_GET['room_id'] > 0) {
 						<?php endif; ?>
 					</div>
 					<div class="card-body">
+						<!-- <table border="0" cellspacing="5" cellpadding="5">
+							<tbody>
+								<tr>
+									<td>Minimum date:</td>
+									<td><input type="date" id="min"></td>
+								</tr>
+								<tr>
+									<td>Maximum date:</td>
+									<td><input type="date" id="max"></td>
+								</tr>
+							</tbody>
+						</table> -->
 						<table class="table tabe-hover table-bordered equipment_list">
 							<thead>
 								<tr>
@@ -404,7 +416,7 @@ if (isset($_GET['room_id']) && $_GET['room_id'] > 0) {
 		$('.delete_equipment').click(function() {
 			_conf("Are you sure to delete this equipment?", "delete_equipment", [$(this).attr('data-id')])
 		})
-		$('.equipment_list').dataTable({
+		const table = $('.equipment_list').dataTable({
 			dom: 'Bfrtip',
 			buttons: [
 				'excel', 'pdf', {
@@ -428,6 +440,43 @@ if (isset($_GET['room_id']) && $_GET['room_id'] > 0) {
 				}
 			]
 		})
+
+		// let minDate, maxDate;
+
+		// Create date inputs
+		// minDate = new DateTime('#min', {
+		// 	format: 'MMMM Do YYYY'
+		// });
+		// maxDate = new DateTime('#max', {
+		// 	format: 'MMMM Do YYYY'
+		// });
+
+		// Filter by date
+		// $('#min, #max').on('change', function() {
+		// 	minDate = $('#min').val();
+		// 	maxDate = $('#max').val();
+
+		// 	table.draw();
+
+		// 	console.log(minDate, maxDate);
+		// });
+
+		// $.fn.dataTable.ext.search.push(
+		// 	function(settings, data, dataIndex) {
+		// 		// format and trim the date values from data[1]
+
+		// 		const min = moment(minDate, 'YYYY-MM-DD');
+		// 		const max = moment(maxDate, 'YYYY-MM-DD');
+		// 		const date = moment(data[1], 'MM/DD/YYYY');
+
+		// 		// If the date is between the min and max
+		// 		if ((min == '' && max == '') || (min == '' && date <= max) || (min <= date && '' == max) || (min <= date && date <= max)) {
+		// 			return true;
+		// 		}
+
+		// 		return false;
+		// 	}
+		// );
 	})
 
 	function delete_equipment($id) {

@@ -11,16 +11,16 @@
 				<h3 class="card-title text-capitalize font-weight-bold">
 					<i class="fa fa-list"></i> Report List (<?= mysqli_num_rows($result) ?>)
 				</h3>
-				<!-- <div class="card-tools">
+				<div class="card-tools">
 					<ul class="pagination pagination-sm m-0 float-right">
-						<li class="page-item">
+						<!-- <li class="page-item">
 							<a class="btn btn-block btn-sm btn-default btn-flat border-primary new_evaluation" href="javascript:void(0)"><i class="fa fa-plus"></i> New Evaluation</a>
-						</li>
+						</li> -->
 						<li class="page-item">
 							<a class="btn btn-block btn-sm btn-default btn-flat border-primary new_request" href="javascript:void(0)"><i class="fa fa-plus"></i> New Request</a>
 						</li>
 					</ul>
-				</div> -->
+				</div>
 			</div>
 			<div class="card-body">
 				<table class="table tabe-hover table-bordered report_list">

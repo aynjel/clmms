@@ -19,6 +19,18 @@ $result = mysqli_query($conn, $query);
 				</div>
 			</div>
 			<div class="card-body">
+				<table border="0" cellspacing="5" cellpadding="5">
+					<tbody>
+						<tr>
+							<td>Minimum date:</td>
+							<td><input type="date" id="min"></td>
+						</tr>
+						<tr>
+							<td>Maximum date:</td>
+							<td><input type="date" id="max"></td>
+						</tr>
+					</tbody>
+				</table>
 				<table class="table tabe-hover table-bordered report_list">
 					<thead>
 						<tr>
@@ -38,7 +50,9 @@ $result = mysqli_query($conn, $query);
 								<!-- <td class="text-center"><?php echo $row['id'] ?></td> -->
 								<td><?php echo substr($row['languages'], 0, -1) ?></td>
 								<!-- <td class="text-center"><?php echo $row['description'] ?></td> -->
-								<td class="text-center"><?php echo date('F j, Y, g:i a', strtotime($row['date'])); ?></td>
+								<td class="text-center">
+									<?php echo date('m/d/Y', strtotime($row['date'])) ?>
+								</td>
 								<td class="text-center">
 									<?php if ($row['status'] == 1) : ?>
 										<span class="badge badge-success">Accomplished</span>
@@ -78,7 +92,8 @@ $result = mysqli_query($conn, $query);
 
 <script>
 	$(document).ready(function() {
-		$('.report_list').dataTable({
+		const table = $('.report_list').DataTable({
+			pageLength: 5,
 			dom: 'Bfrtip',
 			buttons: [
 				'excel', 'pdf', {
@@ -102,6 +117,44 @@ $result = mysqli_query($conn, $query);
 				}
 			]
 		})
+
+		let minDate, maxDate;
+
+		// Create date inputs
+		minDate = new DateTime('#min', {
+			format: 'MMMM Do YYYY'
+		});
+		maxDate = new DateTime('#max', {
+			format: 'MMMM Do YYYY'
+		});
+
+		// Filter by date
+		$('#min, #max').on('change', function() {
+			minDate = $('#min').val();
+			maxDate = $('#max').val();
+
+			table.draw();
+
+			console.log(minDate, maxDate);
+		});
+
+		$.fn.dataTable.ext.search.push(
+			function(settings, data, dataIndex) {
+				// format and trim the date values from data[1]
+
+				const min = moment(minDate, 'YYYY-MM-DD');
+				const max = moment(maxDate, 'YYYY-MM-DD');
+				const date = moment(data[1], 'MM/DD/YYYY');
+
+				// If the date is between the min and max
+				if ((min == '' && max == '') || (min == '' && date <= max) || (min <= date && '' == max) || (min <= date && date <= max)) {
+					return true;
+				}
+
+				return false;
+			}
+		);
+
 		$('.new_request').click(function() {
 			uni_modal("New Request for Maintenance", "<?= $_SESSION['login_view_folder'] ?>manage_report.php")
 		})

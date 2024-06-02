@@ -48,7 +48,8 @@
 <script>
 	$(document).ready(function() {
 		$('.view_user').click(function() {
-			uni_modal("<i class='fa fa-id-card'></i> User Details", "view_chairperson.php?id=" + $(this).attr('data-id'))
+			console.log($(this).attr('data-id'));
+			uni_modal("<i class='fa fa-id-card'></i> User Details", "<?php echo $_SESSION['login_view_folder'] ?>view_chairperson.php?id=" + $(this).attr('data-id'))
 		})
 		$('.delete_user').click(function() {
 			_conf("Are you sure to delete this user?", "delete_user", [$(this).attr('data-id')])

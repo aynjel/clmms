@@ -51,10 +51,12 @@ function displayText($idStatus)
 		<div class="col-md-12">
 			<dl>
 				<dt><b class="border-bottom border-primary">Evaluation for</b></dt>
-				<dd><?php
-						$fac = $conn->query("SELECT * FROM tb_data where id = " . $report_id)->fetch_array();
-						echo ucwords($fac['description']) . ' - ' . $fac['languages'];
-						?></dd>
+				<dd>
+					<?php
+					$fac = $conn->query("SELECT * FROM tb_data where id = " . $report_id)->fetch_array();
+					echo ucwords($fac['description']) . ' - ' . rtrim($fac['languages'], ',');
+					?>
+				</dd>
 			</dl>
 		</div>
 	</div>

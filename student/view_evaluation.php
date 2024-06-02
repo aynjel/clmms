@@ -29,9 +29,9 @@ function displayText($idStatus)
 			<dl>
 				<dt><b class="border-bottom border-primary">Evaluator</b></dt>
 				<dd><?php
-					$fac = $conn->query("SELECT * FROM faculty_list where id = " . $user_id)->fetch_array();
-					echo ucwords($fac['firstname'] . ' ' . $fac['lastname']);
-					?></dd>
+						$fac = $conn->query("SELECT * FROM faculty_list where id = " . $user_id)->fetch_array();
+						echo ucwords($fac['firstname'] . ' ' . $fac['lastname']);
+						?></dd>
 			</dl>
 			<dl>
 				<dt><b class="border-bottom border-primary">Status</b></dt>
@@ -52,9 +52,9 @@ function displayText($idStatus)
 			<dl>
 				<dt><b class="border-bottom border-primary">Evaluation for</b></dt>
 				<dd><?php
-					$fac = $conn->query("SELECT * FROM tb_data where id = " . $report_id)->fetch_array();
-					echo ucwords($fac['description']) . ' - ' . $fac['languages'];
-					?></dd>
+						$fac = $conn->query("SELECT * FROM tb_data where id = " . $report_id)->fetch_array();
+						echo ucwords($fac['description']) . ' - ' . rtrim($fac['languages'], ',');
+						?></dd>
 			</dl>
 		</div>
 	</div>
@@ -116,14 +116,14 @@ function displayText($idStatus)
 		<div class="col-md-12">
 			<dl>
 				<dt><b class="border-bottom border-primary">
-					What are the main strengths of the our services?
-				</b></dt>
+						What are the main strengths of the our services?
+					</b></dt>
 				<dd><?php echo ucwords($core_services) ?></dd>
 			</dl>
 			<dl>
 				<dt><b class="border-bottom border-primary">
-					What areas should we need to improve?
-				</b></dt>
+						What areas should we need to improve?
+					</b></dt>
 				<dd><?php echo ucwords($improvement) ?></dd>
 			</dl>
 		</div>

@@ -130,12 +130,12 @@
                   <p>Add New</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="./index.php?page=maintenance_staff_list" class="nav-link nav-maintenance_staff_list tree-item">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>List</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
 

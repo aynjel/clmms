@@ -41,7 +41,7 @@ if (isset($_GET['id'])) {
         <?php endif; ?>
     </div>
     <div class="form-group">
-        <label for="languages">Languages</label>
+        <label for="languages">Section</label>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" value="Civil and Sanitary" name="languages[]" id="civil_and_sanitary" <?php echo isset($languages) && in_array('Civil and Sanitary', explode(",", $languages)) ? 'checked' : '' ?>>
             <label class="form-check-label" for="civil_and_sanitary">

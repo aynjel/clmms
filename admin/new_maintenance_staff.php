@@ -53,16 +53,12 @@
 							<!-- Electrician, Plumber, Carpenter, Mason, Painter, Welder, Mechanic, Gardener, Driver, Security Guard -->
 							<select name="section" id="" class="custom-select custom-select-sm">
 								<option value="" <?php echo !isset($section) ? 'selected' : '' ?>>Select Section</option>
-								<option value="Electrician" <?php echo isset($section) && $section == 'Electrician' ? 'selected' : '' ?>>Electrician</option>
-								<option value="Plumber" <?php echo isset($section) && $section == 'Plumber' ? 'selected' : '' ?>>Plumber</option>
-								<option value="Carpenter" <?php echo isset($section) && $section == 'Carpenter' ? 'selected' : '' ?>>Carpenter</option>
-								<option value="Mason" <?php echo isset($section) && $section == 'Mason' ? 'selected' : '' ?>>Mason</option>
-								<option value="Painter" <?php echo isset($section) && $section == 'Painter' ? 'selected' : '' ?>>Painter</option>
-								<option value="Welder" <?php echo isset($section) && $section == 'Welder' ? 'selected' : '' ?>>Welder</option>
-								<option value="Mechanic" <?php echo isset($section) && $section == 'Mechanic' ? 'selected' : '' ?>>Mechanic</option>
-								<option value="Gardener" <?php echo isset($section) && $section == 'Gardener' ? 'selected' : '' ?>>Gardener</option>
-								<option value="Driver" <?php echo isset($section) && $section == 'Driver' ? 'selected' : '' ?>>Driver</option>
-								<option value="Security Guard" <?php echo isset($section) && $section == 'Security Guard' ? 'selected' : '' ?>>Security Guard</option>
+								<option value="Civil and Sanitary" <?php echo isset($section) && $section == 'Civil and Sanitary' ? 'selected' : '' ?>>Civil and Sanitary</option>
+								<option value="Electrical" <?php echo isset($section) && $section == 'Electrical' ? 'selected' : '' ?>>Electrical</option>
+								<option value="Mechanical" <?php echo isset($section) && $section == 'Mechanical' ? 'selected' : '' ?>>Mechanical</option>
+								<option value="Electronic and Communication" <?php echo isset($section) && $section == 'Electronic and Communication' ? 'selected' : '' ?>>Electronic and Communication</option>
+								<option value="ICT" <?php echo isset($section) && $section == 'ICT' ? 'selected' : '' ?>>ICT</option>
+								<option value="Others" <?php echo isset($section) && $section == 'Others' ? 'selected' : '' ?>>Others</option>
 							</select>
 						</div>
 					</div>

@@ -67,7 +67,7 @@ if (isset($_SESSION['login_id']))
             <select name="login" id="" class="custom-select custom-select-sm">
               <option value="1">Chairperson</option>
               <option value="2">Faculty In-charge</option>
-              <option value="3">Maintenance</option>
+              <option value="3">Maintenance Staff</option>
             </select>
           </div>
           <div class="row">
@@ -84,6 +84,11 @@ if (isset($_SESSION['login_id']))
               <button type="submit" class="btn btn-primary btn-block">Sign In</button>
             </div>
             <!-- /.col -->
+            <div class="col-12">
+              <a href="javascript:void(0)" id="new_account" class="text-center">
+                Register as Maintenance Staff
+              </a>
+            </div>
           </div>
         </form>
       </div>
@@ -95,6 +100,10 @@ if (isset($_SESSION['login_id']))
   <!-- /.login-box -->
   <script>
     $(document).ready(function() {
+      $('#new_account').click(function() {
+        location.href = 'new_maintenance_staff.php'
+      })
+
       $('#login-form').submit(function(e) {
         e.preventDefault()
         start_load()

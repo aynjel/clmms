@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2024 at 12:22 PM
+-- Generation Time: Jun 21, 2024 at 05:18 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -360,6 +360,7 @@ CREATE TABLE `student_list` (
   `password` text NOT NULL,
   `class_id` int(30) NOT NULL,
   `avatar` text NOT NULL DEFAULT 'no-image-available.png',
+  `section` varchar(50) DEFAULT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -367,10 +368,15 @@ CREATE TABLE `student_list` (
 -- Dumping data for table `student_list`
 --
 
-INSERT INTO `student_list` (`id`, `school_id`, `firstname`, `lastname`, `email`, `password`, `class_id`, `avatar`, `date_created`) VALUES
-(1, '6231413', 'John', 'Smith', 'jsmith@sample.com', '39ce7e2a8573b41ce73b5ba41617f8f7', 2, '1608012360_avatar.jpg', '2020-12-15 14:06:14'),
-(2, '101497', 'Claire', 'Blake', 'cblake@sample.com', '4744ddea876b11dcb1d169fadf494418', 2, '1608012720_47446233-clean-noir-et-gradient-sombre-image-de-fond-abstrait-.jpg', '2020-12-15 14:12:03'),
-(3, '123', 'Mike', 'Williams', 'mwilliams@sample.com', '3cc93e9a6741d8b40460457139cf8ced', 1, '1608034680_1605601740_download.jpg', '2020-12-15 20:18:22');
+INSERT INTO `student_list` (`id`, `school_id`, `firstname`, `lastname`, `email`, `password`, `class_id`, `avatar`, `section`, `date_created`) VALUES
+(1, '6231413', 'John', 'Smith', 'jsmith@sample.com', '39ce7e2a8573b41ce73b5ba41617f8f7', 2, '1608012360_avatar.jpg', NULL, '2020-12-15 14:06:14'),
+(2, '101497', 'Claire', 'Blake', 'cblake@sample.com', '4744ddea876b11dcb1d169fadf494418', 2, '1608012720_47446233-clean-noir-et-gradient-sombre-image-de-fond-abstrait-.jpg', NULL, '2020-12-15 14:12:03'),
+(3, '123', 'Mike', 'Williams', 'mwilliams@sample.com', '3cc93e9a6741d8b40460457139cf8ced', 1, '1608034680_1605601740_download.jpg', NULL, '2020-12-15 20:18:22'),
+(6, '2342342', 'Jaek', 'Last', 'asdfsa@csc.om', 'a8f5f167f44f4964e6c998dee827110c', 0, 'no-image-available.png', 'Electronic and Communication', '2024-06-18 15:33:49'),
+(7, 'Mercedes', 'Carol', 'Chava', 'taxofehyd@mailinator.com', 'a8f5f167f44f4964e6c998dee827110c', 0, 'no-image-available.png', 'Electronic and Communication', '2024-06-18 15:37:37'),
+(8, '123456', 'Anggi', 'Ortega', 'ortega@gmail.com', 'a8f5f167f44f4964e6c998dee827110c', 0, 'no-image-available.png', 'Civil and Sanitary', '2024-06-18 15:38:03'),
+(9, '32', 'Kylan', 'Barclay', 'vitymus@mailinator.com', 'a8f5f167f44f4964e6c998dee827110c', 0, 'no-image-available.png', 'Others', '2024-06-21 10:25:05'),
+(10, '7123', 'Reuben', 'Gary', 'liqy@mailinator.com', 'a8f5f167f44f4964e6c998dee827110c', 0, 'no-image-available.png', 'Electronic and Communication', '2024-06-21 10:25:24');
 
 -- --------------------------------------------------------
 
@@ -445,7 +451,9 @@ CREATE TABLE `tbl_evaluation` (
 --
 
 INSERT INTO `tbl_evaluation` (`id`, `user_id`, `report_id`, `faculty_id`, `service`, `response`, `quality`, `communication`, `experience`, `troubleshooting`, `clean_orderly`, `overall`, `core_services`, `improvement`, `status`, `f_status`, `c_status`) VALUES
-(29, 1, 36, 0, '2', '4', '3', '3', '3', '3', '5', '1', 'Qui quis suscipit fa', 'Amet fugiat fugiat', 1, 0, 0);
+(29, 1, 36, 0, '2', '4', '3', '3', '3', '3', '5', '1', 'Qui quis suscipit fa', 'Amet fugiat fugiat', 1, 0, 0),
+(30, 1, 37, 0, '3', '4', '5', '1', '1', '2', '2', '4', 'Dolorem ratione qui ', 'Magnam corporis et i', 0, 0, 0),
+(31, 1, 37, 0, '4', '3', '2', '4', '5', '3', '3', '5', 'Eveniet cupiditate ', 'Est molestiae ut lau', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -473,7 +481,9 @@ INSERT INTO `tb_data` (`id`, `user_id`, `faculty_id`, `description`, `languages`
 (31, 2, 1, 'Dolorem provident q', 'Civil and Sanitary,Mechanical,Electronic and Communication,ICT,', 0, 0, 1, '2024-03-17 18:49:39'),
 (32, 1, 1, 'Irure quibusdam volu', 'Mechanical,Electronic and Communication,', 0, 1, 1, '2024-03-17 18:49:54'),
 (35, 1, 4, 'trrts', 'Civil and Sanitary,Mechanical,', 0, 1, 0, '2024-03-17 19:05:39'),
-(36, 1, 1, 'test', 'Electronic and Communication,', 0, 1, 0, '2024-03-17 19:05:52');
+(36, 1, 1, 'test', 'Electronic and Communication,', 0, 1, 0, '2024-03-17 19:05:52'),
+(37, 3, 1, 'tests admin request', 'Mechanical,', 0, 0, 1, '2024-05-30 21:46:34'),
+(38, 2, 1, 'test 123', 'Mechanical,Electronic and Communication,ICT,', 0, 0, 0, '2024-05-30 21:47:09');
 
 -- --------------------------------------------------------
 
@@ -750,7 +760,7 @@ ALTER TABLE `sections`
 -- AUTO_INCREMENT for table `student_list`
 --
 ALTER TABLE `student_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `subject_list`
@@ -768,13 +778,13 @@ ALTER TABLE `system_settings`
 -- AUTO_INCREMENT for table `tbl_evaluation`
 --
 ALTER TABLE `tbl_evaluation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tb_data`
 --
 ALTER TABLE `tb_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tb_data_comments`

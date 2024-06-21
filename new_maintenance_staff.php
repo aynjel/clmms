@@ -51,7 +51,7 @@ if (isset($_SESSION['login_id']))
             <div class="col-md-6 border-right">
               <div class="form-group">
                 <label for="" class="control-label">Employee ID</label>
-                <input type="text" name="school_id" class="form-control form-control-sm" required value="<?php echo isset($school_id) ? $school_id : '' ?>">
+                <input type="number" name="school_id" class="form-control form-control-sm" required value="<?php echo isset($school_id) ? $school_id : '' ?>">
               </div>
               <div class="form-group">
                 <label for="" class="control-label">First Name</label>

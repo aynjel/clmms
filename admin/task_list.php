@@ -111,8 +111,17 @@
 		$('#list').dataTable({
 			dom: 'Bfrtip',
 			buttons: [
-				'excel', 'pdf', 'print'
-			],
+				'excel', {
+					extend: 'print',
+					text: 'Print',
+					autoPrint: true,
+					title: '',
+					// Add header logo 
+					messageTop: '<header style="display: flex; justify-content: space-between; align-items: center;"><img src="https://raw.githubusercontent.com/aynjel/clmms/main/assets/print-logo-1.png" alt="CTU Logo" style="" /><p style="text-align: center;font-size: 20px;"> Republic of the Philippines <br> <b> CEBU TECHNOLOGICAL UNIVERSITY <br> TUBURAN CAMPUS </b> <br> <small> Poblacion 8, Tuburan, Cebu, Philippines <br> Website: http://www.ctu.edu.ph E-mail: tuburan.campus@ctu.edu.ph <br> Tel. No. (032) 463-9350 </small> </p><img src="https://raw.githubusercontent.com/aynjel/clmms/main/assets/print-logo-2.png" alt="ASEAN Logo" style="" /></header>',
+					// Add footer logo fixed in the bottom center
+					messageBottom: '<footer style="text-align: center; position: fixed; bottom: 0; width: 100%;"><img src="https://raw.githubusercontent.com/aynjel/clmms/main/assets/print-logo-3.png" alt="Footer Logo" /></footer>'
+				}
+			]
 		})
 		$('#new_task').click(function() {
 			uni_modal("<i class='fa fa-plus'></i> New Task", "manage_task.php", 'mid-large')

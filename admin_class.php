@@ -799,7 +799,7 @@ class Action
 		}
 
 		if (empty($id)) {
-			$save = $this->db->query("INSERT INTO `tb_data`(`user_id`,`faculty_id`, `description`, `languages`) VALUES ('$user_id','$faculty_id','$description','$language')");
+			$save = $this->db->query("INSERT INTO `tb_data`(`user_id`,`faculty_id`, `description`, `languages`,`req_no`) VALUES ('$user_id','$faculty_id','$description','$language','$req_no')");
 		} else {
 			$save = $this->db->query("UPDATE tb_data set `f_status`='$f_status' WHERE id = $id");
 		}

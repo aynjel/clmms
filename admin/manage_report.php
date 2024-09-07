@@ -85,14 +85,11 @@ if (isset($_GET['id'])) {
     </div>
     <?php
     if (!isset($id)) {
+        $req_no = mt_rand(100000, 999999);
     ?>
         <div class="form-group">
             <label for="req_no">Request No.</label>
-            <?php
-            // generate random number for request number
-            $req_no = mt_rand(100000, 999999);
-            ?>
-            <input type="text" class="form-control" name="req_no" value="<?php echo $req_no ?>" readonly>
+            <input type="text" class="form-control" name="req_no" value="<?= $req_no ?>" readonly>
         </div>
     <?php } ?>
 </form>

@@ -11,13 +11,13 @@
 				<h3 class="card-title text-capitalize font-weight-bold">
 					<i class="fa fa-list"></i> Report's (<?= mysqli_num_rows($result) ?>)
 				</h3>
-				<!-- <div class="card-tools">
+				<div class="card-tools">
 					<ul class="pagination pagination-sm m-0 float-right">
 						<li class="page-item">
 							<a class="btn btn-block btn-sm btn-default btn-flat border-primary new_report" href="javascript:void(0)"><i class="fa fa-plus"></i> New Report</a>
 						</li>
 					</ul>
-				</div> -->
+				</div>
 			</div>
 			<div class="card-body">
 				<table class="table tabe-hover table-bordered report_list">
@@ -27,7 +27,7 @@
 							<th scope="col">Machine/Equipment/Facility</th>
 							<th scope="col">Date of Inspection</th>
 							<th scope="col">Status, Condition, Problem</th>
-							<!-- <th scope="col">Action</th> -->
+							<th scope="col">Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -39,7 +39,7 @@
 									<?php echo date('m/d/Y', strtotime($row['date'])) ?>
 								</td>
 								<td><?php echo $row['status'] ?></td>
-								<!-- <td class="text-center">
+								<td class="text-center">
 									<div class="btn-group">
 										<a href="javascript:void(0)" data-id="<?= $row['id'] ?>" class="btn btn-primary btn-flat manage_report">
 											<i class="fas fa-edit"></i>
@@ -48,7 +48,7 @@
 											<i class="fas fa-trash"></i>
 										</button>
 									</div>
-								</td> -->
+								</td>
 							</tr>
 						<?php endwhile; ?>
 					</tbody>
@@ -81,10 +81,10 @@
 		uni_modal("Maintenance Report Details", "<?php echo $_SESSION['login_view_folder'] ?>view_report_details.php?id=" + $(this).attr('data-id'))
 	})
 	$('.new_report').click(function() {
-		uni_modal("New Report", "<?= $_SESSION['login_view_folder'] ?>manage_report.php", "large")
+		uni_modal("New Report", "<?= $_SESSION['login_view_folder'] ?>manage_report_1.php", "large")
 	})
 	$('.manage_report').click(function() {
-		uni_modal("Manage Report", "<?= $_SESSION['login_view_folder'] ?>manage_report.php?id=" + $(this).attr('data-id'))
+		uni_modal("Manage Report", "<?= $_SESSION['login_view_folder'] ?>manage_report_1.php?id=" + $(this).attr('data-id'))
 	})
 	$('.delete_report').click(function() {
 		_conf("Are you sure to delete this report?", "delete_report", [$(this).attr('data-id')])

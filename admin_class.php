@@ -788,6 +788,31 @@ class Action
 		}
 	}
 
+	function save_report_fa1()
+	{
+		extract($_POST);
+
+		$user_id = $_SESSION['login_id'];
+
+		if (empty($id)) {
+			$save = $this->db->query("INSERT INTO `tb_report`(`area`,`equipment`, `date`, `status`, `user_id`) VALUES ('$area','$equipment','$date','$status','$user_id')");
+		} else {
+			$save = $this->db->query("UPDATE tb_report set `area`='$area', `equipment`='$equipment', `date`='$date', `status`='$status', `user_id`='$user_id' where id = $id");
+		}
+		if ($save) {
+			return 1;
+		}
+	}
+
+	function delete_report_fa1()
+	{
+		extract($_POST);
+		$delete = $this->db->query("DELETE FROM `tb_report` WHERE id = $id");
+		if ($delete) {
+			return 1;
+		}
+	}
+
 	function save_report_fa()
 	{
 		extract($_POST);

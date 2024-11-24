@@ -23,10 +23,22 @@ $astat = array("Not Yet Started", "On-going", "Closed");
       Welcome <?php echo $_SESSION['login_name'] ?>!
       <br>
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <div class="small-box bg-light shadow-sm border">
             <div class="inner">
               <h3><?php echo $conn->query("SELECT * FROM tb_data WHERE faculty_id = $_SESSION[login_id]")->num_rows; ?></h3>
+
+              <p>Total Request</p>
+            </div>
+            <div class="icon">
+              <i class="fa ion-ios-people-outline"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="small-box bg-light shadow-sm border">
+            <div class="inner">
+              <h3><?php echo $conn->query("SELECT * FROM tb_report")->num_rows; ?></h3>
 
               <p>Total Report</p>
             </div>
@@ -35,7 +47,7 @@ $astat = array("Not Yet Started", "On-going", "Closed");
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <div class="small-box bg-light shadow-sm border">
             <div class="inner">
               <h3><?php echo $conn->query("SELECT * FROM equipment_list")->num_rows; ?></h3>
@@ -47,7 +59,7 @@ $astat = array("Not Yet Started", "On-going", "Closed");
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <div class="small-box bg-light shadow-sm border">
             <div class="inner">
               <h3><?php echo $conn->query("SELECT * FROM tbl_evaluation WHERE faculty_id = $_SESSION[login_id]")->num_rows; ?></h3>

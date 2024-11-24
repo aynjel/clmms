@@ -5,210 +5,220 @@ date_default_timezone_set("Asia/Manila");
 $action = $_GET['action'];
 include 'admin_class.php';
 $crud = new Action();
-if($action == 'login'){
+if ($action == 'login') {
 	$login = $crud->login();
-	if($login)
+	if ($login)
 		echo $login;
 }
-if($action == 'login2'){
+if ($action == 'login2') {
 	$login = $crud->login2();
-	if($login)
+	if ($login)
 		echo $login;
 }
-if($action == 'logout'){
+if ($action == 'logout') {
 	$logout = $crud->logout();
-	if($logout)
+	if ($logout)
 		echo $logout;
 }
-if($action == 'logout2'){
+if ($action == 'logout2') {
 	$logout = $crud->logout2();
-	if($logout)
+	if ($logout)
 		echo $logout;
 }
 
-if($action == 'signup'){
+if ($action == 'signup') {
 	$save = $crud->signup();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_user'){
+if ($action == 'save_user') {
 	$save = $crud->save_user();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'update_user'){
+if ($action == 'update_user') {
 	$save = $crud->update_user();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'delete_user'){
+if ($action == 'delete_user') {
 	$save = $crud->delete_user();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_subject'){
+if ($action == 'save_subject') {
 	$save = $crud->save_subject();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'delete_subject'){
+if ($action == 'delete_subject') {
 	$save = $crud->delete_subject();
-	if($save)
+	if ($save)
 		echo $save;
 }
 
-if($action == 'save_equipment'){
+if ($action == 'save_equipment') {
 	$save = $crud->save_equipment();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'delete_equipment'){
+if ($action == 'delete_equipment') {
 	$save = $crud->delete_equipment();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_faculty_room'){
+if ($action == 'save_faculty_room') {
 	$save = $crud->save_faculty_room();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_class'){
+if ($action == 'save_class') {
 	$save = $crud->save_class();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'delete_class'){
+if ($action == 'delete_class') {
 	$save = $crud->delete_class();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_academic'){
+if ($action == 'save_academic') {
 	$save = $crud->save_academic();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'delete_academic'){
+if ($action == 'delete_academic') {
 	$save = $crud->delete_academic();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'make_default'){
+if ($action == 'make_default') {
 	$save = $crud->make_default();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_criteria'){
+if ($action == 'save_criteria') {
 	$save = $crud->save_criteria();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'delete_criteria'){
+if ($action == 'delete_criteria') {
 	$save = $crud->delete_criteria();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_question'){
+if ($action == 'save_question') {
 	$save = $crud->save_question();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'delete_question'){
+if ($action == 'delete_question') {
 	$save = $crud->delete_question();
-	if($save)
+	if ($save)
 		echo $save;
 }
 
-if($action == 'save_criteria_question'){
+if ($action == 'save_criteria_question') {
 	$save = $crud->save_criteria_question();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_criteria_order'){
+if ($action == 'save_criteria_order') {
 	$save = $crud->save_criteria_order();
-	if($save)
+	if ($save)
 		echo $save;
 }
 
-if($action == 'save_question_order'){
+if ($action == 'save_question_order') {
 	$save = $crud->save_question_order();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_faculty'){
+if ($action == 'save_faculty') {
 	$save = $crud->save_faculty();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'delete_faculty'){
+if ($action == 'delete_faculty') {
 	$save = $crud->delete_faculty();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_student'){
+if ($action == 'save_student') {
 	$save = $crud->save_student();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'delete_student'){
+if ($action == 'delete_student') {
 	$save = $crud->delete_student();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_restriction'){
+if ($action == 'save_restriction') {
 	$save = $crud->save_restriction();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_evaluation'){
+if ($action == 'save_evaluation') {
 	$save = $crud->save_evaluation();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_evaluation_01'){
+if ($action == 'save_evaluation_01') {
 	$save = $crud->save_evaluation_01();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'delete_evaluation_01'){
+if ($action == 'delete_evaluation_01') {
 	$save = $crud->delete_evaluation_01();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_report'){
+if ($action == 'save_report') {
 	$save = $crud->save_report();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'save_report_fa'){
+if ($action == 'save_report_fa1') {
+	$save = $crud->save_report_fa1();
+	if ($save)
+		echo $save;
+}
+if ($action == 'save_report_fa') {
 	$save = $crud->save_report_fa();
-	if($save)
+	if ($save)
 		echo $save;
 }
-if($action == 'delete_report'){
-	$save = $crud->delete_report();
-	if($save)
+if ($action == 'delete_report_fa1') {
+	$save = $crud->delete_report_fa1();
+	if ($save)
 		echo $save;
 }
 
-if($action == 'get_class'){
-	$get = $crud->get_class();
-	if($get)
-		echo $get;
-}
-if($action == 'get_report'){
-	$get = $crud->get_report();
-	if($get)
-		echo $get;
-}
-if($action == 'save_room'){
-	$save = $crud->save_room();
-	if($save)
+if ($action == 'delete_report') {
+	$save = $crud->delete_report();
+	if ($save)
 		echo $save;
 }
-if($action == 'delete_room'){
+
+if ($action == 'get_class') {
+	$get = $crud->get_class();
+	if ($get)
+		echo $get;
+}
+if ($action == 'get_report') {
+	$get = $crud->get_report();
+	if ($get)
+		echo $get;
+}
+if ($action == 'save_room') {
+	$save = $crud->save_room();
+	if ($save)
+		echo $save;
+}
+if ($action == 'delete_room') {
 	$save = $crud->delete_room();
-	if($save)
+	if ($save)
 		echo $save;
 }
 ob_end_flush();
-?>

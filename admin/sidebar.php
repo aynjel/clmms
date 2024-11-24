@@ -31,18 +31,26 @@
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a href="./index.php?page=report" class="nav-link nav-report">
+            <a href="./index.php?page=request" class="nav-link nav-request">
               <i class="nav-icon fas fa-file"></i>
               <p>
-                Reports
+                Request
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item dropdown">
+            <a href="./index.php?page=report" class="nav-link nav-report">
+              <i class="nav-icon fas fa-file"></i>
+              <p>
+                Report
+              </p>
+            </a>
+          </li>
+          <li class=" nav-item">
             <a href="#" class="nav-link nav-edit_equipment">
               <i class="nav-icon fas fa-tv"></i>
               <p>
-                Equipment
+                Assign Equipment
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -57,6 +65,12 @@
                 <a href="./index.php?page=equipment_list" class="nav-link nav-equipment_list tree-item">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index.php?page=report_inventory" class="nav-link nav-report_inventory tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Report Inventory</p>
                 </a>
               </li>
             </ul>

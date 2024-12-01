@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2024 at 05:18 AM
+-- Generation Time: Dec 01, 2024 at 07:02 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -54,13 +54,6 @@ CREATE TABLE `academic_list` (
   `status` int(1) NOT NULL DEFAULT 0 COMMENT '0=Pending,1=Start,2=Closed'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `academic_list`
---
-
-INSERT INTO `academic_list` (`id`, `year`, `semester`, `is_default`, `status`) VALUES
-(4, '2023-2024', 2, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -73,15 +66,6 @@ CREATE TABLE `class_list` (
   `level` text NOT NULL,
   `section` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `class_list`
---
-
-INSERT INTO `class_list` (`id`, `curriculum`, `level`, `section`) VALUES
-(1, 'BSIT', '1', 'A'),
-(2, 'BSIT', '1', 'B'),
-(3, 'BSIT', '1', 'C');
 
 -- --------------------------------------------------------
 
@@ -111,21 +95,9 @@ INSERT INTO `criteria_list` (`id`, `criteria`, `order_by`) VALUES
 CREATE TABLE `equipment_list` (
   `id` int(30) NOT NULL,
   `room_id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `quantity` int(50) NOT NULL,
-  `description` text NOT NULL,
-  `manufacturer` text NOT NULL,
-  `serial_no` text NOT NULL,
-  `condition` text NOT NULL
+  `category_name` varchar(100) NOT NULL,
+  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`data`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `equipment_list`
---
-
-INSERT INTO `equipment_list` (`id`, `room_id`, `name`, `quantity`, `description`, `manufacturer`, `serial_no`, `condition`) VALUES
-(52, 122, 'Elvis Castillo', 571, 'Provident qui aut a', 'Dominique Nichols', 'Quynn Johnson', 'Damaged'),
-(53, 122, 'Urielle Mckee', 959, 'Velit porro a conse', 'Zena Sampson', 'Ralph Martinez', 'Good');
 
 -- --------------------------------------------------------
 
@@ -139,21 +111,6 @@ CREATE TABLE `evaluation_answers` (
   `question_id` int(30) NOT NULL,
   `rate` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `evaluation_answers`
---
-
-INSERT INTO `evaluation_answers` (`id`, `evaluation_id`, `question_id`, `rate`) VALUES
-(1, 1, 1, 5),
-(2, 1, 6, 4),
-(3, 1, 3, 5),
-(4, 2, 1, 5),
-(5, 2, 6, 5),
-(6, 2, 3, 4),
-(7, 3, 1, 5),
-(8, 3, 6, 5),
-(9, 3, 3, 4);
 
 -- --------------------------------------------------------
 
@@ -297,19 +254,6 @@ CREATE TABLE `restriction_list` (
   `subject_id` int(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `restriction_list`
---
-
-INSERT INTO `restriction_list` (`id`, `academic_id`, `faculty_id`, `class_id`, `subject_id`) VALUES
-(8, 3, 1, 1, 1),
-(9, 3, 1, 2, 2),
-(10, 3, 1, 3, 3),
-(11, 4, 2, 2, 2),
-(12, 4, 2, 2, 2),
-(13, 4, 1, 2, 2),
-(14, 4, 1, 2, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -324,15 +268,6 @@ CREATE TABLE `room_list` (
   `capacity` int(11) NOT NULL DEFAULT 0,
   `status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `room_list`
---
-
-INSERT INTO `room_list` (`id`, `faculty_id`, `room`, `description`, `capacity`, `status`) VALUES
-(122, 1, '69', 'Iure rerum et sequi ', 28, 1),
-(123, NULL, '3', 'Consectetur neque p', 10, 1),
-(124, NULL, 'test ro', 'Et ad numquam Nam eu', 15, 0);
 
 -- --------------------------------------------------------
 
@@ -391,13 +326,6 @@ CREATE TABLE `subject_list` (
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `subject_list`
---
-
-INSERT INTO `subject_list` (`id`, `code`, `subject`, `description`) VALUES
-(3, 'M-101', 'Math 101', 'Math - Advance Algebra ');
-
 -- --------------------------------------------------------
 
 --
@@ -453,7 +381,8 @@ CREATE TABLE `tbl_evaluation` (
 INSERT INTO `tbl_evaluation` (`id`, `user_id`, `report_id`, `faculty_id`, `service`, `response`, `quality`, `communication`, `experience`, `troubleshooting`, `clean_orderly`, `overall`, `core_services`, `improvement`, `status`, `f_status`, `c_status`) VALUES
 (29, 1, 36, 0, '2', '4', '3', '3', '3', '3', '5', '1', 'Qui quis suscipit fa', 'Amet fugiat fugiat', 1, 0, 0),
 (30, 1, 37, 0, '3', '4', '5', '1', '1', '2', '2', '4', 'Dolorem ratione qui ', 'Magnam corporis et i', 0, 0, 0),
-(31, 1, 37, 0, '4', '3', '2', '4', '5', '3', '3', '5', 'Eveniet cupiditate ', 'Est molestiae ut lau', 0, 0, 0);
+(31, 1, 37, 0, '4', '3', '2', '4', '5', '3', '3', '5', 'Eveniet cupiditate ', 'Est molestiae ut lau', 0, 0, 0),
+(32, 1, 37, 0, '1', '1', '1', '1', '1', '1', '1', '1', '', '', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -483,7 +412,9 @@ INSERT INTO `tb_data` (`id`, `user_id`, `faculty_id`, `description`, `languages`
 (35, 1, 4, 'trrts', 'Civil and Sanitary,Mechanical,', 0, 1, 0, '2024-03-17 19:05:39'),
 (36, 1, 1, 'test', 'Electronic and Communication,', 0, 1, 0, '2024-03-17 19:05:52'),
 (37, 3, 1, 'tests admin request', 'Mechanical,', 0, 0, 1, '2024-05-30 21:46:34'),
-(38, 2, 1, 'test 123', 'Mechanical,Electronic and Communication,ICT,', 0, 0, 0, '2024-05-30 21:47:09');
+(38, 2, 1, 'test 123', 'Mechanical,Electronic and Communication,ICT,', 0, 0, 0, '2024-05-30 21:47:09'),
+(39, 8, 1, 'test', 'Mechanical,', 0, 0, 0, '2024-09-07 11:25:22'),
+(40, 7, 1, 'test', 'Mechanical,Electronic and Communication,', 873154, 0, 0, '2024-09-07 11:27:21');
 
 -- --------------------------------------------------------
 
@@ -509,6 +440,21 @@ INSERT INTO `tb_data_comments` (`id`, `comments`, `tb_data_id`, `student_id`, `d
 (3, 'test', 35, 1, '2024-03-17 19:11:22'),
 (4, 'No comments', 36, 1, '2024-03-17 19:21:48'),
 (5, 'No comments', 36, 1, '2024-03-17 19:21:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_report`
+--
+
+CREATE TABLE `tb_report` (
+  `id` int(11) NOT NULL,
+  `area` varchar(100) NOT NULL,
+  `equipment` varchar(100) NOT NULL,
+  `date` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -561,7 +507,8 @@ ALTER TABLE `criteria_list`
 --
 ALTER TABLE `equipment_list`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_to_room` (`room_id`);
+  ADD KEY `fk_to_room` (`room_id`),
+  ADD KEY `fk_to_ec` (`category_name`);
 
 --
 -- Indexes for table `evaluation_answers`
@@ -663,6 +610,12 @@ ALTER TABLE `tb_data_comments`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tb_report`
+--
+ALTER TABLE `tb_report`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -694,7 +647,7 @@ ALTER TABLE `criteria_list`
 -- AUTO_INCREMENT for table `equipment_list`
 --
 ALTER TABLE `equipment_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `evaluation_answers`
@@ -778,19 +731,25 @@ ALTER TABLE `system_settings`
 -- AUTO_INCREMENT for table `tbl_evaluation`
 --
 ALTER TABLE `tbl_evaluation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `tb_data`
 --
 ALTER TABLE `tb_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `tb_data_comments`
 --
 ALTER TABLE `tb_data_comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tb_report`
+--
+ALTER TABLE `tb_report`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`

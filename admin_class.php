@@ -745,14 +745,17 @@ class Action
 	function save_equipment()
 	{
 		extract($_POST);
-		$chk = $this->db->query("SELECT * FROM equipment_list where name = '$name' and id != '{$id}' ")->num_rows;
-		if ($chk > 0) {
-			return 2;
+		$data = array();
+		foreach ($_POST as $key => $value) {
+			if ($key != 'id' && $key != 'room_id' && $key != 'category_name') {
+				$data[$key] = $value;
+			}
 		}
+		$data_json = json_encode($data);
 		if (empty($id)) {
-			$save = $this->db->query("INSERT INTO `equipment_list`(`room_id`, `name`, `quantity`, `description`, `manufacturer`, `serial_no`, `condition`) VALUES ('$room_id', '$name','$quantity','$description','$manufacturer','$serial_no','$condition')");
+			$save = $this->db->query("INSERT INTO `equipment_list`(`room_id`, `category_name`, `data`) VALUES ('$room_id', '$category_name','$data_json')");
 		} else {
-			$save = $this->db->query("UPDATE equipment_list set `name`='$name', `quantity`='$quantity', `description`='$description', `manufacturer`='$manufacturer', `serial_no`='$serial_no', `condition`='$condition' where id = $id");
+			$save = $this->db->query("UPDATE equipment_list set `room_id`='$room_id', `category_name`='$category_name', `data`='$data_json' where id = $id");
 		}
 		if ($save) {
 			return 1;

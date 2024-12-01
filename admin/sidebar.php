@@ -58,19 +58,19 @@
               <li class="nav-item">
                 <a href="./index.php?page=new_equipment" class="nav-link nav-new_equipment tree-item">
                   <i class="fas fa-angle-right nav-icon"></i>
-                  <p>Add New</p>
+                  <p>Add Equipment</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./index.php?page=equipment_list" class="nav-link nav-equipment_list tree-item">
                   <i class="fas fa-angle-right nav-icon"></i>
-                  <p>List</p>
+                  <p>List Equipment</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./index.php?page=report_inventory" class="nav-link nav-report_inventory tree-item">
                   <i class="fas fa-angle-right nav-icon"></i>
-                  <p>Report Inventory</p>
+                  <p>Inventory Report</p>
                 </a>
               </li>
             </ul>

@@ -53,35 +53,36 @@ if (isset($_GET['room_id'])) {
 		foreach ($qry as $k => $v) {
 			$$k = $v;
 		}
+
+		$data = json_decode($data);
+
+		$pc_number = isset($data->pc_number) ? $data->pc_number : '';
+		$manufacturer = isset($data->manufacturer) ? $data->manufacturer : '';
+		$serial_no = isset($data->serial_no) ? $data->serial_no : '';
+		$os_version = isset($data->os_version) ? $data->os_version : '';
+		$ram = isset($data->ram) ? $data->ram : '';
+		$processor = isset($data->processor) ? $data->processor : '';
+		$smart_tv = isset($data->smart_tv) ? $data->smart_tv : '';
+		$monitor_number = isset($data->monitor_number) ? $data->monitor_number : '';
+		$keyboard = isset($data->keyboard) ? $data->keyboard : '';
+		$mouse = isset($data->mouse) ? $data->mouse : '';
+		$avr = isset($data->avr) ? $data->avr : '';
+		$switch = isset($data->switch) ? $data->switch : '';
+		$air_condition_unit = isset($data->air_condition_unit) ? $data->air_condition_unit : '';
+		$printer = isset($data->printer) ? $data->printer : '';
+		$long = isset($data->long) ? $data->long : '';
+		$square = isset($data->square) ? $data->square : '';
+		$circle = isset($data->circle) ? $data->circle : '';
+		$mini = isset($data->mini) ? $data->mini : '';
+		$green = isset($data->green) ? $data->green : '';
+		$white = isset($data->white) ? $data->white : '';
+		$yellow = isset($data->yellow) ? $data->yellow : '';
+		$arm_chair = isset($data->arm_chair) ? $data->arm_chair : '';
+		$functional = isset($data->functional) ? $data->functional : '';
+		$not_functional = isset($data->not_functional) ? $data->not_functional : '';
+		$status = isset($data->status) ? $data->status : '';
 	}
 
-	$data = json_decode($data);
-
-	$pc_number = isset($data->pc_number) ? $data->pc_number : '';
-	$manufacturer = isset($data->manufacturer) ? $data->manufacturer : '';
-	$serial_no = isset($data->serial_no) ? $data->serial_no : '';
-	$os_version = isset($data->os_version) ? $data->os_version : '';
-	$ram = isset($data->ram) ? $data->ram : '';
-	$processor = isset($data->processor) ? $data->processor : '';
-	$smart_tv = isset($data->smart_tv) ? $data->smart_tv : '';
-	$monitor_number = isset($data->monitor_number) ? $data->monitor_number : '';
-	$keyboard = isset($data->keyboard) ? $data->keyboard : '';
-	$mouse = isset($data->mouse) ? $data->mouse : '';
-	$avr = isset($data->avr) ? $data->avr : '';
-	$switch = isset($data->switch) ? $data->switch : '';
-	$air_condition_unit = isset($data->air_condition_unit) ? $data->air_condition_unit : '';
-	$printer = isset($data->printer) ? $data->printer : '';
-	$long = isset($data->long) ? $data->long : '';
-	$square = isset($data->square) ? $data->square : '';
-	$circle = isset($data->circle) ? $data->circle : '';
-	$mini = isset($data->mini) ? $data->mini : '';
-	$green = isset($data->green) ? $data->green : '';
-	$white = isset($data->white) ? $data->white : '';
-	$yellow = isset($data->yellow) ? $data->yellow : '';
-	$arm_chair = isset($data->arm_chair) ? $data->arm_chair : '';
-	$functional = isset($data->functional) ? $data->functional : '';
-	$not_functional = isset($data->not_functional) ? $data->not_functional : '';
-	$status = isset($data->status) ? $data->status : '';
 	switch ($_GET['category_name']) {
 		case $category_list[1]:
 			include 'new_equipment_system_unit.php';

@@ -747,15 +747,15 @@ class Action
 		extract($_POST);
 		$data = array();
 		foreach ($_POST as $key => $value) {
-			if ($key != 'id' && $key != 'room_id' && $key != 'category_name') {
+			if ($key != 'id' && $key != 'room_id') {
 				$data[$key] = $value;
 			}
 		}
 		$data_json = json_encode($data);
 		if (empty($id)) {
-			$save = $this->db->query("INSERT INTO `equipment_list`(`room_id`, `category_name`, `data`) VALUES ('$room_id', '$category_name','$data_json')");
+			$save = $this->db->query("INSERT INTO `equipment_list`(`room_id`, `category_id`, `data`) VALUES ('$room_id', '$category_id','$data_json')");
 		} else {
-			$save = $this->db->query("UPDATE equipment_list set `room_id`='$room_id', `category_name`='$category_name', `data`='$data_json' where id = $id");
+			$save = $this->db->query("UPDATE equipment_list set `room_id`='$room_id', `category_id`='$category_id', `data`='$data_json' where id = $id");
 		}
 		if ($save) {
 			return 1;

@@ -1,12 +1,12 @@
 <?php
 $room_id = isset($_GET['room_id']) ? $_GET['room_id'] : '';
-$category_name = isset($_GET['category_name']) ? $_GET['category_name'] : '';
+$category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
 ?>
 
 <form id="equipment_monitor_form">
   <input type="hidden" name="id" value="<?= isset($eq_id) ? $eq_id : '' ?>">
   <input type="hidden" name="room_id" value="<?php echo $room_id ?>">
-  <input type="hidden" name="category_name" value="<?php echo $category_name ?>">
+  <input type="hidden" name="category_id" value="<?php echo $category_id ?>">
   <div class="form-group">
     <label for="monitor_number" class="control-label">Monitor Number</label>
     <input type="number" name="monitor_number" id="monitor_number" class="form-control form-control-sm" value="<?= isset($monitor_number) ? $monitor_number : '' ?>">

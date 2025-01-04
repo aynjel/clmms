@@ -5,16 +5,6 @@ $room_status = isset($_GET['room_status']) ? $_GET['room_status'] : '';
 $room_id = isset($_GET['room_id']) ? $_GET['room_id'] : '';
 $equipment_status = isset($_GET['equipment_status']) ? $_GET['equipment_status'] : '';
 $rooms = $conn->query("SELECT * FROM room_list order by id asc");
-$category_list = array(
-	1 => 'System Unit',
-	2 => 'Monitor',
-	3 => 'Avr',
-	4 => 'Keyboard',
-	5 => 'Mouse',
-	6 => 'Monoblock Chairs',
-	7 => 'Tables',
-	8 => 'Other Equipment'
-);
 
 if (isset($_GET['room_id'])) {
 	$rooms = $conn->query("SELECT * FROM room_list where id = " . $_GET['room_id'] . " order by id asc");
@@ -59,7 +49,8 @@ if (isset($_GET['room_id'])) {
 
 	<!--End-->
 
-	<?php while ($room_row = $rooms->fetch_assoc()) { ?>
+	<?php while ($room_row = $rooms->fetch_assoc()) {
+	?>
 		<div class="card card-outline card-primary">
 			<div class="card-header">
 				<div class="card-title">
@@ -73,264 +64,27 @@ if (isset($_GET['room_id'])) {
 			</div>
 			<div class="card-body">
 				<?php
-				$room_equipment = $conn->query("SELECT * FROM equipment_list where room_id = '{$room_row['id']}'");
+				$equipment_category_array = array();
 
-				if ($room_equipment->num_rows <= 0) :
-				?>
-					<div class="text-center">
-						No Equipment Found
-					</div>
-				<?php
-				endif;
-				while ($room_eq_row = $room_equipment->fetch_assoc()) {
-				?>
-					<div class="card card-outline card-secondary">
-						<div class="card-header">
-							<div class="card-title">
-								<h3 class="card-title">
-									<span class="badge badge-secondary">Category</span>
-									<span class="text-uppercase font-weight-bold"><?= $room_eq_row['category_name'] ?></span>
-								</h3>
-							</div>
-							<div class="card-tools">
-								<div class="btn-group dropleft float-right">
-									<a class="btn btn-sm btn-default delete_equipment" href="javascript:void(0)" data-id="<?= $room_eq_row['id'] ?>"><i class="fa fa-trash text-danger"></i> Delete</a>
-									<a
-										class="btn btn-sm btn-default"
-										href="./index.php?page=new_equipment&room_id=<?= $room_eq_row['room_id'] ?>&category_name=<?= $room_eq_row['category_name'] ?>&eq_id=<?= $room_eq_row['id'] ?>">
-										<i class="fa fa-edit text-info"></i> Edit
-									</a>
-								</div>
-							</div>
-						</div>
-						<?php
-						$decoded_data = json_decode($room_eq_row['data'], true);
-						switch ($room_eq_row['category_name']) {
-							case $category_list[1]:
-						?>
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>PC Number</th>
-											<th>Manufacturer</th>
-											<th>Serial Number</th>
-											<th>OS Version</th>
-											<th>RAM</th>
-											<th>Processor</th>
-											<th>Status</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><?= $decoded_data['pc_number'] ?></td>
-											<td><?= $decoded_data['manufacturer'] ?></td>
-											<td><?= $decoded_data['serial_no'] ?></td>
-											<td><?= $decoded_data['os_version'] ?></td>
-											<td><?= $decoded_data['ram'] ?></td>
-											<td><?= $decoded_data['processor'] ?></td>
-											<td><?= $decoded_data['status'] ?></td>
-										</tr>
-									</tbody>
-								</table>
-							<?php
-								break;
-							case $category_list[2]:
-							?>
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Monitor Number</th>
-											<th>Manufacturer</th>
-											<th>Serial Number</th>
-											<th>Status</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><?= $decoded_data['monitor_number'] ?></td>
-											<td><?= $decoded_data['manufacturer'] ?></td>
-											<td><?= $decoded_data['serial_no'] ?></td>
-											<td><?= $decoded_data['status'] ?></td>
-										</tr>
-									</tbody>
-								</table>
-							<?php
-								break;
-							case $category_list[3]:
-							?>
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>AVR</th>
-											<th>Quantity</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Functional</td>
-											<td><?= $decoded_data['functional'] ?></td>
-										</tr>
-										<tr>
-											<td>Not-Functional</td>
-											<td><?= $decoded_data['not_functional'] ?></td>
-										</tr>
-									</tbody>
-								</table>
-							<?php
-								break;
-							case $category_list[4]:
-							?>
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Keyboard</th>
-											<th>Quantity</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Functional</td>
-											<td><?= $decoded_data['functional'] ?></td>
-										</tr>
-										<tr>
-											<td>Not-Functional</td>
-											<td><?= $decoded_data['not_functional'] ?></td>
-										</tr>
-									</tbody>
-								</table>
-							<?php
-								break;
-							case $category_list[5]:
-							?>
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Mouse</th>
-											<th>Quantity</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Functional</td>
-											<td><?= $decoded_data['functional'] ?></td>
-										</tr>
-										<tr>
-											<td>Not-Functional</td>
-											<td><?= $decoded_data['not_functional'] ?></td>
-										</tr>
-									</tbody>
-								</table>
-							<?php
-								break;
-							case $category_list[6]:
-							?>
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Monoblock Chairs</th>
-											<th>Quantity</th>
-											<th>Status</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Green</td>
-											<td><?= $decoded_data['green'] ?></td>
-											<td rowspan="4" style="vertical-align: middle;"><?= $decoded_data['status'] ?></td>
-										</tr>
-										<tr>
-											<td>White</td>
-											<td><?= $decoded_data['white'] ?></td>
-										</tr>
-										<tr>
-											<td>Yellow</td>
-											<td><?= $decoded_data['yellow'] ?></td>
-										</tr>
-										<tr>
-											<td>Arm Chair</td>
-											<td><?= $decoded_data['arm_chair'] ?></td>
-										</tr>
-									</tbody>
-								</table>
-							<?php
-								break;
-							case $category_list[7]:
-							?>
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Table</th>
-											<th>Quantity</th>
-											<th>Status</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Long</td>
-											<td><?= $decoded_data['long'] ?></td>
-											<td rowspan="4" style="vertical-align: middle;"><?= $decoded_data['status'] ?></td>
-										</tr>
-										<tr>
-											<td>Square</td>
-											<td><?= $decoded_data['square'] ?></td>
-										</tr>
-										<tr>
-											<td>Mini</td>
-											<td><?= $decoded_data['mini'] ?></td>
-										</tr>
-										<tr>
-											<td>Circle</td>
-											<td><?= $decoded_data['circle'] ?></td>
-										</tr>
-									</tbody>
-								</table>
-							<?php
-								break;
-							case $category_list[8]:
-							?>
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Other Equipment</th>
-											<th>Quantity</th>
-											<th>Status</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Smart TV</td>
-											<td><?= $decoded_data['smart_tv'] ?></td>
-											<td rowspan="4" style="vertical-align: middle;"><?= $decoded_data['status'] ?></td>
-										</tr>
-										<tr>
-											<td>Switch</td>
-											<td><?= $decoded_data['switch'] ?></td>
-										</tr>
-										<tr>
-											<td>Air Condition Unit</td>
-											<td><?= $decoded_data['air_condition_unit'] ?></td>
-										</tr>
-										<tr>
-											<td>Printer</td>
-											<td><?= $decoded_data['printer'] ?></td>
-										</tr>
-									</tbody>
-								</table>
-						<?php
-								break;
-							default:
-								# code...
-								break;
-						}
-						?>
-					</div>
-				<?php
-				}
+				$equipment_sql = $conn->query("SELECT id, room_id, category_id, data FROM equipment_list where room_id = " . $room_row['id'] . " order by id asc");
 
-				?>
+				while ($equipment = $equipment_sql->fetch_assoc()) {
+					$category_sql = $conn->query("SELECT * FROM tbl_categories where id = " . $equipment['category_id']);
+
+					$equipment['category'] = $category_sql->num_rows > 0 ? $category_sql->fetch_array()['name'] : 'N/A';
+					$equipment_category_array[$equipment['category_id']][] = $equipment;
+				} ?>
+
+				<?php foreach ($equipment_category_array as $equipment) { ?>
+					<pre>
+						<?= json_encode($equipment, JSON_PRETTY_PRINT) ?>
+					</pre>
+				<?php } ?>
 			</div>
 		</div>
-	<?php } ?>
+	<?php }
+	$conn->close()
+	?>
 </div>
 
 <script>

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2024 at 07:02 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jan 05, 2025 at 09:10 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,25 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `eval`
 --
-
-DELIMITER $$
---
--- Functions
---
-CREATE DEFINER=`root`@`localhost` FUNCTION `insert_request` (`sectionName` VARCHAR(255), `requestDescription` TEXT) RETURNS INT(11)  BEGIN
-    DECLARE s_id INT;
-    
-    -- Retrieve the section_id based on the sectionName
-    SELECT section_id INTO s_id FROM sections WHERE section_name = sectionName LIMIT 1;
-    
-    -- Insert the new request into the requests table
-    INSERT INTO requests (section_id, description) VALUES (s_id, requestDescription);
-    
-    -- Return the last inserted request_id
-    RETURN LAST_INSERT_ID();
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -95,7 +76,7 @@ INSERT INTO `criteria_list` (`id`, `criteria`, `order_by`) VALUES
 CREATE TABLE `equipment_list` (
   `id` int(30) NOT NULL,
   `room_id` int(11) NOT NULL,
-  `category_name` varchar(100) NOT NULL,
+  `category_id` int(11) NOT NULL,
   `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`data`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -269,6 +250,14 @@ CREATE TABLE `room_list` (
   `status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `room_list`
+--
+
+INSERT INTO `room_list` (`id`, `faculty_id`, `room`, `description`, `capacity`, `status`) VALUES
+(125, NULL, '101', 'Possimus quia debit', 16, 1),
+(126, NULL, '102', 'Et consequat Volupt', 59, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -347,6 +336,31 @@ CREATE TABLE `system_settings` (
 
 INSERT INTO `system_settings` (`id`, `name`, `email`, `contact`, `address`, `cover_img`) VALUES
 (1, 'COMPUTER LABORATORY MANAGEMENT AND MAINTENANCE SYSTEM', 'info@sample.comm', '+6948 8542 623', '2102  Caldwell Road, Rochester, New York, 14608', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_categories`
+--
+
+CREATE TABLE `tbl_categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_categories`
+--
+
+INSERT INTO `tbl_categories` (`id`, `name`) VALUES
+(1, 'System Unit'),
+(2, 'AVR'),
+(3, 'Keyboard'),
+(4, 'Mouse'),
+(5, 'Table'),
+(6, 'Monitor'),
+(7, 'Other Equipment'),
+(8, 'Monoblock Chairs');
 
 -- --------------------------------------------------------
 
@@ -508,7 +522,7 @@ ALTER TABLE `criteria_list`
 ALTER TABLE `equipment_list`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_to_room` (`room_id`),
-  ADD KEY `fk_to_ec` (`category_name`);
+  ADD KEY `fk_to_ec` (`category_id`);
 
 --
 -- Indexes for table `evaluation_answers`
@@ -592,6 +606,12 @@ ALTER TABLE `system_settings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_categories`
+--
+ALTER TABLE `tbl_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_evaluation`
 --
 ALTER TABLE `tbl_evaluation`
@@ -647,7 +667,7 @@ ALTER TABLE `criteria_list`
 -- AUTO_INCREMENT for table `equipment_list`
 --
 ALTER TABLE `equipment_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `evaluation_answers`
@@ -701,7 +721,7 @@ ALTER TABLE `restriction_list`
 -- AUTO_INCREMENT for table `room_list`
 --
 ALTER TABLE `room_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT for table `sections`
@@ -726,6 +746,12 @@ ALTER TABLE `subject_list`
 --
 ALTER TABLE `system_settings`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_categories`
+--
+ALTER TABLE `tbl_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_evaluation`
@@ -765,6 +791,7 @@ ALTER TABLE `users`
 -- Constraints for table `equipment_list`
 --
 ALTER TABLE `equipment_list`
+  ADD CONSTRAINT `fk_to_category` FOREIGN KEY (`category_id`) REFERENCES `tbl_categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_to_room` FOREIGN KEY (`room_id`) REFERENCES `room_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

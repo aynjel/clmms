@@ -68,145 +68,208 @@ if (isset($_GET['room_id'])) {
 
 				$equipment_sql = $conn->query("SELECT * FROM equipment_list WHERE room_id = " . $room_row['id'] . " ORDER by id asc");
 
-				while ($equipment = $equipment_sql->fetch_assoc()) {
-					$category_sql = $conn->query("SELECT * FROM tbl_categories WHERE id = " . $equipment['category_id'] . " ORDER by id asc");
+				if ($equipment_sql->num_rows <= 0) {
+					echo '<p class="text-center">No Equipment Found</p>';
+				} else {
+					while ($equipment = $equipment_sql->fetch_assoc()) {
+						$category_sql = $conn->query("SELECT * FROM tbl_categories WHERE id = " . $equipment['category_id'] . " ORDER by id asc");
 
-					$equipment['category'] = $category_sql->num_rows > 0 ? $category_sql->fetch_array()['name'] : 'N/A';
-					$equipment_category_array[$equipment['category']][] = $equipment;
-
-					$sorted_equipment_category_array = array();
-
-					foreach ($equipment_category_array as $key => $value) {
-						$sorted_equipment_category_array[$key] = $value;
+						$equipment['category'] = $category_sql->num_rows > 0 ? $category_sql->fetch_array()['name'] : 'N/A';
+						$equipment_category_array[$equipment['category']][] = $equipment;
 					}
-					arsort($equipment_category_array);
-				} ?>
 
-				<?php foreach ($sorted_equipment_category_array as $equipment_category) { ?>
-					<div class="card">
-						<div class="card-header">
-							<div class="card-title">
-								<h3><?= $equipment_category[0]['category']; ?></h3>
+					foreach ($equipment_category_array as $equipment_category) { ?>
+						<div class="card">
+							<div class="card-header">
+								<div class="card-title">
+									<h3><?= $equipment_category[0]['category']; ?></h3>
+								</div>
+							</div>
+							<div class="card-body p-0">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<?php
+											switch ($equipment_category[0]['category_id']) {
+												case 1:
+													echo '<th class="text-center">PC Number</th>';
+													echo '<th class="text-center">Manufacturer</th>';
+													echo '<th class="text-center">Serial Number</th>';
+													echo '<th class="text-center">OS Version</th>';
+													echo '<th class="text-center">RAM</th>';
+													echo '<th class="text-center">Processor</th>';
+													echo '<th class="text-center">Status</th>';
+													echo '<th class="text-center">Action</th>';
+													break;
+												case 2:
+													echo '<th class="text-center">Monitor Number</th>';
+													echo '<th class="text-center">Manufacturer</th>';
+													echo '<th class="text-center">Serial Number</th>';
+													echo '<th class="text-center">Status</th>';
+													echo '<th class="text-center">Action</th>';
+													break;
+												case 3:
+												case 4:
+												case 5:
+													echo '<th class="text-center">Functional</th>';
+													echo '<th class="text-center">Not-Functional</th>';
+													echo '<th class="text-center">Action</th>';
+													break;
+												case 6:
+													echo '<th class="text-center">Green</th>';
+													echo '<th class="text-center">White</th>';
+													echo '<th class="text-center">Yellow</th>';
+													echo '<th class="text-center">Arm Chair</th>';
+													echo '<th class="text-center">Status</th>';
+													echo '<th class="text-center">Action</th>';
+													break;
+												case 7:
+													echo '<th class="text-center">Long</th>';
+													echo '<th class="text-center">Square</th>';
+													echo '<th class="text-center">Circle</th>';
+													echo '<th class="text-center">Mini</th>';
+													echo '<th class="text-center">Status</th>';
+													echo '<th class="text-center">Action</th>';
+													break;
+												case 8:
+													echo '<th class="text-center">Smart TV</th>';
+													echo '<th class="text-center">Switch</th>';
+													echo '<th class="text-center">Air Condition Unit</th>';
+													echo '<th class="text-center">Printer</th>';
+													echo '<th class="text-center">Status</th>';
+													echo '<th class="text-center">Action</th>';
+													break;
+											}
+											?>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										foreach ($equipment_category as $category) {
+											$data = json_decode($category['data']);
+											switch ($category['category_id']) {
+												case 1:
+													echo '<tr>';
+													echo '<td class="text-center">' . $data->pc_number . '</td>';
+													echo '<td class="text-center">' . $data->manufacturer . '</td>';
+													echo '<td class="text-center">' . $data->serial_no . '</td>';
+													echo '<td class="text-center">' . $data->os_version . '</td>';
+													echo '<td class="text-center">' . $data->ram . '</td>';
+													echo '<td class="text-center">' . $data->processor . '</td>';
+													echo '<td class="text-center">' . $data->status . '</td>';
+													echo '<td class="text-center">';
+													echo '<button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">';
+													echo '<span class="sr-only">Toggle Dropdown</span>';
+													echo '</button>';
+													echo '<div class="dropdown-menu" role="menu">';
+													echo '<a class="dropdown-item edit_equipment" href="javascript:void(0)" data-id="' . $category['id'] . '" data-category_id="' . $category['category_id'] . '">Edit</a>';
+													echo '<div class="dropdown-divider"></div>';
+													echo '<a class="dropdown-item delete_equipment" href="javascript:void(0)" data-id="' . $category['id'] . '">Delete</a>';
+													echo '</div>';
+													echo '</td>';
+													echo '</tr>';
+													break;
+												case 2:
+													echo '<tr>';
+													echo '<td class="text-center">' . $data->monitor_number . '</td>';
+													echo '<td class="text-center">' . $data->manufacturer . '</td>';
+													echo '<td class="text-center">' . $data->serial_no . '</td>';
+													echo '<td class="text-center">' . $data->status . '</td>';
+													echo '<td class="text-center">';
+													echo '<button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">';
+													echo '<span class="sr-only">Toggle Dropdown</span>';
+													echo '</button>';
+													echo '<div class="dropdown-menu" role="menu">';
+													echo '<a class="dropdown-item edit_equipment" href="javascript:void(0)" data-id="' . $category['id'] . '" data-category_id="' . $category['category_id'] . '">Edit</a>';
+													echo '<div class="dropdown-divider"></div>';
+													echo '<a class="dropdown-item delete_equipment" href="javascript:void(0)" data-id="' . $category['id'] . '">Delete</a>';
+													echo '</div>';
+													echo '</td>';
+													echo '</tr>';
+													break;
+												case 3:
+												case 4:
+												case 5:
+													echo '<tr>';
+													echo '<td class="text-center">' . $data->functional . '</td>';
+													echo '<td class="text-center">' . $data->not_functional . '</td>';
+													echo '<td class="text-center">';
+													echo '<button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">';
+													echo '<span class="sr-only">Toggle Dropdown</span>';
+													echo '</button>';
+													echo '<div class="dropdown-menu" role="menu">';
+													echo '<a class="dropdown-item edit_equipment" href="javascript:void(0)" data-id="' . $category['id'] . '" data-category_id="' . $category['category_id'] . '">Edit</a>';
+													echo '<div class="dropdown-divider"></div>';
+													echo '<a class="dropdown-item delete_equipment" href="javascript:void(0)" data-id="' . $category['id'] . '">Delete</a>';
+													echo '</div>';
+													echo '</td>';
+													echo '</tr>';
+													break;
+												case 6:
+													echo '<tr>';
+													echo '<td class="text-center">' . $data->green . '</td>';
+													echo '<td class="text-center">' . $data->white . '</td>';
+													echo '<td class="text-center">' . $data->yellow . '</td>';
+													echo '<td class="text-center">' . $data->arm_chair . '</td>';
+													echo '<td class="text-center">' . $data->status . '</td>';
+													echo '<td class="text-center">';
+													echo '<button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">';
+													echo '<span class="sr-only">Toggle Dropdown</span>';
+													echo '</button>';
+													echo '<div class="dropdown-menu" role="menu">';
+													echo '<a class="dropdown-item edit_equipment" href="javascript:void(0)" data-id="' . $category['id'] . '" data-category_id="' . $category['category_id'] . '">Edit</a>';
+													echo '<div class="dropdown-divider"></div>';
+													echo '<a class="dropdown-item delete_equipment" href="javascript:void(0)" data-id="' . $category['id'] . '">Delete</a>';
+													echo '</div>';
+													echo '</td>';
+													echo '</tr>';
+													break;
+												case 7:
+													echo '<tr>';
+													echo '<td class="text-center">' . $data->long . '</td>';
+													echo '<td class="text-center">' . $data->square . '</td>';
+													echo '<td class="text-center">' . $data->circle . '</td>';
+													echo '<td class="text-center">' . $data->mini . '</td>';
+													echo '<td class="text-center">' . $data->status . '</td>';
+													echo '<td class="text-center">';
+													echo '<button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">';
+													echo '<span class="sr-only">Toggle Dropdown</span>';
+													echo '</button>';
+													echo '<div class="dropdown-menu" role="menu">';
+													echo '<a class="dropdown-item edit_equipment" href="javascript:void(0)" data-id="' . $category['id'] . '" data-category_id="' . $category['category_id'] . '">Edit</a>';
+													echo '<div class="dropdown-divider"></div>';
+													echo '<a class="dropdown-item delete_equipment" href="javascript:void(0)" data-id="' . $category['id'] . '">Delete</a>';
+													echo '</div>';
+													echo '</td>';
+													echo '</tr>';
+													break;
+												case 8:
+													echo '<tr>';
+													echo '<td class="text-center">' . $data->smart_tv . '</td>';
+													echo '<td class="text-center">' . $data->switch . '</td>';
+													echo '<td class="text-center">' . $data->air_condition_unit . '</td>';
+													echo '<td class="text-center">' . $data->printer . '</td>';
+													echo '<td class="text-center">' . $data->status . '</td>';
+													echo '<td class="text-center">';
+													echo '<button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">';
+													echo '<span class="sr-only">Toggle Dropdown</span>';
+													echo '</button>';
+													echo '<div class="dropdown-menu" role="menu">';
+													echo '<a class="dropdown-item edit_equipment" href="javascript:void(0)" data-id="' . $category['id'] . '" data-category_id="' . $category['category_id'] . '">Edit</a>';
+													echo '<div class="dropdown-divider"></div>';
+													echo '<a class="dropdown-item delete_equipment" href="javascript:void(0)" data-id="' . $category['id'] . '">Delete</a>';
+													echo '</div>';
+													echo '</td>';
+													echo '</tr>';
+													break;
+											}
+										}	?>
+									</tbody>
+								</table>
 							</div>
 						</div>
-						<div class="card-body p-0">
-							<table class="table table-hover">
-								<thead>
-									<tr>
-										<?php
-										switch ($equipment_category[0]['category_id']) {
-											case 1:
-												echo '<th class="text-center">PC Number</th>';
-												echo '<th class="text-center">Manufacturer</th>';
-												echo '<th class="text-center">Serial Number</th>';
-												echo '<th class="text-center">OS Version</th>';
-												echo '<th class="text-center">RAM</th>';
-												echo '<th class="text-center">Processor</th>';
-												echo '<th class="text-center">Status</th>';
-												break;
-											case 2:
-												echo '<th class="text-center">Monitor Number</th>';
-												echo '<th class="text-center">Manufacturer</th>';
-												echo '<th class="text-center">Serial Number</th>';
-												echo '<th class="text-center">Status</th>';
-												break;
-											case 3:
-											case 4:
-											case 5:
-												echo '<th class="text-center">Functional</th>';
-												echo '<th class="text-center">Not-Functional</th>';
-												break;
-											case 6:
-												echo '<th class="text-center">Green</th>';
-												echo '<th class="text-center">White</th>';
-												echo '<th class="text-center">Yellow</th>';
-												echo '<th class="text-center">Arm Chair</th>';
-												echo '<th class="text-center">Status</th>';
-												break;
-											case 7:
-												echo '<th class="text-center">Long</th>';
-												echo '<th class="text-center">Square</th>';
-												echo '<th class="text-center">Circle</th>';
-												echo '<th class="text-center">Mini</th>';
-												echo '<th class="text-center">Status</th>';
-												break;
-											case 8:
-												echo '<th class="text-center">Smart TV</th>';
-												echo '<th class="text-center">Switch</th>';
-												echo '<th class="text-center">Air Condition Unit</th>';
-												echo '<th class="text-center">Printer</th>';
-												echo '<th class="text-center">Status</th>';
-												break;
-										}
-										?>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-									foreach ($equipment_category as $category) {
-										$data = json_decode($category['data']);
-										switch ($category['category_id']) {
-											case 1:
-												echo '<tr>';
-												echo '<td class="text-center">' . $data->pc_number . '</td>';
-												echo '<td class="text-center">' . $data->manufacturer . '</td>';
-												echo '<td class="text-center">' . $data->serial_no . '</td>';
-												echo '<td class="text-center">' . $data->os_version . '</td>';
-												echo '<td class="text-center">' . $data->ram . '</td>';
-												echo '<td class="text-center">' . $data->processor . '</td>';
-												echo '<td class="text-center">' . $data->status . '</td>';
-												echo '</tr>';
-												break;
-											case 2:
-												echo '<tr>';
-												echo '<td class="text-center">' . $data->monitor_number . '</td>';
-												echo '<td class="text-center">' . $data->manufacturer . '</td>';
-												echo '<td class="text-center">' . $data->serial_no . '</td>';
-												echo '<td class="text-center">' . $data->status . '</td>';
-												echo '</tr>';
-												break;
-											case 3:
-											case 4:
-											case 5:
-												echo '<tr>';
-												echo '<td class="text-center">' . $data->functional . '</td>';
-												echo '<td class="text-center">' . $data->not_functional . '</td>';
-												echo '</tr>';
-												break;
-											case 6:
-												echo '<tr>';
-												echo '<td class="text-center">' . $data->green . '</td>';
-												echo '<td class="text-center">' . $data->white . '</td>';
-												echo '<td class="text-center">' . $data->yellow . '</td>';
-												echo '<td class="text-center">' . $data->arm_chair . '</td>';
-												echo '<td class="text-center">' . $data->status . '</td>';
-												echo '</tr>';
-												break;
-											case 7:
-												echo '<tr>';
-												echo '<td class="text-center">' . $data->long . '</td>';
-												echo '<td class="text-center">' . $data->square . '</td>';
-												echo '<td class="text-center">' . $data->circle . '</td>';
-												echo '<td class="text-center">' . $data->mini . '</td>';
-												echo '<td class="text-center">' . $data->status . '</td>';
-												echo '</tr>';
-												break;
-											case 8:
-												echo '<tr>';
-												echo '<td class="text-center">' . $data->smart_tv . '</td>';
-												echo '<td class="text-center">' . $data->switch . '</td>';
-												echo '<td class="text-center">' . $data->air_condition_unit . '</td>';
-												echo '<td class="text-center">' . $data->printer . '</td>';
-												echo '<td class="text-center">' . $data->status . '</td>';
-												echo '</tr>';
-												break;
-										}
-									}	?>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				<?php } ?>
+				<?php }
+				} ?>
 			</div>
 		</div>
 	<?php }
@@ -218,6 +281,10 @@ if (isset($_GET['room_id'])) {
 	$(document).ready(function() {
 		$('.delete_equipment').click(function() {
 			_conf("Are you sure to delete this equipment?", "delete_equipment", [$(this).attr('data-id')])
+		})
+
+		$('.edit_equipment').click(function() {
+			uni_modal("Edit Equipment", "<?= $_SESSION['login_view_folder'] ?>edit_equipment.php?id=" + $(this).attr('data-id'))
 		})
 	})
 

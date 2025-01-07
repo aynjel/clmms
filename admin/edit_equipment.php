@@ -1,10 +1,13 @@
-<?php
-include 'db_connect.php';
-$qry = $conn->query("SELECT * FROM equipment_list where id = ".$_GET['id'])->fetch_array();
-foreach($qry as $k => $v){
-	$$k = $v;
-}
-?>
+Not finished
+_________
+<?= $_GET['id'] ?>
+<!-- <?php
+			// include 'db_connect.php';
+			// $qry = $conn->query("SELECT * FROM equipment_list where id = " . $_GET['id'])->fetch_array();
+			// foreach ($qry as $k => $v) {
+			// 	$$k = $v;
+			// }
+			?>
 <div class="col-lg-12">
 	<div class="card">
 		<div class="card-body">
@@ -93,4 +96,4 @@ foreach($qry as $k => $v){
 			}
 		})
 	})
-</script>
+</script> -->

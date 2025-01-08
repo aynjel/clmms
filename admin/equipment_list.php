@@ -189,7 +189,7 @@ if (isset($_GET['room_id'])) {
 													break;
 												case 3:
 												case 4:
-												case 5:
+												case 6:
 													echo '<tr>';
 													echo '<td class="text-center">' . $data->functional . '</td>';
 													echo '<td class="text-center">' . $data->not_functional . '</td>';
@@ -205,7 +205,7 @@ if (isset($_GET['room_id'])) {
 													echo '</td>';
 													echo '</tr>';
 													break;
-												case 6:
+												case 8:
 													echo '<tr>';
 													echo '<td class="text-center">' . $data->green . '</td>';
 													echo '<td class="text-center">' . $data->white . '</td>';
@@ -224,7 +224,7 @@ if (isset($_GET['room_id'])) {
 													echo '</td>';
 													echo '</tr>';
 													break;
-												case 7:
+												case 5:
 													echo '<tr>';
 													echo '<td class="text-center">' . $data->long . '</td>';
 													echo '<td class="text-center">' . $data->square . '</td>';
@@ -243,7 +243,7 @@ if (isset($_GET['room_id'])) {
 													echo '</td>';
 													echo '</tr>';
 													break;
-												case 8:
+												case 7:
 													echo '<tr>';
 													echo '<td class="text-center">' . $data->smart_tv . '</td>';
 													echo '<td class="text-center">' . $data->switch . '</td>';

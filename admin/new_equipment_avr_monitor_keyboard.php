@@ -2,21 +2,22 @@
 $room_id = isset($_GET['room_id']) ? $_GET['room_id'] : '';
 $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
 ?>
-
 <form id="equipment_monitor_form">
   <input type="hidden" name="id" value="<?= isset($eq_id) ? $eq_id : '' ?>">
   <input type="hidden" name="room_id" value="<?php echo $room_id ?>">
   <input type="hidden" name="category_id" value="<?php echo $category_id ?>">
   <div class="form-group">
     <label for="functional" class="control-label">Functional</label>
-    <input type="number" name="functional" id="functional" class="form-control form-control-sm" value="<?= isset($functional) ? $functional : '' ?>">
+    <input type="number" name="functional" id="functional" class="form-control form-control-sm" value="<?= isset($data->functional) ? $data->functional : '' ?>">
   </div>
   <div class="form-group">
     <label for="not_functional" class="control-label">Not-Functional</label>
-    <input type="number" name="not_functional" id="not_functional" class="form-control form-control-sm" value="<?= isset($not_functional) ? $not_functional : '' ?>">
+    <input type="number" name="not_functional" id="not_functional" class="form-control form-control-sm" value="<?= isset($data->not_functional) ? $data->not_functional : '' ?>">
   </div>
   <hr>
-  <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save</button>
+  <?php if (!isset($id)) : ?>
+    <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save</button>
+  <?php endif; ?>
 </form>
 
 <script>

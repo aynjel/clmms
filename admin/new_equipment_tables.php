@@ -9,25 +9,25 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
   <input type="hidden" name="category_id" value="<?php echo $category_id ?>">
   <div class="form-group">
     <label for="long" class="control-label">Long</label>
-    <input type="number" name="long" id="long" class="form-control form-control-sm" value="<?= isset($long) ? $long : '' ?>">
+    <input type="number" name="long" id="long" class="form-control form-control-sm" value="<?= isset($data->long) ? $data->long : '' ?>">
   </div>
   <div class="form-group">
     <label for="square" class="control-label">Square</label>
-    <input type="number" name="square" id="square" class="form-control form-control-sm" value="<?= isset($square) ? $square : '' ?>">
+    <input type="number" name="square" id="square" class="form-control form-control-sm" value="<?= isset($data->square) ? $data->square : '' ?>">
   </div>
   <div class="form-group">
     <label for="circle" class="control-label">Circle</label>
-    <input type="number" name="circle" id="circle" class="form-control form-control-sm" value="<?= isset($circle) ? $circle : '' ?>">
+    <input type="number" name="circle" id="circle" class="form-control form-control-sm" value="<?= isset($data->circle) ? $data->circle : '' ?>">
   </div>
   <div class="form-group">
     <label for="mini" class="control-label">Mini</label>
-    <input type="number" name="mini" id="mini" class="form-control form-control-sm" value="<?= isset($mini) ? $mini : '' ?>">
+    <input type="number" name="mini" id="mini" class="form-control form-control-sm" value="<?= isset($data->mini) ? $data->mini : '' ?>">
   </div>
   <div class="form-group">
     <label for="status" class="control-label">Status</label>
     <select name="status" id="status" class="form-control form-control-sm" required>
-      <option value="New" <?php echo isset($status) && $status == 'New' ? 'selected' : '' ?>>New</option>
-      <option value="Damaged" <?php echo isset($status) && $status == 'Damaged' ? 'selected' : '' ?>>Damaged</option>
+      <option value="New" <?php echo isset($data->status) && $data->status == 'New' ? 'selected' : '' ?>>New</option>
+      <option value="Damaged" <?php echo isset($data->status) && $data->status == 'Damaged' ? 'selected' : '' ?>>Damaged</option>
     </select>
   </div>
   <hr>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2025 at 11:18 AM
+-- Generation Time: Jan 05, 2025 at 09:10 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -79,20 +79,6 @@ CREATE TABLE `equipment_list` (
   `category_id` int(11) NOT NULL,
   `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`data`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `equipment_list`
---
-
-INSERT INTO `equipment_list` (`id`, `room_id`, `category_id`, `data`) VALUES
-(113, 125, 7, '{\"equipment_id\":\"113\",\"category_id\":\"7\",\"smart_tv\":\"25\",\"switch\":\"38\",\"air_condition_unit\":\"98\",\"printer\":\"123\",\"status\":\"Not Functional\"}'),
-(114, 125, 5, '{\"room_id\":\"125\",\"category_id\":\"5\",\"long\":\"30\",\"square\":\"74\",\"circle\":\"100\",\"mini\":\"89\",\"status\":\"Damaged\"}'),
-(116, 125, 5, '{\"equipment_id\":\"116\",\"category_id\":\"5\",\"long\":\"77\",\"square\":\"43\",\"circle\":\"7\",\"mini\":\"24\",\"status\":\"Damaged\"}'),
-(119, 125, 7, '{\"equipment_id\":\"113\",\"room_id\":\"125\",\"category_id\":\"7\",\"smart_tv\":\"25\",\"switch\":\"38\",\"air_condition_unit\":\"98\",\"printer\":\"43\",\"status\":\"Not Functional\"}'),
-(120, 125, 6, '{\"equipment_id\":\"120\",\"room_id\":\"\",\"category_id\":\"\",\"monitor_number\":\"564\",\"manufacturer\":\"Dolore reprehenderit\",\"serial_no\":\"Praesentium totam fu\",\"status\":\"Functional\"}'),
-(121, 125, 6, '{\"equipment_id\":\"\",\"room_id\":\"125\",\"category_id\":\"6\",\"monitor_number\":\"708\",\"manufacturer\":\"Esse odio consectet\",\"serial_no\":\"Quia repudiandae et \",\"status\":\"Not Functional\"}'),
-(122, 125, 3, '{\"equipment_id\":\"\",\"room_id\":\"125\",\"category_id\":\"3\",\"functional\":\"88\",\"not_functional\":\"91\"}'),
-(124, 125, 3, '{\"equipment_id\":\"124\",\"room_id\":\"125\",\"category_id\":\"3\",\"functional\":\"83\",\"not_functional\":\"49\"}');
 
 -- --------------------------------------------------------
 
@@ -257,8 +243,7 @@ CREATE TABLE `restriction_list` (
 
 CREATE TABLE `room_list` (
   `id` int(11) NOT NULL,
-  `faculty_id_1` int(11) DEFAULT NULL,
-  `faculty_id_2` int(11) DEFAULT NULL,
+  `faculty_id` int(11) DEFAULT NULL,
   `room` varchar(100) NOT NULL,
   `description` text DEFAULT NULL,
   `capacity` int(11) NOT NULL DEFAULT 0,
@@ -269,9 +254,9 @@ CREATE TABLE `room_list` (
 -- Dumping data for table `room_list`
 --
 
-INSERT INTO `room_list` (`id`, `faculty_id_1`, `faculty_id_2`, `room`, `description`, `capacity`, `status`) VALUES
-(125, 2, 4, '101', 'Possimus quia debit', 16, 1),
-(127, NULL, NULL, 'TEST 1', 'Nihil nisi sit culpa', 29, 1);
+INSERT INTO `room_list` (`id`, `faculty_id`, `room`, `description`, `capacity`, `status`) VALUES
+(125, NULL, '101', 'Possimus quia debit', 16, 1),
+(126, NULL, '102', 'Et consequat Volupt', 59, 0);
 
 -- --------------------------------------------------------
 
@@ -594,7 +579,7 @@ ALTER TABLE `restriction_list`
 --
 ALTER TABLE `room_list`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_room_to_faculty` (`faculty_id_1`);
+  ADD KEY `fk_room_to_faculty` (`faculty_id`);
 
 --
 -- Indexes for table `sections`
@@ -682,7 +667,7 @@ ALTER TABLE `criteria_list`
 -- AUTO_INCREMENT for table `equipment_list`
 --
 ALTER TABLE `equipment_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `evaluation_answers`
@@ -736,7 +721,7 @@ ALTER TABLE `restriction_list`
 -- AUTO_INCREMENT for table `room_list`
 --
 ALTER TABLE `room_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT for table `sections`
@@ -815,6 +800,12 @@ ALTER TABLE `equipment_list`
 ALTER TABLE `faculty_room_list`
   ADD CONSTRAINT `fk_to_faculty1` FOREIGN KEY (`faculty_id`) REFERENCES `faculty_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_to_room1` FOREIGN KEY (`room_id`) REFERENCES `room_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `room_list`
+--
+ALTER TABLE `room_list`
+  ADD CONSTRAINT `fk_room_to_faculty` FOREIGN KEY (`faculty_id`) REFERENCES `faculty_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

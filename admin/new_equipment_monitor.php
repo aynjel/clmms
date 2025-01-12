@@ -1,12 +1,12 @@
 <?php
-$room_id = isset($_GET['room_id']) ? $_GET['room_id'] : '';
-$category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
+$room_id = isset($_GET['room_id']) ? $_GET['room_id'] : $data->room_id;
+$category_id = isset($_GET['category_id']) ? $_GET['category_id'] : $data->category_id;;
 ?>
 
 <form id="equipment_monitor_form">
-  <input type="hidden" name="id" value="<?= isset($eq_id) ? $eq_id : '' ?>">
-  <input type="hidden" name="room_id" value="<?php echo $room_id ?>">
-  <input type="hidden" name="category_id" value="<?php echo $category_id ?>">
+  <input type="hidden" name="equipment_id" value="<?= isset($id) ? $id : '' ?>">
+  <input type="hidden" name="room_id" value="<?= $room_id; ?>">
+  <input type="hidden" name="category_id" value="<?= $category_id; ?>">
   <div class="form-group">
     <label for="monitor_number" class="control-label">Monitor Number</label>
     <input type="number" name="monitor_number" id="monitor_number" class="form-control form-control-sm" value="<?= isset($data->monitor_number) ? $data->monitor_number : '' ?>">
@@ -27,7 +27,9 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
     </select>
   </div>
   <hr>
-  <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save</button>
+  <?php if (!isset($id)) : ?>
+    <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save</button>
+  <?php endif; ?>
 </form>
 
 <script>

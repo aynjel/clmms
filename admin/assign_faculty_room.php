@@ -1,8 +1,8 @@
 <?php
 include '../db_connect.php';
-if(isset($_GET['room_id'])){
+if (isset($_GET['room_id'])) {
 	$qry = $conn->query("SELECT * FROM room_list where id={$_GET['room_id']}")->fetch_array();
-	foreach($qry as $k => $v){
+	foreach ($qry as $k => $v) {
 		$$k = $v;
 	}
 }
@@ -21,15 +21,29 @@ if(isset($_GET['room_id'])){
 		</div>
 		<div class="col-md-12">
 			<div class="form-group">
-				<label for="faculty" class="control-label">Faculty</label>
-				<select name="faculty_id" id="faculty" class="form-control form-control-sm select2">
+				<label for="faculty" class="control-label">Faculty 1</label>
+				<select name="faculty_id_1" id="faculty" class="form-control form-control-sm select2">
 					<option selected disabled hidden>Select Faculty</option>
 					<?php
-					$qry = $conn->query("SELECT * FROM faculty_list order by lastname asc");
-					while($row= $qry->fetch_assoc()):
+					$qry1 = $conn->query("SELECT * FROM faculty_list order by lastname asc");
+					while ($row = $qry1->fetch_assoc()):
 					?>
-					<option value="<?= $row['id'] ?>" <?= isset($fac['id']) && $fac['id'] == $row['id'] ? 'selected' : '' ?>><?= ucwords($row['firstname'].' '.$row['lastname']) ?></option>
-				<?php endwhile; ?>
+						<option value="<?= $row['id'] ?>" <?= isset($fac['id']) && $fac['id'] == $row['id'] ? 'selected' : '' ?>><?= ucwords($row['firstname'] . ' ' . $row['lastname']) ?></option>
+					<?php endwhile; ?>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="form-group">
+				<label for="faculty" class="control-label">Faculty 2</label>
+				<select name="faculty_id_2" id="faculty" class="form-control form-control-sm select2">
+					<option selected disabled hidden>Select Faculty</option>
+					<?php
+					$qry2 = $conn->query("SELECT * FROM faculty_list order by lastname asc");
+					while ($row = $qry2->fetch_assoc()):
+					?>
+						<option value="<?= $row['id'] ?>" <?= isset($fac['id']) && $fac['id'] == $row['id'] ? 'selected' : '' ?>><?= ucwords($row['firstname'] . ' ' . $row['lastname']) ?></option>
+					<?php endwhile; ?>
 				</select>
 			</div>
 		</div>

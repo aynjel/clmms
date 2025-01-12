@@ -723,10 +723,12 @@ class Action
 		if (empty($id)) {
 			$save = $this->db->query("INSERT INTO `room_list`(`room`, `description`, `capacity`, `status`) VALUES ('$room','$description','$capacity','$status')");
 		} else {
-			if (empty($faculty_id) || $faculty_id == 0) {
-				$save = $this->db->query("UPDATE room_list set `room`='$room', `description`='$description', `capacity`='$capacity', `status`='$status', `faculty_id`=null where id = $id");
+			if (empty($faculty_id_1)) {
+				$save = $this->db->query("UPDATE room_list SET `faculty_id_2`=$faculty_id_2 WHERE id = $id");
+			} else if (empty($faculty_id_2)) {
+				$save = $this->db->query("UPDATE room_list SET `faculty_id_1`=$faculty_id_1 WHERE id = $id");
 			} else {
-				$save = $this->db->query("UPDATE room_list set `room`='$room', `description`='$description', `capacity`='$capacity', `status`='$status', `faculty_id`='$faculty_id' where id = $id");
+				$save = $this->db->query("UPDATE room_list SET `room`='$room', `description`='$description', `capacity`='$capacity', `status`='$status', `faculty_id_1`=$faculty_id_1, `faculty_id_2`=$faculty_id_2 WHERE id = $id");
 			}
 		}
 		if ($save) {
@@ -747,15 +749,15 @@ class Action
 		extract($_POST);
 		$data = array();
 		foreach ($_POST as $key => $value) {
-			if ($key != 'id') {
+			if ($key != 'room_id' || $key != 'equipment_id') {
 				$data[$key] = $value;
 			}
 		}
 		$data_json = json_encode($data);
-		if (empty($id)) {
+		if (empty($equipment_id)) {
 			$save = $this->db->query("INSERT INTO `equipment_list`(`room_id`, `category_id`, `data`) VALUES ('$room_id', '$category_id','$data_json')");
 		} else {
-			$save = $this->db->query("UPDATE equipment_list SET `data`='$data_json' WHERE id = $id");
+			$save = $this->db->query("UPDATE equipment_list SET `data`='$data_json' WHERE id = $equipment_id");
 		}
 		if ($save) {
 			return 1;

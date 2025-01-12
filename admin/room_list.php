@@ -8,17 +8,12 @@
 		</div>
 		<div class="card-body">
 			<table class="table tabe-hover table-bordered" id="room-list">
-				<colgroup>
-					<col width="5%">
-					<col width="20%">
-					<col width="30%">
-					<col width="10%">
-				</colgroup>
 				<thead>
 					<tr>
 						<th>Room</th>
 						<th>Capacity</th>
-						<th style="text-align: center;">Assigned Faculty</th>
+						<th>Assigned Faculty 1</th>
+						<th>Assigned Faculty 2</th>
 						<th>Status</th>
 						<th style="text-align: center;">Action</th>
 					</tr>
@@ -33,16 +28,24 @@
 						<tr>
 							<td><b><?= $row['room'] ?></b></td>
 							<td><b><?= $row['capacity'] ?></b></td>
-							<td style="text-align: center;">
-								<?php if ($row['faculty_id'] == null) : ?>
-									<button class="btn btn-sm btn-primary assign_faculty" data-id="<?= $row['id'] ?>">Assign Faculty</button>
+							<td>
+								<?php if ($row['faculty_id_1'] == null) : ?>
+									No faculty assigned
 								<?php else : ?>
 									<?php
-									$fac = $conn->query("SELECT * FROM faculty_list where id = " . $row['faculty_id'])->fetch_array();
+									$fac = $conn->query("SELECT * FROM faculty_list where id = " . $row['faculty_id_1'])->fetch_array();
 									?>
 									<b><?= ucwords($fac['firstname'] . ' ' . $fac['lastname']) ?></b>
-									<br>
-									<button class="btn btn-sm btn-link assign_faculty" data-id="<?= $row['id'] ?>">Re-assign Faculty</button>
+								<?php endif; ?>
+							</td>
+							<td>
+								<?php if ($row['faculty_id_2'] == null) : ?>
+									No faculty assigned
+								<?php else : ?>
+									<?php
+									$fac = $conn->query("SELECT * FROM faculty_list where id = " . $row['faculty_id_2'])->fetch_array();
+									?>
+									<b><?= ucwords($fac['firstname'] . ' ' . $fac['lastname']) ?></b>
 								<?php endif; ?>
 							</td>
 							<td>
@@ -56,11 +59,10 @@
 							</td>
 							<td class="text-center">
 								<div class="btn-group">
-
-									<a href="javascript:void(0)" data-id="<?= $row['id'] ?>" class="btn btn-primary btn-flat manage_room">
+									<a href="javascript:void(0)" data-id="<?= $row['id'] ?>" class="btn btn-sm btn-primary btn-flat manage_room">
 										<i class="fas fa-edit"></i>
 									</a>
-									<button type="button" class="btn btn-danger btn-flat delete_room" data-id="<?= $row['id'] ?>">
+									<button type="button" class="btn btn-sm btn-danger btn-flat delete_room" data-id="<?= $row['id'] ?>">
 										<i class="fas fa-trash"></i>
 									</button>
 								</div>
@@ -88,13 +90,6 @@
 					messageBottom: '<footer style="text-align: center; position: fixed; bottom: 0; width: 100%;"><img src="https://raw.githubusercontent.com/aynjel/clmms/main/assets/print-logo-3.png" alt="Footer Logo" /></footer>'
 				}
 			]
-		})
-		// $('.new_room').click(function(){
-		// 	uni_modal("New room","<?= $_SESSION['login_view_folder'] ?>manage_room.php")
-		// })
-		$('.assign_faculty').click(function() {
-			uni_modal("Assign Faculty", "<?= $_SESSION['login_view_folder'] ?>assign_faculty_room.php?room_id=" + $(this).attr('data-id'))
-			// window.location.href = "index.php?page=assign_faculty_room&room_id="+$(this).attr('data-id')
 		})
 		$('.manage_room').click(function() {
 			uni_modal("Manage room", "<?= $_SESSION['login_view_folder'] ?>manage_room.php?id=" + $(this).attr('data-id'))

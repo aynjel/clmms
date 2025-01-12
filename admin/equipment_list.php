@@ -59,7 +59,8 @@ if (isset($_GET['room_id'])) {
 				</div>
 
 				<div class="card-tools float-right">
-					<a class="btn btn-block btn-sm btn-default" href="./index.php?page=new_equipment&room_id=<?= $room_row['id'] ?>"><i class="fa fa-plus"></i> Add New Equipment</a>
+					<a class="btn btn-sm btn-secondary assign_faculty" href="javascript:void(0)" data-id="<?= $room_row['id'] ?>"><i class="fa fa-users"></i> Faculty</a>
+					<a class="btn btn-sm btn-default" href="./index.php?page=new_equipment&room_id=<?= $room_row['id'] ?>"><i class="fa fa-plus"></i> New Equipment</a>
 				</div>
 			</div>
 			<div class="card-body">
@@ -147,8 +148,9 @@ if (isset($_GET['room_id'])) {
 										<?php
 										foreach ($equipment_category as $category) {
 											$data = json_decode($category['data']);
+											// echo "<pre>" . json_encode($data, JSON_PRETTY_PRINT) . "</pre>";
 											switch ($category['category_id']) {
-												case 1:
+												case '1':
 													echo '<tr>';
 													echo '<td class="text-center">' . $data->pc_number . '</td>';
 													echo '<td class="text-center">' . $data->manufacturer . '</td>';
@@ -169,7 +171,7 @@ if (isset($_GET['room_id'])) {
 													echo '</td>';
 													echo '</tr>';
 													break;
-												case 2:
+												case '6':
 													echo '<tr>';
 													echo '<td class="text-center">' . $data->monitor_number . '</td>';
 													echo '<td class="text-center">' . $data->manufacturer . '</td>';
@@ -187,9 +189,9 @@ if (isset($_GET['room_id'])) {
 													echo '</td>';
 													echo '</tr>';
 													break;
-												case 3:
-												case 4:
-												case 6:
+												case '2':
+												case '3':
+												case '4':
 													echo '<tr>';
 													echo '<td class="text-center">' . $data->functional . '</td>';
 													echo '<td class="text-center">' . $data->not_functional . '</td>';
@@ -205,7 +207,7 @@ if (isset($_GET['room_id'])) {
 													echo '</td>';
 													echo '</tr>';
 													break;
-												case 8:
+												case '8':
 													echo '<tr>';
 													echo '<td class="text-center">' . $data->green . '</td>';
 													echo '<td class="text-center">' . $data->white . '</td>';
@@ -224,7 +226,7 @@ if (isset($_GET['room_id'])) {
 													echo '</td>';
 													echo '</tr>';
 													break;
-												case 5:
+												case '5':
 													echo '<tr>';
 													echo '<td class="text-center">' . $data->long . '</td>';
 													echo '<td class="text-center">' . $data->square . '</td>';
@@ -243,7 +245,7 @@ if (isset($_GET['room_id'])) {
 													echo '</td>';
 													echo '</tr>';
 													break;
-												case 7:
+												case '7':
 													echo '<tr>';
 													echo '<td class="text-center">' . $data->smart_tv . '</td>';
 													echo '<td class="text-center">' . $data->switch . '</td>';
@@ -285,6 +287,10 @@ if (isset($_GET['room_id'])) {
 
 		$('.edit_equipment').click(function() {
 			uni_modal("Edit Equipment", "<?= $_SESSION['login_view_folder'] ?>edit_equipment.php?id=" + $(this).attr('data-id'))
+		})
+
+		$('.assign_faculty').click(function() {
+			uni_modal("Assigned Faculty", "<?= $_SESSION['login_view_folder'] ?>view_assign_faculty_room.php?room_id=" + $(this).attr('data-id'))
 		})
 	})
 

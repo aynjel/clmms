@@ -14,7 +14,7 @@
 						<th>Employee ID</th>
 						<th>Name</th>
 						<th>Email</th>
-						<th>Room</th>
+						<th colspan="2">Room/s Assigned</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -30,7 +30,11 @@
 							<td><b><?php echo ucwords($row['name']) ?></b></td>
 							<td><b><?php echo $row['email'] ?></b></td>
 							<td><b><?php
-											$room = $conn->query("SELECT * FROM room_list where faculty_id = " . $row['id']);
+											$room = $conn->query("SELECT * FROM room_list where faculty_id_1 = " . $row['id']);
+											echo ucwords($room->num_rows > 0 ? $room->fetch_array()['room'] : 'N/A');
+											?></b></td>
+							<td><b><?php
+											$room = $conn->query("SELECT * FROM room_list where faculty_id_2 = " . $row['id']);
 											echo ucwords($room->num_rows > 0 ? $room->fetch_array()['room'] : 'N/A');
 											?></b></td>
 							<td class="text-center">

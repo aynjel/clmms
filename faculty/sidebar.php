@@ -48,10 +48,10 @@
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a href="./index.php?page=room" class="nav-link nav-room">
+            <a href="./index.php?page=equipment_list" class="nav-link nav-room">
               <i class="nav-icon fas fa-building"></i>
               <p>
-                Room
+                Equipment
               </p>
             </a>
           </li>

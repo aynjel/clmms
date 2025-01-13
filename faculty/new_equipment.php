@@ -13,8 +13,8 @@
 							<select name="room_id" id="" class="custom-select custom-select-sm" <?php echo isset($_GET['room_id']) ? 'disabled' : '' ?>>
 								<option selected disabled hidden>Select Room</option>
 								<?php
-								$room = $conn->query("SELECT * FROM room_list order by id asc");
-								while ($row = $room->fetch_assoc()) :
+								$rooms = $conn->query("SELECT * FROM room_list WHERE faculty_id_1={$_SESSION['login_id']} OR faculty_id_2={$_SESSION['login_id']} ORDER BY id ASC");
+								while ($row = $rooms->fetch_assoc()) :
 								?>
 									<option value="<?php echo $row['id'] ?>" <?php echo isset($_GET['room_id']) && $_GET['room_id'] == $row['id'] ? 'selected' : '' ?>><?php echo $row['room'] ?></option>
 								<?php endwhile; ?>
